@@ -15,7 +15,44 @@ Für jedes Objekt benötigen Sie idealerweise zwei Dateien:
 - Icon: `oil-platform.png`
 - Foto: `oil-platform.webp`
 
-## Technische Spezifikationen
+### 3. Zeit-Abhängige Varianten (Timeline)
+Für Objekte, die sich über die Zeit verändern (z.B. Korallenriff), werden Suffixe verwendet.
+Das System prüft automatisch, ob eine Variante für das aktuelle Jahr existiert.
+
+**Namens-Schema:**
+`[ID]_[SUFFIX].png`
+
+**Beispiel (Korallenriff):**
+- `coral-reef_1950.png` (Gesunder Zustand, bis 1980)
+- `coral-reef.png` (Normaler Zustand / Bleiche, 1980-2030)
+- `coral-reef_2050.png` (Abgestorbener Zustand, ab 2030)
+
+**Weitere definierte Zeit-Varianten:**
+- **ISS (`iss-research`):**
+    - `_const` (Aufbauphase, bis 2010)
+    - `_deorbit` (Deorbit/Absturz, ab 2040)
+- **Weltraumschrott (`space-junk-cluster`):**
+    - `_early` (Wenig Schrott, bis 1990)
+    - `_kessler` (Kessler-Syndrom, ab 2100)
+- **Ozonschicht (`ozone-layer`):**
+    - `_intact` (Intakt, bis 1980)
+    - `_hole` (Ozonloch, 1980-2015)
+- **Plastik-Insel (`plastic-island`):**
+    - `_early` (Entstehung, bis 2000)
+    - `_dense` (Plastik-Kontinent, ab 2100)
+- **Öl-Plattform (`oil-platform`):**
+    - `_const` (Aufbau, bis 1970)
+    - `_ruin` (Verlassen, ab 2040)
+- **Schildkröte (`sea-turtle`):**
+    - `_healthy` (Gesund, bis 1980)
+    - `_critical` (Ausgestorben/Kritisch, ab 2060)
+- **Tiefsee-Bergbau (`nodule-mining`):**
+    - `_pristine` (Unberührt, bis 2020)
+    - `_dead` (Todeszone, ab 2045)
+
+> **Hinweis:** Die Suffixe werden in `src/data/zones.js` im `timeline`-Array definiert.
+
+### 4. Technische Details
 
 | Typ | Format | Empfohlene Größe | Besonderheit |
 | :--- | :--- | :--- | :--- |

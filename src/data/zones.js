@@ -10,8 +10,39 @@ export const ZONES = [
         objects: [
             { id: 'satellite-graveyard', title: 'Satelliten-Friedhof', x: '15%', y: '25%', type: 'danger', icon: 'Satellite', startYear: 1960, description: 'Ein Bereich im Orbit, in dem ausgediente Satelliten "geparkt" werden. Durch den Klimawandel kühlt die Thermosphäre ab und zieht sich zusammen, was den natürlichen "Drag" verringert – Müll bleibt dadurch viel länger im Orbit.', facts: ['12.000+ Satelliten im Orbit (2025)', '30% längere Verweildauer durch CO2-Effekt', 'Erhöhtes Risiko des Kessler-Syndroms'] },
             { id: 'solar-wind', title: 'Solar Wind Sensor', x: '75%', y: '15%', type: 'info', icon: 'Sun', startYear: 2020, description: 'Sensoren (wie auf der SWFO-L1 Mission), die 2025 während des solaren Maximums kritische Daten liefern, um geomagnetische Stürme vorherzusagen, die Stromnetze auf der Erde bedrohen.', facts: ['Solar Cycle 25 Maximum in 2025', 'Warnt vor geomagnetischen Stürmen', 'Schützt GPS & Stromnetze vor Ausfall'] },
-            { id: 'iss-research', title: 'ISS ECOSTRESS', x: '55%', y: '45%', type: 'info', icon: 'Orbit', startYear: 1998, endYear: 2031, description: 'Das ECOSTRESS-Instrument auf der ISS misst die Temperatur von Pflanzen, um Wasserstress zu erkennen, bevor Dürren sichtbar werden – ein entscheidendes Tool für die globale Nahrungssicherheit.', facts: ['Misst Pflanzen-Evapotranspiration', '70m genaue Auflösung einzelner Felder', 'Frühwarnsystem für globale Dürren'] },
-            { id: 'space-junk-cluster', title: 'Trümmer-Feld', x: '35%', y: '65%', type: 'danger', icon: 'AlertTriangle', startYear: 1970, description: 'Millionen winzige Schrottteile rasen mit 27.000 km/h um die Erde. Schon ein 1cm großes Teil hat die Sprengkraft einer Handgranate.', facts: ['>1 Mio. Teile zwischen 1-10cm', 'Gesamtmasse über 15.000 Tonnen', 'Bedroht Klimasatelliten & ISS'] },
+            {
+                id: 'iss-research',
+                title: 'ISS ECOSTRESS',
+                x: '55%',
+                y: '45%',
+                type: 'info',
+                icon: 'Orbit',
+                startYear: 1998,
+                endYear: 2031,
+                timeline: [
+                    { maxYear: 2010, suffix: '_const', title: 'ISS Aufbauphase', description: 'Die Internationale Raumstation wird Modul für Modul zusammengesetzt. Ein Symbol für friedliche, globale Kooperation.' },
+                    { maxYear: 2030, suffix: '', title: 'ISS Forschungsbetrieb', description: 'Das fliegende Labor liefert entscheidende Klimadaten (ECOSTRESS) und medizinische Erkenntnisse.' },
+                    { maxYear: 2040, suffix: '_deorbit', title: 'ISS Deorbit', description: 'Die Station wird kontrolliert zum Absturz gebracht und verglüht über dem Point Nemo im Pazifik.' }
+                ],
+                description: 'Das ECOSTRESS-Instrument auf der ISS misst die Temperatur von Pflanzen, um Wasserstress zu erkennen, bevor Dürren sichtbar werden – ein entscheidendes Tool für die globale Nahrungssicherheit.',
+                facts: ['Misst Pflanzen-Evapotranspiration', '70m genaue Auflösung einzelner Felder', 'Frühwarnsystem für globale Dürren']
+            },
+            {
+                id: 'space-junk-cluster',
+                title: 'Trümmer-Feld',
+                x: '35%',
+                y: '65%',
+                type: 'danger',
+                icon: 'AlertTriangle',
+                startYear: 1957,
+                timeline: [
+                    { maxYear: 1990, suffix: '_early', title: 'Erste Trümmer', description: 'Vereinzelte Raketenstufen und inaktive Satelliten beginnen sich im Orbit anzusammeln.' },
+                    { maxYear: 2030, suffix: '', title: 'Kritisches Trümmerfeld', description: 'Millionen Teile rasen um die Erde. Ausweichmanöver für die ISS werden zur Routine.' },
+                    { maxYear: 2100, suffix: '_kessler', title: 'Kessler-Syndrom', description: 'Eine Kettenreaktion von Kollisionen macht den niedrigen Erdorbit unnutzbar. Raumfahrt wird fast unmöglich.' }
+                ],
+                description: 'Millionen winzige Schrottteile rasen mit 27.000 km/h um die Erde. Schon ein 1cm großes Teil hat die Sprengkraft einer Handgranate.',
+                facts: ['>1 Mio. Teile zwischen 1-10cm', 'Gesamtmasse über 15.000 Tonnen', 'Bedroht Klimasatelliten & ISS']
+            },
             { id: 'climate-sentinel', title: 'Sentinel-6', x: '85%', y: '70%', type: 'success', icon: 'Radio', startYear: 2020, description: 'Der "Wächter des Meeresspiegels". Sentinel-6 misst den Anstieg der Ozeane bis auf den Millimeter genau (derzeit ca. 4.8 mm pro Jahr, beschleunigend).', facts: ['Fortsetzung der Messreihe seit 1992', 'Aktueller Anstieg: 4.8mm/Jahr', 'Entscheidend für Küstenschutz-Planung'] },
             { id: 'solar-observatory', title: 'Parker Solar Probe', x: '45%', y: '10%', type: 'info', icon: 'Telescope', startYear: 2018, description: 'Das schnellste von Menschen gebaute Objekt. Im Jahr 2025 nähert sie sich der Sonne auf unter 6,2 Mio. km und liefert Daten zum Sonnenwind-Ursprung.', facts: ['Geschwindigkeit: ~690.000 km/h', 'Hitzeschild trotzt 1.370°C', 'Erforscht die Sonnenkorona direkt'] },
             { id: 'magnetosphere-sentinel', title: 'MMS-Mission', x: '5%', y: '10%', type: 'info', icon: 'Shield', startYear: 2015, description: 'Vier NASA-Satelliten (Magnetospheric Multiscale), die die magnetische Rekonnektion im Erdschild untersuchen.', facts: ['Kartiert magnetische Stürme', 'Verständnis der Polarlichter', 'Schutz vor Teilchenstrahlung'] },
@@ -58,7 +89,21 @@ export const ZONES = [
         maxDepth: 4000,
         background: 'linear-gradient(to bottom, #3a4bb5 0%, #4a68c5 30%, #5d88da 65%, #75ace8 100%)',
         objects: [
-            { id: 'ozone-layer', title: 'Ozonschicht', x: '50%', y: '35%', type: 'success', icon: 'ShieldCheck', description: 'Ein globaler Erfolg: Dank des Montreal-Protokolls schließt sich das Ozonloch. 2025 war das antarktische Loch das kleinste seit 1992.', facts: ['Vollständige Erholung bis 2066', 'Verhinderte zusätzlich 0.5°C Erwärmung', 'Schutz vor UV-Strahlung rettet Millionen'] },
+            {
+                id: 'ozone-layer',
+                title: 'Ozonschicht',
+                x: '50%',
+                y: '35%',
+                type: 'success',
+                icon: 'ShieldCheck',
+                timeline: [
+                    { maxYear: 1980, suffix: '_intact', title: 'Intakte Ozonschicht', description: 'Vor der massiven Nutzung von FCKW war der UV-Schutz der Erde stabil.' },
+                    { maxYear: 2015, suffix: '_hole', title: 'Ozonloch-Krise', description: 'Massive Ausdünnung über der Antarktis. Hautkrebsraten steigen weltweit.' },
+                    { maxYear: 2100, suffix: '', title: 'Erholte Ozonschicht', description: 'Dank des Montreal-Protokolls hat sich die Schutzschicht fast vollständig regeneriert. Ein Sieg für die Umweltpolitik.' }
+                ],
+                description: 'Ein globaler Erfolg: Dank des Montreal-Protokolls schließt sich das Ozonloch. 2025 war das antarktische Loch das kleinste seit 1992.',
+                facts: ['Vollständige Erholung bis 2066', 'Verhinderte zusätzlich 0.5°C Erwärmung', 'Schutz vor UV-Strahlung rettet Millionen']
+            },
             { id: 'weather-balloon', title: 'Klimaballon', x: '25%', y: '60%', type: 'info', icon: 'Wind', startYear: 1930, description: 'Radiosonden messen CO2-Gehalt und Temperatur in extremer Höhe.', facts: ['Wichtige Daten für Vorhersagen', 'Bis 40km Höhe', 'Unverzichtbar für Klimamodelle'] },
             { id: 'jet-stream', title: 'Jetstream-Instabilität', x: '75%', y: '45%', type: 'danger', icon: 'MoveLeft', description: 'Durch die schnelle Erwärmung der Arktis ("Arctic Amplification") verlangsamt sich der Jetstream und beginnt zu schlingern ("meandering"). Das führt zu wochenlangen, extremen Wetterlagen.', facts: ['Verursacht stehende Hitzewellen', 'Bringt Polarluft weit nach Süden', 'Ursache für blockierte Wetterlagen'] },
             { id: 'ozone-sampling-drone', title: 'Global Hawk (NASA)', x: '10%', y: '25%', type: 'info', icon: 'Plane', startYear: 2010, description: 'Unbemannte Forschungsdrohne, die in der Stratosphäre Schadstoffe und Ozonkonzentrationen sammelt.', facts: ['Fliegt über 20 km Höhe', 'Kein Pilot an Bord nötig', 'Dauereinsätze von 30+ Stunden'] },
@@ -97,7 +142,23 @@ export const ZONES = [
         objects: [
             { id: 'rocket-base', title: 'Raketenrampe', x: '8%', y: '50%', type: 'vehicle', icon: 'Rocket', static: true, startYear: 1957, description: 'Technologie zur Überwachung des Klimas aus dem Weltraum.', facts: ['Erdbeobachtungsprogramme', 'CO2-Mess-Missionen', 'Startplatz für Forschung'] },
             { id: 'sub-dock', title: 'Deepsea Dock', x: '24%', y: '50%', type: 'vehicle', icon: 'Anchor', static: true, startYear: 2010, description: 'Basis für autonome Forschungs-U-Boote (AUVs), die bis in den Marianengraben tauchen, um dort Temperatur und Plastikverschmutzung zu messen.', facts: ['Wartet autonome "Glider"', 'Schnittstelle für Tiefsee-Daten', 'Startpunkt für Hadal-Missionen'] },
-            { id: 'oil-platform', title: 'Öl-Plattform', x: '40%', y: '50%', type: 'danger', icon: 'Factory', static: true, startYear: 1950, description: 'Förderung fossiler Brennstoffe, der Haupttreiber des Klimawandels.', facts: ['Methan-Lecklagen', 'Risiko von Ölkatastrophen', 'CO2-Quelle Nummer 1'] },
+            {
+                id: 'oil-platform',
+                title: 'Öl-Plattform',
+                x: '40%',
+                y: '50%',
+                type: 'danger',
+                icon: 'Factory',
+                static: true,
+                startYear: 1950,
+                timeline: [
+                    { maxYear: 1970, suffix: '_const', title: 'Bohr-Aufbau', description: 'Die Erschließung neuer Ölfelder beginnt. Risiken werden oft ignoriert.' },
+                    { maxYear: 2040, suffix: '', title: 'Hochbetrieb', description: 'Förderung fossiler Brennstoffe läuft auf Hochtouren. Haupttreiber der globalen Erwärmung.' },
+                    { maxYear: 2100, suffix: '_ruin', title: 'Verlassene Plattform', description: 'Ein "Stranded Asset" der fossilen Ära. Rostende Stahlkolosse im Meer, da Erneuerbare Energien übernommen haben.' }
+                ],
+                description: 'Förderung fossiler Brennstoffe, der Haupttreiber des Klimawandels.',
+                facts: ['Methan-Lecklagen', 'Risiko von Ölkatastrophen', 'CO2-Quelle Nummer 1']
+            },
             { id: 'offshore-wind', title: 'Windpark Alpha', x: '56%', y: '50%', type: 'success', icon: 'Wind', static: true, startYear: 1991, description: 'Grüne Energiegewinnung durch konstante Küstenwinde.', facts: ['Saubere Energie', 'Keine CO2-Emissionen', 'Wichtiger Pfeiler der Energiewende'] },
             { id: 'ai-center', title: 'Cloud-Kollektor', x: '72%', y: '50%', type: 'danger', icon: 'Cpu', static: true, startYear: 2023, description: 'Enormer Energieverbrauch durch KI-Rechenzentren an der Küste.', facts: ['2% globaler Stromverbrauch', 'Kühlungsbedarf durch Meerwasser', 'Digitale Dekarbonisierung nötig'] },
             { id: 'cargo-tanker', title: 'Industrie-Logistik', x: '88%', y: '50%', type: 'danger', icon: 'Ship', static: true, startYear: 1950, description: '90% des Welthandels verursacht massive Schwefelemissionen.', facts: ['Schweröl-Verbrennung', 'Belastung der Weltmeere', 'Lärmverschmutzung für Wale'] },
@@ -114,7 +175,22 @@ export const ZONES = [
         maxDepth: -1,
         background: 'linear-gradient(to bottom, #006994 0%, #005a80 25%, #004d70 55%, #004060 85%, #003050 100%)',
         objects: [
-            { id: 'sea-turtle', title: 'Schildkröte', x: '20%', y: '25%', type: 'info', icon: 'Shell', extinctionYear: 2070, description: 'Meeresschildkröten verwechseln schwimmende Plastiktüten oft mit ihrer Hauptnahrung, den Quallen. Das Plastik verstopft ihren Magen und führt zum langsamen Verhungern.', facts: ['Plastik im Magen fast aller Arten', 'Verlust von Niststränden durch Meeresspiegel', 'Bestand sinkt dramatisch'] },
+            {
+                id: 'sea-turtle',
+                title: 'Schildkröte',
+                x: '20%',
+                y: '25%',
+                type: 'info',
+                icon: 'Shell',
+                extinctionYear: 2070,
+                timeline: [
+                    { maxYear: 1980, suffix: '_healthy', title: 'Gesunde Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.' },
+                    { maxYear: 2060, suffix: '', title: 'Plastik-Gefahr', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.' },
+                    { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.' }
+                ],
+                description: 'Meeresschildkröten verwechseln schwimmende Plastiktüten oft mit ihrer Hauptnahrung, den Quallen. Das Plastik verstopft ihren Magen und führt zum langsamen Verhungern.',
+                facts: ['Plastik im Magen fast aller Arten', 'Verlust von Niststränden durch Meeresspiegel', 'Bestand sinkt dramatisch']
+            },
             {
                 id: 'coral-reef',
                 title: 'Korallenriff',
@@ -133,7 +209,22 @@ export const ZONES = [
             },
 
             { id: 'humpback-whale', title: 'Buckelwal (CO2-Pumpe)', x: '50%', y: '50%', type: 'success', icon: 'Fish', description: 'Wale sind riesige Kohlenstoffspeicher. Ein großer Wal speichert durchschnittlich 33 Tonnen CO2. Wenn er stirbt, sinkt er in die Tiefe und entzieht diesen Kohlenstoff der Atmosphäre für Jahrhunderte.', facts: ['"Whale Pump" düngt Plankton', 'Speichert so viel CO2 wie 1000 Bäume', 'Erholung der Bestände hilft Klima'] },
-            { id: 'plastic-island', title: 'Great Pacific Garbage Patch', x: '35%', y: '15%', type: 'danger', icon: 'Trash2', startYear: 1970, description: 'Ein riesiger Müllstrudel im Pazifik, dreimal so groß wie Frankreich. Mikroplastik-Konzentrationen haben sich dort in wenigen Jahren verzehnfacht.', facts: ['>1.5 Mio. Plastikteile pro km²', '94% davon ist Mikroplastik', 'Tausende Tonnen Geisternetze'] },
+            {
+                id: 'plastic-island',
+                title: 'Great Pacific Garbage Patch',
+                x: '35%',
+                y: '15%',
+                type: 'danger',
+                icon: 'Trash2',
+                startYear: 1970,
+                timeline: [
+                    { maxYear: 2000, suffix: '_early', title: 'Entstehender Müllstrudel', description: 'Erste Anzeichen einer Akkumulation von Plastikteilen durch Meeresströmungen.' },
+                    { maxYear: 2040, suffix: '', title: 'Great Pacific Garbage Patch', description: 'Ein riesiger Müllteppich, dreimal so groß wie Frankreich. Mikroplastik ist allgegenwärtig.' },
+                    { maxYear: 2100, suffix: '_dense', title: 'Plastik-Kontinent', description: 'Der Müll hat sich zu einer dichten Schicht verdichtet. Ein eigenes Ökosystem ("Neopelagic") hat sich auf dem Plastik gebildet.' }
+                ],
+                description: 'Ein riesiger Müllstrudel im Pazifik, dreimal so groß wie Frankreich. Mikroplastik-Konzentrationen haben sich dort in wenigen Jahren verzehnfacht.',
+                facts: ['>1.5 Mio. Plastikteile pro km²', '94% davon ist Mikroplastik', 'Tausende Tonnen Geisternetze']
+            },
             { id: 'overfishing', title: 'Industriefischerei', x: '65%', y: '35%', type: 'danger', icon: 'AlertTriangle', startYear: 1950, description: 'Boden-Schleppnetze pflügen den Meeresboden um und setzen dabei riesige Mengen an im Sediment gespeichertem CO2 frei – vergleichbar mit dem gesamten Luftverkehr.', facts: ['Zerstört CO2-Senke Meeresboden', '80% Beifang bei Schleppnetzen', 'Fischbestände kollabieren'] },
             { id: 'plankton-map', title: 'Phytoplankton', x: '10%', y: '65%', type: 'info', icon: 'Map', description: 'Das Phytoplankton produziert 50% des Sauerstoffs, den wir atmen. Durch steigende Wassertemperaturen und Versauerung geht die Menge global zurück.', facts: ['Basis der Nahrungskette', 'Sinkt die Menge, hungert das Meer', 'Bindet Milliarden Tonnen CO2'] }
         ]
@@ -179,7 +270,22 @@ export const ZONES = [
         background: 'linear-gradient(to bottom, #000000 0%, #010101 50%, #000000 100%)',
         objects: [
             { id: 'deep-sea-dumbo', title: 'Dumbo-Oktopus', x: '35%', y: '35%', type: 'info', icon: 'Bug', description: 'Ein sanfter Oktopus, der in extremen Tiefen schwebt.', facts: ['Nutzt ohrenähnliche Flossen', 'Keine Tintensäcke nötig', 'Sehr seltene Beobachtungen'] },
-            { id: 'nodule-mining', title: 'Tiefsee-Bergbau', x: '75%', y: '65%', type: 'danger', icon: 'HardHat', startYear: 2015, description: 'Geplanter Abbau von Manganknollen für E-Auto-Batterien. Forscher warnen: Die Zerstörung des Meeresbodens könnte gespeicherten Kohlenstoff freisetzen und einzigartige Arten auslöschen, bevor wir sie entdecken.', facts: ['Knollen wachsen nur mm pro Mio. Jahre', 'Sedimentwolken ersticken Leben', 'Irreversible Zerstörung'] },
+            {
+                id: 'nodule-mining',
+                title: 'Tiefsee-Bergbau',
+                x: '75%',
+                y: '65%',
+                type: 'danger',
+                icon: 'HardHat',
+                startYear: 2015,
+                timeline: [
+                    { maxYear: 2020, suffix: '_pristine', title: 'Unberührtes Mangaufeld', description: 'Manganknollen liegen seit Millionen Jahren am Meeresgrund. Ein einzigartiger Lebensraum.' },
+                    { maxYear: 2045, suffix: '', title: 'Aktiver Abbau', description: 'Großmaschinen ernten den Meeresboden ab. Sedimentwolken ersticken das Leben im Umkreis von Kilometern.' },
+                    { maxYear: 2100, suffix: '_dead', title: 'Todeszone', description: 'Der Meeresboden ist eine leblose Wüste. Der Kohlenstoffspeicher wurde zerstört und erholt sich nicht mehr.' }
+                ],
+                description: 'Geplanter Abbau von Manganknollen für E-Auto-Batterien. Forscher warnen: Die Zerstörung des Meeresbodens könnte gespeicherten Kohlenstoff freisetzen und einzigartige Arten auslöschen, bevor wir sie entdecken.',
+                facts: ['Knollen wachsen nur mm pro Mio. Jahre', 'Sedimentwolken ersticken Leben', 'Irreversible Zerstörung']
+            },
             { id: 'sunken-shipwreck', title: 'Tiefsee-Wrack', x: '20%', y: '80%', type: 'info', icon: 'Anchor', startYear: 1912, description: 'Kulturelles Erbe, das durch versauerndes Meerwasser schneller korrodiert als erwartet. Bakterien, die Eisen fressen, breiten sich aus.', facts: ['Titanic zerfällt bis 2030', 'Mikrobielles Leben verändert sich', 'Historisches "Zeitfenster" schließt sich'] },
             { id: 'research-lander', title: 'Hadal-Lander Alfie', x: '55%', y: '15%', type: 'info', icon: 'Camera', startYear: 2009, description: 'Spezialroboter (wie vom WHOI), die autonom an die tiefsten Stellen der Erde tauchen, um Mikroplastik im Sediment nachzuweisen.', facts: ['Hält dem Druck von 1000 Elefanten stand', 'Beweist: Plastik ist überall', 'Kartiert unbekannte Tiefseegräben'] },
             { id: 'xenophyophore-colony', title: 'Xenophyophoren', x: '45%', y: '90%', type: 'info', icon: 'Shapes', description: 'Gigantische Einzeller, die extrem empfindlich auf Störungen durch Tiefsee-Bergbau reagieren. Sie sind die "Bäume" der Tiefsee und bieten Lebensraum für viele andere Arten.', facts: ['Größte Einzeller der Welt (20cm)', 'Filtern Wasser & Schwermetalle', 'Keystone-Spezies der Tiefsee'] },
