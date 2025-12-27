@@ -14,7 +14,7 @@ function HUD() {
     const vehicleMode = depth > 0 ? 'rocket' : 'submarine';
 
     return (
-        <div className="fixed inset-0 pointer-events-none z-[60] flex flex-col justify-between p-4">
+        <div className="fixed inset-0 pointer-events-none z-[60] flex flex-col justify-between p-3 md:p-4">
 
             {/* Top Left: Zone Info */}
             <div className="flex items-start gap-4">
@@ -24,7 +24,7 @@ function HUD() {
                             {vehicleMode === 'rocket' ? '🚀' : '🔱'} {vehicleMode === 'rocket' ? 'Aufstieg' : 'Tauchfahrt'}
                         </span>
                     </div>
-                    <h2 className="text-lg font-bold text-white leading-tight">
+                    <h2 className="text-base md:text-lg font-bold text-white leading-tight">
                         {currentZone?.title}
                     </h2>
                     <span className="text-xs text-muted">{currentZone?.subtitle}</span>
@@ -36,9 +36,12 @@ function HUD() {
 
                 {/* Navigation Hint */}
                 <div className="panel px-3 py-2">
-                    <span className="text-[10px] text-muted">
+                    <span className="text-[10px] text-muted hidden md:inline-flex items-center">
                         <kbd className="px-1 py-0.5 bg-white/10 rounded text-white text-[9px] mr-1">↑↓</kbd>
                         Navigation
+                    </span>
+                    <span className="text-[10px] text-muted md:hidden inline-flex items-center">
+                        <span className="mr-1">↕</span> Swipe
                     </span>
                 </div>
 

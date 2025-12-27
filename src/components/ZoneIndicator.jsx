@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+
 import { useClimateStore } from '../store/useClimateStore';
 import { ZONES } from '../data/zones';
 
 function ZoneIndicator() {
     const depth = useClimateStore((state) => state.depth);
     const setDepth = useClimateStore((state) => state.setDepth);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const totalMax = 12000;
     const totalMin = -11000;
@@ -57,8 +60,18 @@ function ZoneIndicator() {
                 </div>
             </div>
 
+            {/* Mobile Toggle Button */}
+            <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="md:hidden absolute right-8 top-0 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white z-[110]"
+            >
+                {isExpanded ? <X size={20} /> : <Menu size={20} />}
+            </button>
+
             {/* Zone List */}
-            <div className="panel p-3 flex flex-col gap-1 w-44 max-h-full overflow-y-auto">
+            <div className={`panel p-3 flex flex-col gap-1 w-44 max-h-[70vh] md:max-h-full overflow-y-auto transition-all duration-300
+                ${isExpanded ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-10 pointer-events-none md:opacity-100 md:translate-x-0 md:pointer-events-auto'}
+                fixed right-16 top-1/2 -translate-y-1/2 md:static md:transform-none z-[105]`}>
                 <span className="text-xs font-semibold text-muted uppercase tracking-wider px-1 mb-1">Zonen</span>
 
                 {ZONES.map(zone => (

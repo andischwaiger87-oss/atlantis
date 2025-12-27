@@ -17,15 +17,15 @@ function InfoModal({ object, onClose }) {
 
     return (
         <div
-            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-[1000] flex items-end md:items-center justify-center md:p-4 bg-black/80 backdrop-blur-sm"
             onClick={onClose}
         >
             <div
-                className="panel w-full max-w-lg overflow-hidden"
+                className="panel w-full h-[90vh] md:h-auto md:max-w-lg overflow-hidden flex flex-col rounded-t-2xl md:rounded-xl"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Custom Photo Header - prioritized WebP as requested */}
-                <div className="relative w-full h-80 bg-slate-800 overflow-hidden">
+                <div className="relative w-full h-64 md:h-80 bg-slate-800 overflow-hidden flex-shrink-0">
                     <img
                         src={`/assets/objects/${object.id}.webp`}
                         alt={object.title}
@@ -64,7 +64,7 @@ function InfoModal({ object, onClose }) {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 space-y-6">
+                <div className="p-5 md:p-6 space-y-6 overflow-y-auto flex-1">
 
                     {/* Description */}
                     <p className="text-lg text-white/90 leading-relaxed">

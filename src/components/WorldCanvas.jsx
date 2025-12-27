@@ -40,6 +40,7 @@ function WorldCanvas() {
     const keysPressed = useRef({});
     const requestRef = useRef();
     const lastDepth = useRef(depth);
+    const lastTouchY = useRef(null);
 
     // Create stars across all of space
     const stars = useMemo(() => {
@@ -89,14 +90,41 @@ function WorldCanvas() {
             velocity.current -= e.deltaY * WHEEL_SENSITIVITY;
         };
 
+        const handleTouchStart = (e) => {
+            lastTouchY.current = e.touches[0].clientY;
+        };
+
+        const handleTouchMove = (e) => {
+            if (lastTouchY.current === null) return;
+            const currentY = e.touches[0].clientY;
+            const deltaY = currentY - lastTouchY.current;
+
+            // Inverted control for natural touch feel: Drag UP to go DOWN (deeper)
+            // Drag UP = deltaY negative. We want velocity negative (deeper).
+            // So we add deltaY.
+            velocity.current += deltaY * 1.5; // Touch sensitivity multiplier
+
+            lastTouchY.current = currentY;
+        };
+
+        const handleTouchEnd = () => {
+            lastTouchY.current = null;
+        };
+
         window.addEventListener('keydown', handleDown);
         window.addEventListener('keyup', handleUp);
         window.addEventListener('wheel', handleWheel, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart);
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        window.addEventListener('touchend', handleTouchEnd);
 
         return () => {
             window.removeEventListener('keydown', handleDown);
             window.removeEventListener('keyup', handleUp);
             window.removeEventListener('wheel', handleWheel);
+            window.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleTouchEnd);
         };
     }, []);
 
