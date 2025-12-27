@@ -97,9 +97,9 @@ export const ZONES = [
                 type: 'success',
                 icon: 'ShieldCheck',
                 timeline: [
-                    { maxYear: 1980, suffix: '_intact', title: 'Intakte Ozonschicht', description: 'Vor der massiven Nutzung von FCKW war der UV-Schutz der Erde stabil.' },
-                    { maxYear: 2015, suffix: '_hole', title: 'Ozonloch-Krise', description: 'Massive Ausdünnung über der Antarktis. Hautkrebsraten steigen weltweit.' },
-                    { maxYear: 2100, suffix: '', title: 'Erholte Ozonschicht', description: 'Dank des Montreal-Protokolls hat sich die Schutzschicht fast vollständig regeneriert. Ein Sieg für die Umweltpolitik.' }
+                    { maxYear: 1980, suffix: '_intact', title: 'Intakte Ozonschicht', description: 'Vor der massiven Nutzung von FCKW war der UV-Schutz der Erde stabil.', condition: { maxTemp: 1.0 } },
+                    { maxYear: 2015, suffix: '_hole', title: 'Ozonloch-Krise', description: 'Massive Ausdünnung über der Antarktis. Hautkrebsraten steigen weltweit.', condition: { minTemp: 1.1, maxTemp: 1.5 } }, // Artistic license, linking to general enviro stress
+                    { maxYear: 2100, suffix: '', title: 'Erholte Ozonschicht', description: 'Dank des Montreal-Protokolls hat sich die Schutzschicht fast vollständig regeneriert. Ein Sieg für die Umweltpolitik.', condition: { minTemp: 0 } }
                 ],
                 description: 'Ein globaler Erfolg: Dank des Montreal-Protokolls schließt sich das Ozonloch. 2025 war das antarktische Loch das kleinste seit 1992.',
                 facts: ['Vollständige Erholung bis 2066', 'Verhinderte zusätzlich 0.5°C Erwärmung', 'Schutz vor UV-Strahlung rettet Millionen']
@@ -184,9 +184,9 @@ export const ZONES = [
                 icon: 'Shell',
                 extinctionYear: 2070,
                 timeline: [
-                    { maxYear: 1980, suffix: '_healthy', title: 'Gesunde Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.' },
-                    { maxYear: 2060, suffix: '', title: 'Plastik-Gefahr', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.' },
-                    { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.' }
+                    { maxYear: 1980, suffix: '_healthy', title: 'Gesunde Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.', condition: { maxPollution: 20 } },
+                    { maxYear: 2060, suffix: '', title: 'Plastik-Gefahr', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.', condition: { minPollution: 21, maxPollution: 80 } },
+                    { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.', condition: { minPollution: 81 } }
                 ],
                 description: 'Meeresschildkröten verwechseln schwimmende Plastiktüten oft mit ihrer Hauptnahrung, den Quallen. Das Plastik verstopft ihren Magen und führt zum langsamen Verhungern.',
                 facts: ['Plastik im Magen fast aller Arten', 'Verlust von Niststränden durch Meeresspiegel', 'Bestand sinkt dramatisch']
@@ -200,9 +200,9 @@ export const ZONES = [
                 icon: 'Flower2',
                 extinctionYear: 2050, // Keep for backward compatibility/danger logic
                 timeline: [
-                    { maxYear: 1980, suffix: '_1950', title: 'Gesundes Korallenriff', description: 'Ein farbenprächtiges, intaktes Ökosystem vor Beginn der massiven globalen Erwärmung.' },
-                    { maxYear: 2030, suffix: '', title: 'Korallenbleiche', description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche). 90% Verlust droht.' },
-                    { maxYear: 2100, suffix: '_2050', title: 'Abgestorbenes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.' }
+                    { maxYear: 1980, suffix: '_1950', title: 'Gesundes Korallenriff', description: 'Ein farbenprächtiges, intaktes Ökosystem vor Beginn der massiven globalen Erwärmung.', condition: { maxTemp: 1.0, minPh: 8.0 } },
+                    { maxYear: 2030, suffix: '', title: 'Korallenbleiche', description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche). 90% Verlust droht.', condition: { minTemp: 1.1, maxTemp: 1.9, maxPh: 7.9 } },
+                    { maxYear: 2100, suffix: '_2050', title: 'Abgestorbenes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.', condition: { minTemp: 2.0, maxPh: 7.7 } }
                 ],
                 description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche).',
                 facts: ['90% Verlust droht bis 2050', 'Heimat für 25% aller Fische', 'Küsten-Schutzschild']
@@ -218,15 +218,29 @@ export const ZONES = [
                 icon: 'Trash2',
                 startYear: 1970,
                 timeline: [
-                    { maxYear: 2000, suffix: '_early', title: 'Entstehender Müllstrudel', description: 'Erste Anzeichen einer Akkumulation von Plastikteilen durch Meeresströmungen.' },
-                    { maxYear: 2040, suffix: '', title: 'Great Pacific Garbage Patch', description: 'Ein riesiger Müllteppich, dreimal so groß wie Frankreich. Mikroplastik ist allgegenwärtig.' },
-                    { maxYear: 2100, suffix: '_dense', title: 'Plastik-Kontinent', description: 'Der Müll hat sich zu einer dichten Schicht verdichtet. Ein eigenes Ökosystem ("Neopelagic") hat sich auf dem Plastik gebildet.' }
+                    { maxYear: 2000, suffix: '_early', title: 'Entstehender Müllstrudel', description: 'Erste Anzeichen einer Akkumulation von Plastikteilen durch Meeresströmungen.', condition: { maxPollution: 20 } },
+                    { maxYear: 2040, suffix: '', title: 'Great Pacific Garbage Patch', description: 'Ein riesiger Müllteppich, dreimal so groß wie Frankreich. Mikroplastik ist allgegenwärtig.', condition: { minPollution: 21, maxPollution: 70 } },
+                    { maxYear: 2100, suffix: '_dense', title: 'Plastik-Kontinent', description: 'Der Müll hat sich zu einer dichten Schicht verdichtet. Ein eigenes Ökosystem ("Neopelagic") hat sich auf dem Plastik gebildet.', condition: { minPollution: 71 } }
                 ],
                 description: 'Ein riesiger Müllstrudel im Pazifik, dreimal so groß wie Frankreich. Mikroplastik-Konzentrationen haben sich dort in wenigen Jahren verzehnfacht.',
                 facts: ['>1.5 Mio. Plastikteile pro km²', '94% davon ist Mikroplastik', 'Tausende Tonnen Geisternetze']
             },
             { id: 'overfishing', title: 'Industriefischerei', x: '65%', y: '35%', type: 'danger', icon: 'AlertTriangle', startYear: 1950, description: 'Boden-Schleppnetze pflügen den Meeresboden um und setzen dabei riesige Mengen an im Sediment gespeichertem CO2 frei – vergleichbar mit dem gesamten Luftverkehr.', facts: ['Zerstört CO2-Senke Meeresboden', '80% Beifang bei Schleppnetzen', 'Fischbestände kollabieren'] },
-            { id: 'plankton-map', title: 'Phytoplankton', x: '10%', y: '65%', type: 'info', icon: 'Map', description: 'Das Phytoplankton produziert 50% des Sauerstoffs, den wir atmen. Durch steigende Wassertemperaturen und Versauerung geht die Menge global zurück.', facts: ['Basis der Nahrungskette', 'Sinkt die Menge, hungert das Meer', 'Bindet Milliarden Tonnen CO2'] }
+            {
+                id: 'plankton-map',
+                title: 'Phytoplankton',
+                x: '10%',
+                y: '65%',
+                type: 'info',
+                icon: 'Map',
+                // New Timeline for Sim
+                timeline: [
+                    { maxYear: 2020, suffix: '_healthy', title: 'Blühendes Plankton', description: 'Die Grundlage der marinen Nahrungskette ist stabil.', condition: { maxTemp: 1.5, minPh: 8.0 } },
+                    { maxYear: 2100, suffix: '_collapse', title: 'Plankton-Kollaps', description: 'Durch Versauerung und Erwärmung bricht die Basis des Nahrungsnetzes weg. Das Meer hungert.', condition: { minTemp: 3.0, maxPh: 7.8 } }
+                ],
+                description: 'Das Phytoplankton produziert 50% des Sauerstoffs, den wir atmen. Durch steigende Wassertemperaturen und Versauerung geht die Menge global zurück.',
+                facts: ['Basis der Nahrungskette', 'Sinkt die Menge, hungert das Meer', 'Bindet Milliarden Tonnen CO2']
+            }
         ]
     },
     // === DÄMMERZONE ===
@@ -256,7 +270,20 @@ export const ZONES = [
             { id: 'anglerfish-deep', title: 'Anglerfisch', x: '25%', y: '35%', type: 'info', icon: 'Lightbulb', description: 'Hat eine leuchtende Angel am Kopf entwickelt, um Beute anzulocken.', facts: ['Extreme Druckanpassung', 'Parasitäre Paarung', 'Überlebt bei 400 Bar'] },
             { id: 'sperm-whale-dive', title: 'Tauchender Pottwal', x: '60%', y: '20%', type: 'info', icon: 'Fish', description: 'Taucht in diese Tiefe ab, um Riesenkalmare zu jagen.', facts: ['Taucht bis 3000m tief', 'Hält 90 Min die Luft an', 'Hört Echos im Dunkeln'] },
             { id: 'marine-snow', title: 'Meeresschnee (Kohlenstoff-Pumpe)', x: '15%', y: '60%', type: 'success', icon: 'Snowflake', description: 'Ein kontinuierlicher Regen aus organischem Material, der CO2 von der Oberfläche in die Tiefe transportiert ("Biologische Kohlenstoffpumpe"). Ozeanversauerung könnte diesen Prozess schwächen.', facts: ['Transportiert Megatonnen CO2', 'Speichert Kohlenstoff für Jahrtausende', 'Nahrungsgrundlage der Tiefsee'] },
-            { id: 'methane-seepage', title: 'Methan-Austritt', x: '75%', y: '80%', type: 'danger', icon: 'Flame', description: 'Erwärmt sich der Ozean, könnte gefrorenes Methanhydrat am Boden instabil werden und als starkes Treibhausgas aufsteigen.', facts: ['Gefahr eines "Kipppunkts"', 'Methan ist 25x stärker als CO2', 'Forschung überwacht Stabilität'] },
+            {
+                id: 'methane-seepage',
+                title: 'Methan-Austritt',
+                x: '75%',
+                y: '80%',
+                type: 'danger',
+                icon: 'Flame',
+                timeline: [
+                    { maxYear: 2020, suffix: '_stable', title: 'Gefrorenes Methanhydrat', description: 'Unter hohem Druck und Kälte ist das Methan stabil im Eis eingeschlossen.', condition: { maxTemp: 1.5 } },
+                    { maxYear: 2100, suffix: '_leaking', title: 'Kipppunkt erreicht', description: 'Durch die Erwärmung der Tiefsee gast das Methan massiv aus. Ein fataler Feedback-Loop beginnt.', condition: { minTemp: 2.5 } }
+                ],
+                description: 'Erwärmt sich der Ozean, könnte gefrorenes Methanhydrat am Boden instabil werden und als starkes Treibhausgas aufsteigen.',
+                facts: ['Gefahr eines "Kipppunkts"', 'Methan ist 25x stärker als CO2', 'Forschung überwacht Stabilität']
+            },
             { id: 'hydrothermal-vent', title: 'Schwarzer Raucher', x: '45%', y: '85%', type: 'info', icon: 'Zap', description: 'Extrem-Lebensräume, die abhängig von Chemosynthese sind. Sie könnten erste Hinweise liefern, wie Leben unter extremen Klimabedingungen (oder auf anderen Planeten) existiert.', facts: ['Bis zu 400°C heißes Wasser', 'Unabhängig vom Sonnenlicht', 'Symbiose von Bakterien & Tieren'] }
         ]
     },
@@ -279,9 +306,9 @@ export const ZONES = [
                 icon: 'HardHat',
                 startYear: 2015,
                 timeline: [
-                    { maxYear: 2020, suffix: '_pristine', title: 'Unberührtes Mangaufeld', description: 'Manganknollen liegen seit Millionen Jahren am Meeresgrund. Ein einzigartiger Lebensraum.' },
-                    { maxYear: 2045, suffix: '', title: 'Aktiver Abbau', description: 'Großmaschinen ernten den Meeresboden ab. Sedimentwolken ersticken das Leben im Umkreis von Kilometern.' },
-                    { maxYear: 2100, suffix: '_dead', title: 'Todeszone', description: 'Der Meeresboden ist eine leblose Wüste. Der Kohlenstoffspeicher wurde zerstört und erholt sich nicht mehr.' }
+                    { maxYear: 2020, suffix: '_pristine', title: 'Unberührtes Mangaufeld', description: 'Manganknollen liegen seit Millionen Jahren am Meeresgrund. Ein einzigartiger Lebensraum.', condition: { maxPollution: 10 } },
+                    { maxYear: 2045, suffix: '', title: 'Aktiver Abbau', description: 'Großmaschinen ernten den Meeresboden ab. Sedimentwolken ersticken das Leben im Umkreis von Kilometern.', condition: { minPollution: 11, maxPollution: 80 } },
+                    { maxYear: 2100, suffix: '_dead', title: 'Todeszone', description: 'Der Meeresboden ist eine leblose Wüste. Der Kohlenstoffspeicher wurde zerstört und erholt sich nicht mehr.', condition: { minPollution: 81 } }
                 ],
                 description: 'Geplanter Abbau von Manganknollen für E-Auto-Batterien. Forscher warnen: Die Zerstörung des Meeresbodens könnte gespeicherten Kohlenstoff freisetzen und einzigartige Arten auslöschen, bevor wir sie entdecken.',
                 facts: ['Knollen wachsen nur mm pro Mio. Jahre', 'Sedimentwolken ersticken Leben', 'Irreversible Zerstörung']

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Icons from 'lucide-react';
 import { useClimateStore } from '../store/useClimateStore';
+import useSimulationStore from '../store/useSimulationStore';
 import * as SVGs from './SVGIllustrations';
 
 // Map object IDs to custom SVG components
@@ -55,13 +56,41 @@ function InteractiveObject({ object, onClick }) {
     const year = useClimateStore((state) => state.year);
     const depth = useClimateStore((state) => state.depth);
 
+    const { isSimulationActive, temperatureAnomaly, oceanPh, pollutionLevel } = useSimulationStore();
+
     const isExtinct = (object.extinctionYear && year >= object.extinctionYear) || (object.endYear && year > object.endYear);
     const isNotYetBorn = object.startYear && year < object.startYear;
     const isVisible = !isNotYetBorn;
 
     // Determine current timeline state (variants)
-    const activeTimelineState = object.timeline?.find(t => year <= t.maxYear)
-        || (object.timeline ? object.timeline[object.timeline.length - 1] : null);
+    // SIMULATION LOGIC: Check if sim is active and override timeline based on conditions
+    let activeTimelineState = null;
+
+    if (isSimulationActive && object.timeline) {
+        // Find the worst/matching condition
+        // We iterate through timeline. If a condition matches our sim values, we pick it.
+        // Priority: We check from "worst" (usually last in array) to "best" or specific conditions.
+        // Actually, let's check explicit conditions.
+
+        activeTimelineState = object.timeline.find(t => {
+            if (!t.condition) return false;
+            const c = t.condition;
+            // Check all defined conditions
+            if (c.minTemp !== undefined && temperatureAnomaly < c.minTemp) return false;
+            if (c.maxTemp !== undefined && temperatureAnomaly > c.maxTemp) return false;
+            if (c.minPh !== undefined && oceanPh < c.minPh) return false; // pH decreases as it gets worse? No, 8.1 -> 7.6
+            if (c.maxPh !== undefined && oceanPh > c.maxPh) return false;
+            if (c.minPollution !== undefined && pollutionLevel < c.minPollution) return false;
+            if (c.maxPollution !== undefined && pollutionLevel > c.maxPollution) return false;
+            return true;
+        });
+    }
+
+    // Fallback to Year logic if no sim match or sim inactive
+    if (!activeTimelineState) {
+        activeTimelineState = object.timeline?.find(t => year <= t.maxYear)
+            || (object.timeline ? object.timeline[object.timeline.length - 1] : null);
+    }
 
     // Merge current state into object for display
     const currentStateObject = {
