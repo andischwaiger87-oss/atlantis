@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Icons from 'lucide-react';
 import { useClimateStore } from '../store/useClimateStore';
 import * as SVGs from './SVGIllustrations';
@@ -54,7 +54,16 @@ function InteractiveObject({ object, onClick }) {
     const [imageError, setImageError] = useState(false);
     const year = useClimateStore((state) => state.year);
     const depth = useClimateStore((state) => state.depth);
+
     const isExtinct = object.extinctionYear && year >= object.extinctionYear;
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const LucideIcon = Icons[object.icon] || Icons.Circle;
 
@@ -119,7 +128,11 @@ function InteractiveObject({ object, onClick }) {
                     <img
                         src={assetPath}
                         alt={object.title}
-                        style={{ width: object.size || 150, height: object.size || 150, objectFit: 'contain' }}
+                        style={{
+                            width: isMobile ? (object.size ? object.size * 0.6 : 90) : (object.size || 150),
+                            height: isMobile ? (object.size ? object.size * 0.6 : 90) : (object.size || 150),
+                            objectFit: 'contain'
+                        }}
                         onError={() => setImageError(true)}
                     />
                 </div>

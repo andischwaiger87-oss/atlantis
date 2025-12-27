@@ -14,7 +14,7 @@ function HUD() {
     const vehicleMode = depth > 0 ? 'rocket' : 'submarine';
 
     return (
-        <div className="fixed inset-0 pointer-events-none z-[60] flex flex-col justify-between p-3 md:p-4">
+        <div className="fixed inset-0 pointer-events-none z-[60] flex flex-col justify-between p-4">
 
             {/* Top Left: Zone Info */}
             <div className="flex items-start gap-4">
@@ -24,7 +24,7 @@ function HUD() {
                             {vehicleMode === 'rocket' ? '🚀' : '🔱'} {vehicleMode === 'rocket' ? 'Aufstieg' : 'Tauchfahrt'}
                         </span>
                     </div>
-                    <h2 className="text-base md:text-lg font-bold text-white leading-tight">
+                    <h2 className="text-lg font-bold text-white leading-tight">
                         {currentZone?.title}
                     </h2>
                     <span className="text-xs text-muted">{currentZone?.subtitle}</span>
