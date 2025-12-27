@@ -55,7 +55,21 @@ function InteractiveObject({ object, onClick }) {
     const year = useClimateStore((state) => state.year);
     const depth = useClimateStore((state) => state.depth);
 
-    const isExtinct = object.extinctionYear && year >= object.extinctionYear;
+    const isExtinct = (object.extinctionYear && year >= object.extinctionYear) || (object.endYear && year > object.endYear);
+    const isNotYetBorn = object.startYear && year < object.startYear;
+    const isVisible = !isNotYetBorn;
+
+    // Determine current timeline state (variants)
+    const activeTimelineState = object.timeline?.find(t => year <= t.maxYear)
+        || (object.timeline ? object.timeline[object.timeline.length - 1] : null);
+
+    // Merge current state into object for display
+    const currentStateObject = {
+        ...object,
+        ...(activeTimelineState || {}), // Overrides title, description, suffix
+        isExtinct: isExtinct, // Pass calculated status to Modal
+        id: object.id // Keep ID constant
+    };
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -67,9 +81,30 @@ function InteractiveObject({ object, onClick }) {
 
     const LucideIcon = Icons[object.icon] || Icons.Circle;
 
-    // Asset paths - Use PNG for world icons as requested
-    const assetPath = `/assets/objects/${object.id}.png`;
-    const fallbackPath = `/assets/objects/${object.id}.webp`;
+    // Asset paths - Use PNG with Timeline Suffix
+    const suffix = activeTimelineState?.suffix || '';
+    const assetPath = `/assets/objects/${object.id}${suffix}.png`;
+    const defaultPath = `/assets/objects/${object.id}.png`; // Try PNG first
+    const backupPath = `/assets/objects/${object.id}.webp`; // Then WebP
+
+    const [currentSrc, setCurrentSrc] = useState(assetPath);
+
+    // Reset src when object/year changes
+    useEffect(() => {
+        setCurrentSrc(assetPath);
+        setImageError(false);
+    }, [object.id, suffix]);
+
+    const handleImageError = () => {
+        // Fallback chain: Variant -> Default PNG -> Default WebP -> Error (Icon)
+        if (currentSrc === assetPath && suffix) {
+            setCurrentSrc(defaultPath);
+        } else if (currentSrc === defaultPath) {
+            setCurrentSrc(backupPath);
+        } else {
+            setImageError(true);
+        }
+    };
 
     // Vehicle state: show empty station when departed
     const rocketFlying = depth > 2;
@@ -97,13 +132,15 @@ function InteractiveObject({ object, onClick }) {
     const animDelay = (object.id.charCodeAt(0) % 5) * 0.5;
     const floatDuration = 4 + (object.id.charCodeAt(0) % 3);
 
+    if (!isVisible) return null;
+
     return (
         <div
-            onClick={() => !isExtinct && onClick(object)}
+            onClick={() => onClick(currentStateObject)}
             className={`
                 absolute transform -translate-x-1/2 -translate-y-1/2
                 transition-all duration-300 cursor-pointer group
-                ${isExtinct ? 'opacity-20 grayscale pointer-events-none' : 'hover:scale-110'}
+                ${isExtinct ? 'opacity-40 grayscale filter blur-[1px]' : 'hover:scale-110'}
             `}
             style={{
                 left: object.x,
@@ -126,14 +163,14 @@ function InteractiveObject({ object, onClick }) {
             {!imageError ? (
                 <div className="relative transition-transform duration-300 group-hover:scale-110 drop-shadow-2xl">
                     <img
-                        src={assetPath}
+                        src={currentSrc}
                         alt={object.title}
                         style={{
                             width: isMobile ? (object.size ? object.size * 0.6 : 90) : (object.size || 150),
                             height: isMobile ? (object.size ? object.size * 0.6 : 90) : (object.size || 150),
                             objectFit: 'contain'
                         }}
-                        onError={() => setImageError(true)}
+                        onError={handleImageError}
                     />
                 </div>
             ) : CustomSVG ? (
@@ -156,7 +193,7 @@ function InteractiveObject({ object, onClick }) {
             {/* Tooltip - ABOVE object with safe z-index */}
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[9999]">
                 <div className="bg-slate-900/95 border border-white/10 backdrop-blur-md px-4 py-2 rounded-xl whitespace-nowrap text-center shadow-2xl">
-                    <span className="text-sm font-bold block text-white">{object.title}</span>
+                    <span className="text-sm font-bold block text-white">{currentStateObject.title}</span>
                     <span className="text-[10px] text-gray-400">Klicken für Details</span>
                 </div>
             </div>

@@ -72,12 +72,29 @@ function InfoModal({ object, onClose }) {
                     </p>
 
                     {/* Extinction Warning */}
-                    {object.extinctionYear && (
-                        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30">
-                            <Icons.AlertTriangle size={24} className="text-red-400 flex-shrink-0" />
-                            <p className="text-sm text-red-300">
-                                <span className="font-semibold">Gefährdet:</span> Bei aktuellen Trends droht Aussterben bis <span className="font-bold">{object.extinctionYear}</span>
-                            </p>
+                    {/* Extinction / Status Warning */}
+                    {(object.isExtinct || object.extinctionYear) && (
+                        <div className={`flex items-center gap-3 p-4 rounded-xl border ${object.isExtinct ? 'bg-slate-800/80 border-slate-600' : 'bg-red-500/10 border-red-500/30'}`}>
+                            {object.isExtinct ? (
+                                <Icons.Skull size={24} className="text-gray-400 flex-shrink-0" />
+                            ) : (
+                                <Icons.AlertTriangle size={24} className="text-red-400 flex-shrink-0" />
+                            )}
+                            <div className="text-sm">
+                                {object.isExtinct ? (
+                                    <p className="text-gray-300">
+                                        <span className="font-bold text-gray-200">NICHT MEHR VORHANDEN:</span>
+                                        <br />
+                                        {object.extinctionYear
+                                            ? `Diese Art ist im Jahr ${object.extinctionYear} ausgestorben.`
+                                            : 'Dieses Objekt existiert zu diesem Zeitpunkt nicht mehr.'}
+                                    </p>
+                                ) : (
+                                    <p className="text-red-300">
+                                        <span className="font-semibold">Gefährdet:</span> Bei aktuellen Trends droht Aussterben bis <span className="font-bold">{object.extinctionYear}</span>
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     )}
 

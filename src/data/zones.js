@@ -10,7 +10,7 @@ export const ZONES = [
         objects: [
             { id: 'satellite-graveyard', title: 'Satelliten-Friedhof', x: '15%', y: '25%', type: 'danger', icon: 'Satellite', description: 'Tausende inaktive Satelliten bilden einen gefährlichen Gürtel um die Erde.', facts: ['12.000+ Satelliten im Orbit', 'Zunahme durch Mega-Konstellationen', 'Gefahr für bemannte Raumfahrt'] },
             { id: 'solar-wind', title: 'Solar Wind Sensor', x: '75%', y: '15%', type: 'info', icon: 'Sun', description: 'Misst hochenergetische Teilchen der Sonne, die das Erdklima im Jahr 2025 stark beeinflussen.', facts: ['Partikelstrom der Sonne', 'Gefahr für Stromnetze', 'Wichtiger Klimafaktor'] },
-            { id: 'iss-research', title: 'ISS ECOSTRESS', x: '55%', y: '45%', type: 'info', icon: 'Orbit', description: 'Ein NASA-Instrument auf der ISS, das die Verdunstung von Pflanzen misst, um Dürren vorherzusagen.', facts: ['ECOSTRESS: Thermal-Infrarot-Sensor', 'Optimiert Bewässerung weltweit', 'Daten für Nahrungsmittelsicherheit'] },
+            { id: 'iss-research', title: 'ISS ECOSTRESS', x: '55%', y: '45%', type: 'info', icon: 'Orbit', startYear: 1998, endYear: 2031, description: 'Ein NASA-Instrument auf der ISS, das die Verdunstung von Pflanzen misst, um Dürren vorherzusagen.', facts: ['ECOSTRESS: Thermal-Infrarot-Sensor', 'Optimiert Bewässerung weltweit', 'Daten für Nahrungsmittelsicherheit'] },
             { id: 'space-junk-cluster', title: 'Trümmer-Feld', x: '35%', y: '65%', type: 'danger', icon: 'AlertTriangle', description: 'Überreste alter Satelliten, die im Jahr 2025 eine ernsthafte Bedrohung für die Raumfahrt darstellen.', facts: ['Kessler-Syndrom-Gefahr', 'Über 20.000 Fragmente überwacht', 'Gefahr für bemannte Stationen'] },
             { id: 'climate-sentinel', title: 'Sentinel-6', x: '85%', y: '70%', type: 'success', icon: 'Radio', description: 'Ein europäisch-amerikanischer Satellit, der den Meeresspiegelanstieg mit Millimeterpräzision überwacht.', facts: ['Misst Pegelanstieg seit 2020', 'Radar-Altimetrie-Technik', 'Basis für UN-Klimaberichte'] },
             { id: 'solar-observatory', title: 'Parker Solar Probe', x: '45%', y: '10%', type: 'info', icon: 'Telescope', description: 'Die NASA-Sonde, die im Jahr 2025 die Sonne so nah wie nie zuvor umkreist, um Sonnenwind-Ursprünge zu erforschen.', facts: ['Berührt die Sonnenatmosphäre', 'Schutzschild hält 1.400°C aus', 'Daten zur Sonnenkorona'] },
@@ -29,7 +29,7 @@ export const ZONES = [
         objects: [
             { id: 'aurora-borealis', title: 'Aurora Borealis', x: '45%', y: '35%', type: 'info', icon: 'Zap', description: 'Polarlichter entstehen durch die Interaktion von Sonnenwinden mit dem Erdmagnetfeld.', facts: ['Leuchten in 80-500km Höhe', 'Sauerstoff erzeugt grünes Licht', 'Stickstoff erzeugt blau/violett'] },
             { id: 'ionosphere-drag', title: 'Ionosphären-Widerstand', x: '25%', y: '50%', type: 'danger', icon: 'Wind', description: 'Gase in der Thermosphäre bremsen Satelliten ab, was zu Abstürzen führen kann.', facts: ['Zunahme durch Sonnenaktivität', 'Atmosphärisches Aufblähen', 'Lebensdauerverkürzung für LEO-Sats'] },
-            { id: 'starlink-train', title: 'Starlink-Kette', x: '75%', y: '65%', type: 'danger', icon: 'Wifi', description: 'Die Lichtverschmutzung durch Tausende Satelliten stört die Astronomie weltweit.', facts: ['Beeinträchtigt Sternwarten', 'Risiko für Kollisionen wächst', 'Sichtbarkeit mit bloßem Auge'] },
+            { id: 'starlink-train', title: 'Starlink-Kette', x: '75%', y: '65%', type: 'danger', icon: 'Wifi', startYear: 2019, description: 'Die Lichtverschmutzung durch Tausende Satelliten stört die Astronomie weltweit.', facts: ['Beeinträchtigt Sternwarten', 'Risiko für Kollisionen wächst', 'Sichtbarkeit mit bloßem Auge'] },
             { id: 'space-weather-buoy', title: 'DSCOVR Satellit', x: '15%', y: '20%', type: 'info', icon: 'Radio', description: 'Ein Satellit am Lagrange-Punkt L1, der das Weltraumwetter und die Erdatmosphäre (EPIC) überwacht.', facts: ['Misst Sonnenstürme in Echtzeit', 'Position 1,5 Mio. km von Erde', 'Warnsystem für Mobilfunk & Strom'] },
             { id: 'micrometeoroid-explorer', title: 'Odin Nano-Sensor', x: '85%', y: '10%', type: 'info', icon: 'ShieldAlert', description: 'Innovative Sensoren zur Detektion kleinster Einschläge von Weltraumschrott und Meteoroiden im Jahr 2025.', facts: ['Entwickelt von Odin Space', 'Überwacht strukturelle Integrität', 'Frühwarnung vor Mikroschäden'] }
         ]
@@ -115,7 +115,22 @@ export const ZONES = [
         background: 'linear-gradient(to bottom, #006994 0%, #005a80 25%, #004d70 55%, #004060 85%, #003050 100%)',
         objects: [
             { id: 'sea-turtle', title: 'Schildkröte', x: '20%', y: '25%', type: 'info', icon: 'Shell', extinctionYear: 2070, description: 'Meeresschildkröten leiden massiv unter der Plastikverschmutzung.', facts: ['Verwechseln Tüten mit Quallen', 'Zerstörung von Niststränden', 'Bestand sinkt weltweit'] },
-            { id: 'coral-reef', title: 'Korallenriff', x: '82%', y: '80%', type: 'danger', icon: 'Flower2', extinctionYear: 2050, description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche).', facts: ['90% Verlust droht bis 2050', 'Heimat für 25% aller Fische', 'Küsten-Schutzschild'] },
+            {
+                id: 'coral-reef',
+                title: 'Korallenriff',
+                x: '82%',
+                y: '80%',
+                type: 'danger',
+                icon: 'Flower2',
+                extinctionYear: 2050, // Keep for backward compatibility/danger logic
+                timeline: [
+                    { maxYear: 1980, suffix: '_1950', title: 'Gesundes Korallenriff', description: 'Ein farbenprächtiges, intaktes Ökosystem vor Beginn der massiven globalen Erwärmung.' },
+                    { maxYear: 2030, suffix: '', title: 'Korallenbleiche', description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche). 90% Verlust droht.' },
+                    { maxYear: 2100, suffix: '_2050', title: 'Abgestorbenes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.' }
+                ],
+                description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche).',
+                facts: ['90% Verlust droht bis 2050', 'Heimat für 25% aller Fische', 'Küsten-Schutzschild']
+            },
             { id: 'humpback-whale', title: 'Buckelwal', x: '50%', y: '50%', type: 'success', icon: 'Fish', description: 'Wale speichern enorme Mengen CO2 in ihrem Körper.', facts: ['Dünger für Phytoplankton', 'Ein "biologischer CO2-Filter"', 'Gefährdet durch Schiffslärm'] },
             { id: 'plastic-island', title: 'Plastik-Insel', x: '35%', y: '15%', type: 'danger', icon: 'Trash2', description: 'Riesige Wirbel aus Plastikmüll treiben im offenen Ozean.', facts: ['Großer Pazifischer Müllwirbel', 'Tötet Seevögel & Säuger', 'Wird zu Mikroplastik'] },
             { id: 'overfishing', title: 'Industriefischerei', x: '65%', y: '35%', type: 'danger', icon: 'AlertTriangle', description: 'Industrielle Schleppnetze zerstören das ökologische Gleichgewicht.', facts: ['Beifang vernichtet Arten', 'Leere Meere bis 2048 möglich', 'Zerstört Boden-Ökosysteme'] },
