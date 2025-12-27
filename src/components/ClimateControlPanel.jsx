@@ -10,8 +10,11 @@ const ClimateControlPanel = () => {
         temperatureAnomaly, setTemperature,
         oceanPh, setPh,
         pollutionLevel, setPollution,
-        resetSimulation
+        resetSimulation,
+        getEcosystemStats
     } = useSimulationStore();
+
+    const stats = getEcosystemStats ? getEcosystemStats() : { oxygen: 100, foodSupply: 100, calcification: 100 };
 
     // Toggle logic
     const toggleSim = () => {
@@ -131,6 +134,53 @@ const ClimateControlPanel = () => {
                             onChange={(e) => setPollution(parseInt(e.target.value))}
                             className="w-full h-1.5 bg-gradient-to-r from-gray-500 to-purple-600 rounded-lg appearance-none cursor-pointer accent-white"
                         />
+                    </div>
+
+                    {/* Ecosystem Health Monitor (Predicted) */}
+                    <div className="pt-4 border-t border-white/5 space-y-2">
+                        <span className="text-[10px] uppercase font-bold text-muted tracking-wider">Ökosystem-Status</span>
+
+                        {/* Oxygen */}
+                        <div className="flex flex-col gap-0.5">
+                            <div className="flex justify-between text-[10px] text-gray-400">
+                                <span>Sauerstoff</span>
+                                <span>{stats.oxygen.toFixed(0)}%</span>
+                            </div>
+                            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div
+                                    className={`h-full transition-all duration-500 ${stats.oxygen < 60 ? 'bg-red-500' : 'bg-blue-400'}`}
+                                    style={{ width: `${stats.oxygen}%` }}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Food Supply */}
+                        <div className="flex flex-col gap-0.5">
+                            <div className="flex justify-between text-[10px] text-gray-400">
+                                <span>Nahrungskette</span>
+                                <span>{stats.foodSupply.toFixed(0)}%</span>
+                            </div>
+                            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div
+                                    className={`h-full transition-all duration-500 ${stats.foodSupply < 40 ? 'bg-red-500' : 'bg-green-400'}`}
+                                    style={{ width: `${stats.foodSupply}%` }}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Calcification */}
+                        <div className="flex flex-col gap-0.5">
+                            <div className="flex justify-between text-[10px] text-gray-400">
+                                <span>Kalkbildung</span>
+                                <span>{stats.calcification.toFixed(0)}%</span>
+                            </div>
+                            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div
+                                    className={`h-full transition-all duration-500 ${stats.calcification < 50 ? 'bg-orange-500' : 'bg-teal-400'}`}
+                                    style={{ width: `${stats.calcification}%` }}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
 

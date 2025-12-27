@@ -268,7 +268,20 @@ export const ZONES = [
         background: 'linear-gradient(to bottom, #001222 0%, #000c18 20%, #000812 50%, #000508 80%, #000000 100%)',
         objects: [
             { id: 'anglerfish-deep', title: 'Anglerfisch', x: '25%', y: '35%', type: 'info', icon: 'Lightbulb', description: 'Hat eine leuchtende Angel am Kopf entwickelt, um Beute anzulocken.', facts: ['Extreme Druckanpassung', 'Parasitäre Paarung', 'Überlebt bei 400 Bar'] },
-            { id: 'sperm-whale-dive', title: 'Tauchender Pottwal', x: '60%', y: '20%', type: 'info', icon: 'Fish', description: 'Taucht in diese Tiefe ab, um Riesenkalmare zu jagen.', facts: ['Taucht bis 3000m tief', 'Hält 90 Min die Luft an', 'Hört Echos im Dunkeln'] },
+            {
+                id: 'sperm-whale-dive',
+                title: 'Tauchender Pottwal',
+                x: '60%',
+                y: '20%',
+                type: 'info',
+                icon: 'Fish',
+                timeline: [
+                    { maxYear: 2020, suffix: '_healthy', title: 'Jagender Riese', description: 'Taucht in diese Tiefe ab, um Riesenkalmare zu jagen.', condition: { minFood: 50 } },
+                    { maxYear: 2100, suffix: '_starving', title: 'Nahrungsmangel', description: 'Durch den Kollaps der Plankton-Bestände an der Oberfläche fehlt es an Beutetieren in der Tiefe.', condition: { maxFood: 49 } }
+                ],
+                description: 'Taucht in diese Tiefe ab, um Riesenkalmare zu jagen.',
+                facts: ['Taucht bis 3000m tief', 'Hält 90 Min die Luft an', 'Hört Echos im Dunkeln']
+            },
             { id: 'marine-snow', title: 'Meeresschnee (Kohlenstoff-Pumpe)', x: '15%', y: '60%', type: 'success', icon: 'Snowflake', description: 'Ein kontinuierlicher Regen aus organischem Material, der CO2 von der Oberfläche in die Tiefe transportiert ("Biologische Kohlenstoffpumpe"). Ozeanversauerung könnte diesen Prozess schwächen.', facts: ['Transportiert Megatonnen CO2', 'Speichert Kohlenstoff für Jahrtausende', 'Nahrungsgrundlage der Tiefsee'] },
             {
                 id: 'methane-seepage',

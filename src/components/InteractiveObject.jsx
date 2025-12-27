@@ -56,7 +56,7 @@ function InteractiveObject({ object, onClick }) {
     const year = useClimateStore((state) => state.year);
     const depth = useClimateStore((state) => state.depth);
 
-    const { isSimulationActive, temperatureAnomaly, oceanPh, pollutionLevel } = useSimulationStore();
+    const { isSimulationActive, temperatureAnomaly, oceanPh, pollutionLevel, getEcosystemStats } = useSimulationStore();
 
     const isExtinct = (object.extinctionYear && year >= object.extinctionYear) || (object.endYear && year > object.endYear);
     const isNotYetBorn = object.startYear && year < object.startYear;
@@ -67,10 +67,7 @@ function InteractiveObject({ object, onClick }) {
     let activeTimelineState = null;
 
     if (isSimulationActive && object.timeline) {
-        // Find the worst/matching condition
-        // We iterate through timeline. If a condition matches our sim values, we pick it.
-        // Priority: We check from "worst" (usually last in array) to "best" or specific conditions.
-        // Actually, let's check explicit conditions.
+        const stats = getEcosystemStats ? getEcosystemStats() : { oxygen: 100, foodSupply: 100, calcification: 100 };
 
         activeTimelineState = object.timeline.find(t => {
             if (!t.condition) return false;
@@ -78,10 +75,21 @@ function InteractiveObject({ object, onClick }) {
             // Check all defined conditions
             if (c.minTemp !== undefined && temperatureAnomaly < c.minTemp) return false;
             if (c.maxTemp !== undefined && temperatureAnomaly > c.maxTemp) return false;
-            if (c.minPh !== undefined && oceanPh < c.minPh) return false; // pH decreases as it gets worse? No, 8.1 -> 7.6
+            if (c.minPh !== undefined && oceanPh < c.minPh) return false;
             if (c.maxPh !== undefined && oceanPh > c.maxPh) return false;
             if (c.minPollution !== undefined && pollutionLevel < c.minPollution) return false;
             if (c.maxPollution !== undefined && pollutionLevel > c.maxPollution) return false;
+
+            // Check Derived Ecosystem Params (Chain Reactions)
+            // Note: We check if the object *requires* a certain condition to trigger this state.
+            // But usually we check if the world state *matches* the condition for this bad state.
+            // Example: "Dead Zone" happens if Oxygen < 20. condition: { maxOxygen: 20 }
+            if (c.minOxygen !== undefined && stats.oxygen < c.minOxygen) return false;
+            if (c.maxOxygen !== undefined && stats.oxygen > c.maxOxygen) return false;
+            if (c.minFood !== undefined && stats.foodSupply < c.minFood) return false;
+            if (c.maxFood !== undefined && stats.foodSupply > c.maxFood) return false;
+            if (c.minCalcification !== undefined && stats.calcification < c.minCalcification) return false;
+
             return true;
         });
     }
