@@ -35,7 +35,7 @@ function ZoneIndicator() {
     };
 
     return (
-        <div className="fixed right-4 top-1/2 -translate-y-1/2 h-[85vh] flex gap-3 z-[100]">
+        <div className="fixed right-4 top-1/2 -translate-y-1/2 h-[85vh] flex items-center gap-3 z-[100]">
 
             {/* Vertical Track */}
             <div className="relative h-full w-6 flex flex-col items-center">
