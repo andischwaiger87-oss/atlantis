@@ -8,8 +8,8 @@ export const ZONES = [
         maxDepth: 12000,
         background: 'linear-gradient(to bottom, #000000 0%, #01010a 20%, #04041a 50%, #080830 85%, #0c0c45 100%)',
         objects: [
-            { id: 'satellite-graveyard', title: 'Satelliten-Friedhof', x: '15%', y: '25%', type: 'danger', icon: 'Satellite', startYear: 1960, description: 'Ein Bereich im Orbit, in dem ausgediente Satelliten "geparkt" werden. Durch den Klimawandel kühlt die Thermosphäre ab und zieht sich zusammen, was den natürlichen "Drag" verringert – Müll bleibt dadurch viel länger im Orbit.', facts: ['12.000+ Satelliten im Orbit (2025)', '30% längere Verweildauer durch CO2-Effekt', 'Erhöhtes Risiko des Kessler-Syndroms'] },
-            { id: 'merlin-mission', title: 'MERLIN-Mission', x: '75%', y: '15%', type: 'info', icon: 'Sun', startYear: 2025, description: 'Der deutsch-französische Satellit MERLIN (Methane Remote Sensing Lidar Mission) misst ab 2025 die Methan-Konzentration in der Erdatmosphäre mit höchster Präzision.', facts: ['Misst Methan per Laser (Lidar)', 'Erkennt Leckagen in Gaspipelines', 'Wichtig für die Überwachung von Kipppunkten'] },
+            { id: 'satellite-graveyard', title: 'Satelliten-Friedhof', x: '15%', y: '25%', type: 'danger', icon: 'Satellite', startYear: 1960, description: 'Ein Bereich im Orbit, in dem ausgediente Satelliten "geparkt" werden. Durch den Anstieg von CO2 kühlt die Thermosphäre ab, zieht sich zusammen und verringert den natürlichen "Drag" – Weltraummüll bleibt dadurch Jahrzehnte länger als früher im Orbit.', facts: ['12.000+ Satelliten im Orbit (2025)', '30% längere Verweildauer durch CO2-Effekt', 'Gefährdet die internationale Raumfahrt'] },
+            { id: 'merlin-mission', title: 'MERLIN-Mission', x: '75%', y: '15%', type: 'info', icon: 'Sun', startYear: 2025, description: 'Die deutsch-französische MERLIN-Mission ist Teil eines globalen Netzwerks (wie GHGSat) zur Überwachung von Methan-Emissionen – einem Treibhausgas, das 80-mal potenter ist als CO2.', facts: ['Misst Methan per Laser (Lidar)', 'Erkennt Leckagen in Gaspipelines', 'Teil der globalen Treibhausgas-Überwachung'] },
             {
                 id: 'iss-research',
                 title: 'ISS Forschungsstation',
@@ -20,12 +20,12 @@ export const ZONES = [
                 startYear: 1998,
                 endYear: 2031,
                 timeline: [
-                    { maxYear: 2010, suffix: '_const', title: 'Aufbauphase', description: 'Die Internationale Raumstation wird Modul für Modul zusammengesetzt. Ein Symbol für friedliche, globale Kooperation.' },
-                    { maxYear: 2030, suffix: '', title: 'Forschungsbetrieb', description: 'Das fliegende Labor liefert entscheidende Klimadaten (ECOSTRESS) und medizinische Erkenntnisse.' },
-                    { maxYear: 2040, suffix: '_deorbit', title: 'Kontrollierter Absturz', description: 'Die Station wird kontrolliert zum Absturz gebracht und verglüht über dem Point Nemo im Pazifik.' }
+                    { maxYear: 2010, suffix: '_const', title: 'Aufbauphase', description: 'Beginn einer neuen Ära: Die NASA (USA) und Roscosmos (Russland) legen den Grundstein für die ISS, unterstützt durch ESA, JAXA und CSA.' },
+                    { maxYear: 2030, suffix: '', title: 'Forschungsbetrieb', description: 'Die ISS dient als weltweit einzigartiges Labor für Klima- (ECOSTRESS) und Gesundheitsforschung unter internationaler Flagge.' },
+                    { maxYear: 2040, suffix: '_deorbit', title: 'Kontrollierter Absturz', description: 'Geplantes Ende: Die Station wird sicher über dem Point Nemo (Südpazifik) zum Absturz gebracht – der größte "kontrollierte Wiedereintritt" der Geschichte.' }
                 ],
-                description: 'Das ECOSTRESS-Instrument auf der ISS misst die Temperatur von Pflanzen, um Wasserstress zu erkennen, bevor Dürren sichtbar werden – ein entscheidendes Tool für die globale Nahrungssicherheit.',
-                facts: ['Misst Pflanzen-Evapotranspiration', '70m genaue Auflösung einzelner Felder', 'Frühwarnsystem für globale Dürren']
+                description: 'Die ISS ist ein Symbol globaler Kooperation (NASA, Roscosmos, ESA, JAXA, CSA). Ihr ECOSTRESS-Instrument misst die Temperatur von Pflanzen weltweit, um Dürren zu erkennen, bevor sie sichtbar werden.',
+                facts: ['Retirement & Deorbit für 2031 geplant', '70m genaue Auflösung einzelner Felder', 'Wichtig für die globale Ernährungssicherheit']
             },
             {
                 id: 'space-junk-cluster',
@@ -43,7 +43,7 @@ export const ZONES = [
                 description: 'Millionen winzige Schrottteile rasen mit 27.000 km/h um die Erde. Schon ein 1cm großes Teil hat die Sprengkraft einer Handgranate.',
                 facts: ['>1 Mio. Teile zwischen 1-10cm', 'Gesamtmasse über 15.000 Tonnen', 'Bedroht Klimasatelliten & ISS']
             },
-            { id: 'climate-sentinel', title: 'Sentinel-6', x: '85%', y: '70%', type: 'success', icon: 'Radio', startYear: 2020, description: 'Der "Wächter des Meeresspiegels". Sentinel-6 misst den Anstieg der Ozeane bis auf den Millimeter genau (derzeit ca. 4.8 mm pro Jahr, beschleunigend).', facts: ['Fortsetzung der Messreihe seit 1992', 'Aktueller Anstieg: 4.8mm/Jahr', 'Entscheidend für Küstenschutz-Planung'] },
+            { id: 'climate-sentinel', title: 'Sentinel-6 Michael Freilich', x: '85%', y: '70%', type: 'success', icon: 'Radio', startYear: 2020, description: 'Ein internationales Gemeinschaftsprojekt (NASA, ESA, NOAA, EUMETSAT). Sentinel-6 misst den globalen Meeresspiegelanstieg bis auf den Millimeter genau.', facts: ['Fortsetzung der Messreihe seit 1992', 'Aktueller Anstieg: 4.8mm/Jahr (beschleunigt)', 'Referenz für alle Küstenschutz-Modelle'] },
             { id: 'solar-observatory', title: 'Parker Solar Probe', x: '45%', y: '10%', type: 'info', icon: 'Telescope', startYear: 2018, description: 'Das schnellste von Menschen gebaute Objekt. Im Jahr 2025 nähert sie sich der Sonne auf unter 6,2 Mio. km und liefert Daten zum Sonnenwind-Ursprung.', facts: ['Geschwindigkeit: ~690.000 km/h', 'Hitzeschild trotzt 1.370°C', 'Erforscht die Sonnenkorona direkt'] },
             { id: 'magnetosphere-sentinel', title: 'MMS-Mission', x: '5%', y: '10%', type: 'info', icon: 'Shield', startYear: 2015, description: 'Vier NASA-Satelliten (Magnetospheric Multiscale), die die magnetische Rekonnektion im Erdschild untersuchen.', facts: ['Kartiert magnetische Stürme', 'Verständnis der Polarlichter', 'Schutz vor Teilchenstrahlung'] },
             { id: 'cosmic-ray-observatory', title: 'AMS-02 (ISS)', x: '25%', y: '5%', type: 'info', icon: 'Zap', startYear: 2011, description: 'Das Alpha-Magnet-Spektrometer auf der ISS sucht nach Antimaterie und Dunkler Materie im Universum.', facts: ['Präzisester Teilchendetektor im All', 'Leitung durch Nobelpreisträger Samuel Ting', 'Sucht Ursprung des Kosmos'] },
@@ -170,10 +170,10 @@ export const ZONES = [
                     { maxYear: 2020, suffix: '', title: 'Erdbeobachtung', description: 'Startplatz für Klimasatelliten wie CO2M und MERLIN.' },
                     { maxYear: 2100, suffix: '_dormant', title: 'Inaktive Station', description: 'Budgetkürzungen behindern die wichtige Überwachung der planetaren Grenzen.', condition: { minTemp: 3.5 } }
                 ],
-                description: 'Technologie zur Überwachung des Klimas aus dem Weltraum. Lebenswichtige Daten zur Messung planetarer Grenzwerte.',
-                facts: ['Startet ESA-Missionen', 'Überwacht Gletscherschmelze', 'Daten-Basis für IPPC Reports']
+                description: 'Startplatz für internationale Erdbeobachtungs-Missionen. Satelliten wie Copernicus (EU), Landsat (NASA) oder ALOS (JAXA) liefern die Datenbasis für globale Klimaentscheidungen.',
+                facts: ['Daten-Basis für IPCC-Berichte', 'Überwacht Kipppunkte der Biosphäre', 'Schnittstelle für globale Geodaten']
             },
-            { id: 'sub-dock', title: 'Deepsea Dock', x: '24%', y: '50%', type: 'vehicle', icon: 'Anchor', static: true, startYear: 2010, description: 'Basis für autonome Forschungs-U-Boote (AUVs), die bis in den Marianengraben tauchen, um dort Temperatur und Plastikverschmutzung zu messen.', facts: ['Wartet autonome "Glider"', 'Schnittstelle für Tiefsee-Daten', 'Startpunkt für Hadal-Missionen'] },
+            { id: 'sub-dock', title: 'Global Deepsea Dock', x: '24%', y: '50%', type: 'vehicle', icon: 'Anchor', static: true, startYear: 2010, description: 'Basis für autonome Forschungs-U-Boote (AUVs). Sie sind Teil des globalen ARGO-Netzwerkes, das über 4.000 Roboter-Bojen zur Messung der Ozeanwärme weltweit betreibt.', facts: ['Schnittstelle für globale Tiefsee-Daten', 'Vernetzt mit Ocean Networks Canada', 'Wartet autonome "Glider"'] },
             {
                 id: 'oil-platform',
                 title: 'Öl-Plattform',
@@ -406,12 +406,12 @@ export const ZONES = [
                 icon: 'HardHat',
                 startYear: 2015,
                 timeline: [
-                    { maxYear: 2020, suffix: '_pristine', title: 'Unberührtes Mangaufeld', description: 'Manganknollen liegen seit Millionen Jahren am Meeresgrund. Ein einzigartiger Lebensraum.', condition: { maxPollution: 10 } },
-                    { maxYear: 2045, suffix: '', title: 'Aktiver Abbau', description: 'Großmaschinen ernten den Meeresboden ab. Sedimentwolken ersticken das Leben im Umkreis von Kilometern.', condition: { minPollution: 11, maxPollution: 80 } },
-                    { maxYear: 2100, suffix: '_dead', title: 'Todeszone', description: 'Der Meeresboden ist eine leblose Wüste. Der Kohlenstoffspeicher wurde zerstört und erholt sich nicht mehr.', condition: { minPollution: 81 } }
+                    { maxYear: 2020, suffix: '_pristine', title: 'Unberührtes Mangaufeld', description: 'Noch existiert kein kommerzieller Bergbau. Die Meeresbiologie genießt globalen Schutz durch erste UN-Deklarationen.' },
+                    { maxYear: 2045, suffix: '', title: 'Regulierter Abbau', description: 'Die International Seabed Authority (ISA) lässt nach harten Verhandlungen erste Areale zu. Strenge internationale Auflagen sollen die Zerstörung minimieren.' },
+                    { maxYear: 2100, suffix: '_dead', title: 'Todeszone', description: 'Trotz "High Seas Treaty" (UN 2023) führte der Hunger nach Rohstoffen zur Zerstörung weiter Gebiete des Meeresbodens.' }
                 ],
-                description: 'Geplanter Abbau von Manganknollen für E-Auto-Batterien. Forscher warnen: Die Zerstörung des Meeresbodens könnte gespeicherten Kohlenstoff freisetzen und einzigartige Arten auslöschen, bevor wir sie entdecken.',
-                facts: ['Knollen wachsen nur mm pro Mio. Jahre', 'Sedimentwolken ersticken Leben', 'Irreversible Zerstörung']
+                description: 'Geplanter Abbau von Manganknollen am Meeresgrund. Das "High Seas Treaty" der UN von 2023 schaffte erste rechtliche Rahmenbedingungen zum Schutz der Meeres-Biodiversität jenseits nationaler Grenzen.',
+                facts: ['Internationale Meeresbodenbehörde regelt Abbau', 'Gefahr für den globalen Kohlenstoffspeicher', 'Starker Widerstand durch über 20 Nationen']
             },
             { id: 'sunken-shipwreck', title: 'Tiefsee-Wrack', x: '20%', y: '80%', type: 'info', icon: 'Anchor', startYear: 1912, description: 'Kulturelles Erbe, das durch versauerndes Meerwasser schneller korrodiert als erwartet. Bakterien, die Eisen fressen, breiten sich aus.', facts: ['Titanic zerfällt bis 2030', 'Mikrobielles Leben verändert sich', 'Historisches "Zeitfenster" schließt sich'] },
             { id: 'research-lander', title: 'Hadal-Lander Alfie', x: '55%', y: '15%', type: 'info', icon: 'Camera', startYear: 2009, description: 'Spezialroboter (wie vom WHOI), die autonom an die tiefsten Stellen der Erde tauchen, um Mikroplastik im Sediment nachzuweisen.', facts: ['Hält dem Druck von 1000 Elefanten stand', 'Beweist: Plastik ist überall', 'Kartiert unbekannte Tiefseegräben'] },
