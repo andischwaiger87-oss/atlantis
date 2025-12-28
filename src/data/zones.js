@@ -168,7 +168,7 @@ export const ZONES = [
                 startYear: 1957,
                 timeline: [
                     { maxYear: 2020, suffix: '', title: 'Erdbeobachtung', description: 'Startplatz für Klimasatelliten wie CO2M und MERLIN.' },
-                    { maxYear: 2100, suffix: '_dormant', title: 'Inaktive Station', description: 'Budgetkürzungen behindern die wichtige Überwachung der planetaren Grenzen.', condition: { minTemp: 3.5 } }
+                    { maxYear: 2100, suffix: '_dormant', title: 'Raumstation', description: 'Budgetkürzungen behindern die wichtige Überwachung der planetaren Grenzen.', condition: { minTemp: 3.5 } }
                 ],
                 description: 'Startplatz für internationale Erdbeobachtungs-Missionen. Satelliten wie Copernicus (EU), Landsat (NASA) oder ALOS (JAXA) liefern die Datenbasis für globale Klimaentscheidungen.',
                 facts: ['Daten-Basis für IPCC-Berichte', 'Überwacht Kipppunkte der Biosphäre', 'Schnittstelle für globale Geodaten']

@@ -22,10 +22,7 @@ function App() {
 
   const handleStart = () => {
     setShowStartScreen(false);
-    const hasSeenOnboarding = localStorage.getItem('atlantis_onboarding_seen');
-    if (!hasSeenOnboarding) {
-      setShowOnboarding(true);
-    }
+    setShowOnboarding(true);
   };
 
   const handleOnboardingComplete = () => {
