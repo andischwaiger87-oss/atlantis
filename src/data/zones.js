@@ -184,8 +184,8 @@ export const ZONES = [
                 icon: 'Shell',
                 extinctionYear: 2070,
                 timeline: [
-                    { maxYear: 1980, suffix: '_healthy', title: 'Stabile Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.', condition: { maxPollution: 20 } },
-                    { maxYear: 2060, suffix: '', title: 'Gefährdeter Bestand', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.', condition: { minPollution: 21, maxPollution: 75 } },
+                    { maxYear: 2040, suffix: '_healthy', title: 'Stabile Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.', condition: { maxPollution: 20 } },
+                    { maxYear: 2080, suffix: '', title: 'Gefährdeter Bestand', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.', condition: { minPollution: 21, maxPollution: 75 } },
                     { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.', condition: { minPollution: 76 }, isDead: true }
                 ],
                 description: 'Meeresschildkröten verwechseln schwimmende Plastiktüten oft mit ihrer Hauptnahrung, den Quallen. Das Plastik verstopft ihren Magen und führt zum langsamen Verhungern.',
@@ -200,8 +200,8 @@ export const ZONES = [
                 icon: 'Flower2',
                 extinctionYear: 2050, // Keep for backward compatibility/danger logic
                 timeline: [
-                    { maxYear: 1980, suffix: '_1950', title: 'Intaktes Riff', description: 'Ein farbenprächtiges, intaktes Ökosystem vor Beginn der massiven globalen Erwärmung.', condition: { maxTemp: 1.0, minPh: 8.0 } },
-                    { maxYear: 2030, suffix: '', title: 'Korallenbleiche', description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche). 90% Verlust droht.', condition: { minTemp: 1.1, maxTemp: 1.9, maxPh: 7.9 } },
+                    { maxYear: 2030, suffix: '_1950', title: 'Intaktes Riff', description: 'Ein farbenprächtiges, intaktes Ökosystem. Es zeigt jedoch bereits erste Stressanzeichen durch punktuelle Hitzewellen.', condition: { maxTemp: 1.0, minPh: 8.0 } },
+                    { maxYear: 2050, suffix: '', title: 'Korallenbleiche', description: 'Massives Sterben der Korallenriffe durch zu hohe Wassertemperaturen (Bleiche). Ein globaler Kipppunkt.', condition: { minTemp: 1.1, maxTemp: 1.9, maxPh: 7.9 } },
                     { maxYear: 2100, suffix: '_2050', title: 'Kollabiertes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.', condition: { minTemp: 2.0, maxPh: 7.7 }, isDead: true }
                 ],
                 description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche).',
@@ -216,9 +216,9 @@ export const ZONES = [
                 type: 'success',
                 icon: 'Fish',
                 timeline: [
-                    { maxYear: 2020, suffix: '_healthy', title: 'Gesunder Wal-Bestand', description: 'Buckelwale helfen dem Klima, indem sie als "Whale Pump" das Plankton düngen.', condition: { minFood: 41 } },
-                    { maxYear: 2100, suffix: '_starving', title: 'Hungerzustand', description: 'Durch den Kollaps der Plankton-Bestände finden Wale nicht mehr genug Krill. Die Fortpflanzungsraten brechen ein.', condition: { maxFood: 40, minFood: 16 } },
-                    { maxYear: 2100, suffix: '_dead', title: 'Vollständiger Kollaps', description: 'Die Population ist aufgrund des totalen Nahrungsketten-Zusammenbruchs erloschen.', condition: { maxFood: 15 }, isDead: true }
+                    { maxYear: 2045, suffix: '_healthy', title: 'Gesunder Wal-Bestand', description: 'Buckelwale helfen dem Klima, indem sie als "Whale Pump" das Plankton düngen. Aktuell erholen sich viele Populationen.', condition: { minFood: 41 } },
+                    { maxYear: 2080, suffix: '_starving', title: 'Hungerzustand', description: 'Durch den Kollaps der Plankton-Bestände finden Wale nicht mehr genug Krill. Die Fortpflanzungsraten brechen ein.', condition: { maxFood: 40, minFood: 16 } },
+                    { maxYear: 2100, suffix: '_dead', title: 'Bestand Erloschen', description: 'Die Population ist aufgrund des totalen Nahrungsketten-Zusammenbruchs erloschen.', condition: { maxFood: 15 }, isDead: true }
                 ],
                 description: 'Wale sind riesige Kohlenstoffspeicher. Ein großer Wal speichert durchschnittlich 33 Tonnen CO2. Wenn er stirbt, sinkt er in die Tiefe und entzieht diesen Kohlenstoff der Atmosphäre für Jahrhunderte.',
                 facts: ['"Whale Pump" düngt Plankton', 'Speichert so viel CO2 wie 1000 Bäume', 'Erholung der Bestände hilft Klima']
@@ -249,7 +249,7 @@ export const ZONES = [
                 icon: 'Map',
                 // New Timeline for Sim
                 timeline: [
-                    { maxYear: 2020, suffix: '_healthy', title: 'Plankton-Blüte', description: 'Die Grundlage der marinen Nahrungskette ist stabil.', condition: { maxTemp: 1.5, minPh: 8.0 } },
+                    { maxYear: 2040, suffix: '_healthy', title: 'Plankton-Blüte', description: 'Die Grundlage der marinen Nahrungskette ist stabil und produziert 50% unseres Sauerstoffs.', condition: { maxTemp: 1.5, minPh: 8.0 } },
                     { maxYear: 2100, suffix: '_collapse', title: 'Bestands-Kollaps', description: 'Durch Versauerung und Erwärmung bricht die Basis des Nahrungsnetzes weg. Das Meer hungert.', condition: { minTemp: 3.0, maxPh: 7.8 }, isDead: true }
                 ],
                 description: 'Das Phytoplankton produziert 50% des Sauerstoffs, den wir atmen. Durch steigende Wassertemperaturen und Versauerung geht die Menge global zurück.',
@@ -275,8 +275,8 @@ export const ZONES = [
                 type: 'info',
                 icon: 'Eye',
                 timeline: [
-                    { maxYear: 2020, suffix: '', title: 'Gesunder Koloss', description: 'Lebt in der Dämmerzone und jagt Fische sowie kleinere Kalmare.', condition: { minOxygen: 50 } },
-                    { maxYear: 2100, suffix: '_suffocating', title: 'Erloschen (Erstickt)', description: 'Riesenkalmare haben einen hohen Stoffwechsel und reagieren extrem empfindlich auf die Ausdehnung von sauerstoffarmen Zonen.', condition: { maxOxygen: 49 }, isDead: true }
+                    { maxYear: 2050, suffix: '', title: 'Gigant der Tiefe', description: 'Lebt in der Dämmerzone und jagt Fische sowie kleinere Kalmare. Erträgt moderate Sauerstoffschwankungen.', condition: { minOxygen: 50 } },
+                    { maxYear: 2100, suffix: '_suffocating', title: 'Bestand Erloschen', description: 'Riesenkalmare haben einen hohen Stoffwechsel und reagieren extrem empfindlich auf die Ausdehnung von sauerstoffarmen Zonen.', condition: { maxOxygen: 49 }, isDead: true }
                 ],
                 description: 'Einer der geheimnisvollsten Bewohner der Dämmerzone, der empfindlich auf sinkende Sauerstoffwerte in der Tiefe (Deoxygenierung) reagiert.',
                 facts: ['Augen so groß wie Basketbälle', 'Leidet unter Sauerstoffarmut', 'Klimawandel erweitert "Todeszonen"']
@@ -316,8 +316,8 @@ export const ZONES = [
                 type: 'info',
                 icon: 'Lightbulb',
                 timeline: [
-                    { maxYear: 2020, suffix: '', title: 'Hunger-Stress', description: 'Nutzt seine Biolumineszenz, um Beute im ewigen Dunkel anzulocken.', condition: { minFood: 31 } },
-                    { maxYear: 2100, suffix: '_starving', title: 'Erloschen (Hunger)', description: 'Wenn der "Meeresschnee" von der Oberfläche ausbleibt, verhungern die Jäger der Tiefe.', condition: { maxFood: 30 }, isDead: true }
+                    { maxYear: 2060, suffix: '', title: 'Tiefsee-Jäger', description: 'Nutzt seine Biolumineszenz, um Beute im ewigen Dunkel anzulocken.', condition: { minFood: 31 } },
+                    { maxYear: 2100, suffix: '_starving', title: 'Bestand Erloschen', description: 'Wenn der "Meeresschnee" von der Oberfläche ausbleibt, verhungern die Jäger der Tiefe.', condition: { maxFood: 30 }, isDead: true }
                 ],
                 description: 'Hat eine leuchtende Angel am Kopf entwickelt, um Beute anzulocken.',
                 facts: ['Extreme Druckanpassung', 'Parasitäre Paarung', 'Überlebt bei 400 Bar']
