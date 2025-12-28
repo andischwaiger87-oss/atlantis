@@ -41,7 +41,7 @@ function HUD() {
                     title="Wissensbereich & Spenden"
                 >
                     <BookOpen size={20} className="text-cyan-400 group-hover:scale-110 transition-transform" />
-                    <span className="text-[10px] font-bold text-white uppercase tracking-widest hidden md:block">Knowledge</span>
+                    <span className="text-[10px] font-bold text-white uppercase tracking-widest hidden md:block">Wissen</span>
                 </button>
             </div>
 

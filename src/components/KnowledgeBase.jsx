@@ -3,30 +3,54 @@ import { X, Book, Heart, ExternalLink, Info } from 'lucide-react';
 
 const GLOSSARY = [
     {
+        term: 'Albedo-Effekt',
+        def: 'Das Rückstrahlvermögen von Oberflächen. Helles Eis hat eine hohe Albedo und kühlt die Erde; dunkles Meerwasser absorbiert Wärme und verstärkt die Erwärmung.'
+    },
+    {
+        term: 'Biodiversität',
+        def: 'Die Vielfalt allen Lebens auf der Erde. Der Klimawandel ist eine der Hauptursachen für das aktuelle Massenaussterben von Arten.'
+    },
+    {
+        term: 'CO2-Äquivalente (CO2e)',
+        def: 'Maßeinheit zur Vereinheitlichung der Klimawirkung unterschiedlicher Treibhausgase (wie Methan oder Lachgas) basierend auf ihrem Erwärmungspotenzial.'
+    },
+    {
+        term: 'Fossile Brennstoffe',
+        def: 'Energieträger wie Kohle, Erdöl und Erdgas, die über Millionen von Jahren entstanden sind. Ihre Verbrennung setzt gespeichertes CO2 frei.'
+    },
+    {
+        term: 'Kipppunkte',
+        def: 'Kritische Schwellenwerte im Klimasystem, bei deren Überschreitung irreversible und sich selbst verstärkende Prozesse (z.B. Permafrost-Tau) ausgelöst werden.'
+    },
+    {
         term: 'Klimawandel',
         def: 'Langfristige Veränderung von Temperatur und Wettermustern, heute primär durch menschliche Aktivitäten (Verbrennung fossiler Stoffe) getrieben.'
     },
     {
-        term: 'Treibhauseffekt',
-        def: 'Prozess, bei dem Gase in der Atmosphäre Wärme speichern. Ohne ihn wäre die Erde -18°C kalt; durch zu viele Gase überhitzt sie.'
+        term: 'Klimaneutralität',
+        def: 'Zustand, in dem die emittierten Treibhausgase durch deren Aufnahme (z.B. durch Wälder oder Moore) vollständig ausgeglichen werden (Netto-Null).'
     },
     {
-        term: 'Kipppunkte',
-        def: 'Schwellenwerte im Klimasystem, bei deren Überschreitung irreversible Prozesse (z.B. Schmelzen des Grönlandeises) ausgelöst werden.'
+        term: 'Meeresströmungen',
+        def: 'Gigantische "Förderbänder" im Ozean (wie der Golfstrom), die Wärme weltweit verteilen. Schmelzwasser kann diese Systeme verlangsamen oder stoppen.'
+    },
+    {
+        term: 'Methanhydrat',
+        def: 'In Eis eingeschlossenes Methan am Meeresgrund. Bei Erwärmung der Ozeane könnte es schlagartig freiwerden und den Klimawandel massiv beschleunigen.'
     },
     {
         term: 'Ozeanversauerung',
-        def: 'Aufnahme von CO2 durch Meere senkt den pH-Wert. Dies gefährdet Lebewesen mit Kalkschalen wie Korallen und Plankton.'
+        def: 'Aufnahme von CO2 durch Meere senkt den pH-Wert. Dies gefährdet Lebewesen mit Kalkschalen wie Korallen, Muscheln und Plankton.'
     },
     {
-        term: 'Klimaneutralität',
-        def: 'Gleichgewicht zwischen Emissionen und deren Aufnahme aus der Atmosphäre (Netto-Null).'
+        term: 'Permafrost',
+        def: 'Dauerhaft gefrorener Boden in kalten Regionen. Beim Tauen werden riesige Mengen an Methan und CO2 frei, die zuvor Jahrtausende gespeichert waren.'
     },
     {
-        term: 'Biodiversität',
-        def: 'Die Vielfalt allen Lebens auf der Erde. Der Klimawandel ist eine der Hauptursachen für das aktuelle Massenaussterben.'
+        term: 'Treibhauseffekt',
+        def: 'Natürlicher Prozess, bei dem Gase in der Atmosphäre Wärme speichern. Ohne ihn wäre die Erde -18°C kalt; durch zu viele Gase überhitzt sie.'
     }
-];
+].sort((a, b) => a.term.localeCompare(b.term));
 
 const DONATIONS = [
     {

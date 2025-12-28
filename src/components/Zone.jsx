@@ -25,7 +25,7 @@ function Zone({ zone, onObjectSelect }) {
             {/* Zone Label - Professional AAA Styling */}
             {showTitle && heightPx > 150 && (
                 <div
-                    className="absolute pointer-events-none select-none z-[5] pl-6 pt-10"
+                    className="absolute pointer-events-none select-none z-[5] pl-6 pt-32"
                     style={{
                         top: 0,
                         left: 0

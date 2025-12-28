@@ -87,7 +87,9 @@ function InfoModal({ object, onClose }) {
                                 {object.type === 'danger' ? 'Gefahrenpotential' : 'Nutzen / Funktion'}
                             </span>
                             <p className="text-sm text-white/80">
-                                {object.type === 'danger' ? 'Verstärkt Klimawandel oder gefährdet Ökosysteme.' : 'Hilft bei der Überwachung oder Abschwächung der Klimawandelfolgen.'}
+                                {object.impactText || (object.type === 'danger'
+                                    ? 'Verstärkt den Klimawandel oder gefährdet aktiv lokale Ökosysteme.'
+                                    : 'Dient der Erforschung, Überwachung oder dem Schutz des Klimasystems.')}
                             </p>
                         </div>
                     </div>
