@@ -105,7 +105,8 @@ function InteractiveObject({ object, onClick }) {
         ...object,
         ...(activeTimelineState || {}), // Overrides title, description, suffix
         isExtinct: isExtinct, // Pass calculated status to Modal
-        id: object.id // Keep ID constant
+        id: object.id, // Keep ID constant
+        simStateReason: activeTimelineState?.condition ? Object.keys(activeTimelineState.condition)[0] : null
     };
     const [isMobile, setIsMobile] = useState(false);
 
@@ -171,6 +172,23 @@ function InteractiveObject({ object, onClick }) {
 
     if (!isVisible) return null;
 
+    const getSimReasonLabel = (key) => {
+        const labels = {
+            minTemp: 'Temperatur stress',
+            maxTemp: 'Temperatur stress',
+            minPh: 'Ozean-Versauerung',
+            maxPh: 'Ozean-Versauerung',
+            minPollution: 'Verschmutzung',
+            maxPollution: 'Verschmutzung',
+            minOxygen: 'Sauerstoffmangel',
+            maxOxygen: 'Sauerstoffmangel',
+            minFood: 'Nahrungsmangel',
+            maxFood: 'Nahrungsmangel',
+            minCalcification: 'Kalk-Mangel'
+        };
+        return labels[key] || 'Klima-Stress';
+    };
+
     return (
         <div
             onClick={() => onClick(currentStateObject)}
@@ -231,7 +249,14 @@ function InteractiveObject({ object, onClick }) {
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[9999]">
                 <div className="bg-slate-900/95 border border-white/10 backdrop-blur-md px-4 py-2 rounded-xl whitespace-nowrap text-center shadow-2xl">
                     <span className="text-sm font-bold block text-white">{currentStateObject.title}</span>
-                    <span className="text-[10px] text-gray-400">Klicken für Details</span>
+                    <div className="flex flex-col gap-0.5">
+                        {isSimulationActive && currentStateObject.simStateReason && (
+                            <span className="text-[10px] text-red-400 font-bold uppercase tracking-wider">
+                                Ursache: {getSimReasonLabel(currentStateObject.simStateReason)}
+                            </span>
+                        )}
+                        <span className="text-[10px] text-gray-400">Klicken für Details</span>
+                    </div>
                 </div>
             </div>
         </div>

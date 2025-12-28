@@ -208,7 +208,20 @@ export const ZONES = [
                 facts: ['90% Verlust droht bis 2050', 'Heimat für 25% aller Fische', 'Küsten-Schutzschild']
             },
 
-            { id: 'humpback-whale', title: 'Buckelwal (CO2-Pumpe)', x: '50%', y: '50%', type: 'success', icon: 'Fish', description: 'Wale sind riesige Kohlenstoffspeicher. Ein großer Wal speichert durchschnittlich 33 Tonnen CO2. Wenn er stirbt, sinkt er in die Tiefe und entzieht diesen Kohlenstoff der Atmosphäre für Jahrhunderte.', facts: ['"Whale Pump" düngt Plankton', 'Speichert so viel CO2 wie 1000 Bäume', 'Erholung der Bestände hilft Klima'] },
+            {
+                id: 'humpback-whale',
+                title: 'Buckelwal',
+                x: '50%',
+                y: '50%',
+                type: 'success',
+                icon: 'Fish',
+                timeline: [
+                    { maxYear: 2020, suffix: '_healthy', title: 'Gesunder Bestand', description: 'Buckelwale helfen dem Klima, indem sie als "Whale Pump" das Plankton düngen.', condition: { minFood: 41 } },
+                    { maxYear: 2100, suffix: '_starving', title: 'Hungernder Riese', description: 'Durch den Kollaps der Plankton-Bestände finden Wale nicht mehr genug Krill. Die Fortpflanzungsraten brechen ein.', condition: { maxFood: 40 } }
+                ],
+                description: 'Wale sind riesige Kohlenstoffspeicher. Ein großer Wal speichert durchschnittlich 33 Tonnen CO2. Wenn er stirbt, sinkt er in die Tiefe und entzieht diesen Kohlenstoff der Atmosphäre für Jahrhunderte.',
+                facts: ['"Whale Pump" düngt Plankton', 'Speichert so viel CO2 wie 1000 Bäume', 'Erholung der Bestände hilft Klima']
+            },
             {
                 id: 'plastic-island',
                 title: 'Great Pacific Garbage Patch',
@@ -253,7 +266,20 @@ export const ZONES = [
         background: 'linear-gradient(to bottom, #003050 0%, #002540 30%, #001b30 65%, #001222 100%)',
         objects: [
             { id: 'bioluminescence-jelly', title: 'Leuchtqualle', x: '30%', y: '25%', type: 'info', icon: 'Waves', description: 'Durch Ozeanversauerung und Erwärmung verändern sich Biolumineszenz-Muster. Manche Arten leuchten stärker, andere verlieren ihre Fähigkeit zu kommunizieren.', facts: ['Ökosystem-Kommunikation gestört', 'Quallen profitieren von Erwärmung', 'Indikator für chemische Balance'] },
-            { id: 'giant-squid', title: 'Riesenkalmar', x: '70%', y: '60%', type: 'info', icon: 'Eye', description: 'Einer der geheimnisvollsten Bewohner der Dämmerzone, der empfindlich auf sinkende Sauerstoffwerte in der Tiefe (Deoxygenierung) reagiert.', facts: ['Augen so groß wie Basketbälle', 'Leidet unter Sauerstoffarmut', 'Klimawandel erweitert "Todeszonen"'] },
+            {
+                id: 'giant-squid',
+                title: 'Riesenkalmar',
+                x: '70%',
+                y: '60%',
+                type: 'info',
+                icon: 'Eye',
+                timeline: [
+                    { maxYear: 2020, suffix: '', title: 'Gigant der Tiefe', description: 'Lebt in der Dämmerzone und jagt Fische sowie kleinere Kalmare.', condition: { minOxygen: 50 } },
+                    { maxYear: 2100, suffix: '_suffocating', title: 'Sauerstoffnot', description: 'Riesenkalmare haben einen hohen Stoffwechsel und reagieren extrem empfindlich auf die Ausdehnung von sauerstoffarmen Zonen.', condition: { maxOxygen: 49 } }
+                ],
+                description: 'Einer der geheimnisvollsten Bewohner der Dämmerzone, der empfindlich auf sinkende Sauerstoffwerte in der Tiefe (Deoxygenierung) reagiert.',
+                facts: ['Augen so groß wie Basketbälle', 'Leidet unter Sauerstoffarmut', 'Klimawandel erweitert "Todeszonen"']
+            },
             { id: 'ghost-nets', title: 'Geisternetze', x: '45%', y: '40%', type: 'danger', icon: 'Wind', startYear: 1960, description: 'Verlorene Fischernetze aus Plastik "fischen" jahrzehntelang weiter. Sie bestehen oft aus Nylon, das sich in Mikroplastik zersetzt, aber nicht verschwindet.', facts: ['46% des Mülls im Pazifik-Strudel', 'Todesfalle für Robben & Wale', 'Brauchen 600 Jahre zum Abbau'] },
             { id: 'acoustic-monitoring', title: 'Schall-Station', x: '15%', y: '75%', type: 'info', icon: 'Mic', startYear: 1950, description: 'Überwacht den marinen Lärmteppich durch Schifffahrt und Bohrungen.', facts: ['Identifiziert Walgesänge', 'Misst Lärmbelastung', 'Wichtig für Artenschutz'] }
         ]
@@ -267,7 +293,20 @@ export const ZONES = [
         maxDepth: -1000,
         background: 'linear-gradient(to bottom, #001222 0%, #000c18 20%, #000812 50%, #000508 80%, #000000 100%)',
         objects: [
-            { id: 'anglerfish-deep', title: 'Anglerfisch', x: '25%', y: '35%', type: 'info', icon: 'Lightbulb', description: 'Hat eine leuchtende Angel am Kopf entwickelt, um Beute anzulocken.', facts: ['Extreme Druckanpassung', 'Parasitäre Paarung', 'Überlebt bei 400 Bar'] },
+            {
+                id: 'anglerfish-deep',
+                title: 'Anglerfisch',
+                x: '25%',
+                y: '35%',
+                type: 'info',
+                icon: 'Lightbulb',
+                timeline: [
+                    { maxYear: 2020, suffix: '', title: 'Tiefsee-Angler', description: 'Nutzt seine Biolumineszenz, um Beute im ewigen Dunkel anzulocken.', condition: { minFood: 31 } },
+                    { maxYear: 2100, suffix: '_starving', title: 'Nahrungsmangel', description: 'Wenn der "Meeresschnee" von der Oberfläche ausbleibt, verhungern die Jäger der Tiefe.', condition: { maxFood: 30 } }
+                ],
+                description: 'Hat eine leuchtende Angel am Kopf entwickelt, um Beute anzulocken.',
+                facts: ['Extreme Druckanpassung', 'Parasitäre Paarung', 'Überlebt bei 400 Bar']
+            },
             {
                 id: 'sperm-whale-dive',
                 title: 'Tauchender Pottwal',
@@ -341,10 +380,36 @@ export const ZONES = [
         maxDepth: -6000,
         background: '#000000',
         objects: [
-            { id: 'mariana-snailfish', title: 'Hadaler Fisch', x: '45%', y: '45%', type: 'info', icon: 'Fish', description: 'Der tiefstlebende Fisch (Pseudoliparis swirei) wurde in 8.178m Tiefe gefilmt. Er zeigt, dass Leben sich an extremste Bedingungen anpassen kann – aber nicht an schnelle Umweltveränderungen.', facts: ['Keine Schuppen, gelatineartiger Körper', 'Enormer Druck hält Proteine stabil', 'Empfindlich gegen Temperaturänderung'] },
+            {
+                id: 'mariana-snailfish',
+                title: 'Hadaler Fisch',
+                x: '45%',
+                y: '45%',
+                type: 'info',
+                icon: 'Fish',
+                timeline: [
+                    { maxYear: 2020, suffix: '', title: 'Pseudo-Liparis', description: 'Überlebt bei Drücken, die kein anderes Wirbeltier aushält.', condition: { maxTemp: 2.0 } },
+                    { maxYear: 2100, suffix: '_stressed', title: 'Temperatur-Stress', description: 'Hadaler Snailfish sind an konstante Kälte angepasst. Schon geringe Erwärmungen stören ihre Proteinstabilität.', condition: { minTemp: 2.1 } }
+                ],
+                description: 'Der tiefstlebende Fisch (Pseudoliparis swirei) wurde in 8.178m Tiefe gefilmt. Er zeigt, dass Leben sich an extremste Bedingungen anpassen kann – aber nicht an schnelle Umweltveränderungen.',
+                facts: ['Keine Schuppen, gelatineartiger Körper', 'Enormer Druck hält Proteine stabil', 'Empfindlich gegen Temperaturänderung']
+            },
             { id: 'plastic-bag-deep', title: 'Einsame Plastiktüte', x: '55%', y: '85%', type: 'danger', icon: 'ShoppingBag', startYear: 1990, description: 'Victor Vescovo fand bei seinem Rekord-Tauchgang 2019 im Challenger Deep (10.928m) eine Plastiktüte & Bonbonpapier. Der tiefste Punkt der Erde ist vermüllt.', facts: ['Plastik in 11km Tiefe bestätigt', 'Hadale Zone ist eine "Plastik-Falle"', 'Mikroplastik in Amphipoden gefunden'] },
             { id: 'deepsea-challenger', title: 'Deepsea Challenger', x: '25%', y: '25%', type: 'info', icon: 'Target', startYear: 2012, description: 'James Camerons U-Boot (2012). Nur 4 Menschen waren je am tiefsten Punkt der Erde – weniger als auf dem Mond (12). Die Tiefsee ist weitgehend unerforscht.', facts: ['Tauchte auf 10.908m', 'Sammelte Sedimentproben', 'Mehr Menschen auf dem Mond als hier'] },
-            { id: 'hadal-amphipod', title: 'Riesen-Flohkrebs', x: '75%', y: '60%', type: 'info', icon: 'Bug', description: 'Selbst in 11km Tiefe haben Forscher in diesen Tieren menschengemachte Chemikalien (PCBs) und Mikroplastik gefunden. Es gibt keinen unberührten Ort mehr.', facts: ['"Müllschlucker" der Tiefsee', 'PCBs im Körpergewebe nachgewiesen', 'Fressen abgesunkenes Plastik'] },
+            {
+                id: 'hadal-amphipod',
+                title: 'Riesen-Flohkrebs',
+                x: '75%',
+                y: '60%',
+                type: 'info',
+                icon: 'Bug',
+                timeline: [
+                    { maxYear: 1980, suffix: '', title: 'Unberührter Krebs', description: 'Lebt in der extremen Tiefe von herabsinkender Biomasse.', condition: { maxPollution: 50 } },
+                    { maxYear: 2100, suffix: '_toxic', title: 'Chemiebelastung', description: 'Wissenschaftler fanden enorme Konzentrationen an PCBs und Mikroplastik in Amphipoden der Hadal-Zone.', condition: { minPollution: 51 } }
+                ],
+                description: 'Selbst in 11km Tiefe haben Forscher in diesen Tieren menschengemachte Chemikalien (PCBs) und Mikroplastik gefunden. Es gibt keinen unberührten Ort mehr.',
+                facts: ['"Müllschlucker" der Tiefsee', 'PCBs im Körpergewebe nachgewiesen', 'Fressen abgesunkenes Plastik']
+            },
             { id: 'trench-sonar', title: 'Hadaler Kohlenstoff', x: '10%', y: '70%', type: 'info', icon: 'Scan', startYear: 2010, description: 'Neueste Studien zeigen: Tiefseegräben sind Fallen für "Black Carbon" (Ruß). Sie lagern mehr Kohlenstoff ein als bisher angenommen und sind wichtig für das globale Klima.', facts: ['Speichert "Black Carbon" dauerhaft', 'Wichtiger als bisher gedacht', 'Erdbeben begraben organische Stoffe'] },
             { id: 'subduction-fault', title: 'Subduktions-Riss', x: '50%', y: '95%', type: 'danger', icon: 'Zap', description: 'Stelle an der die Pazifische Platte unter die Marianen-Platte abtaucht.', facts: ['Ursprung schwerer Erdbeben', 'Schlingt gewaltige Mengen Wasser ein', 'Tiefster tektonischer Prozess'] },
             { id: 'hydrothermal-tubeworms', title: 'Hadale Röhrenwürmer', x: '85%', y: '85%', type: 'info', icon: 'Bug', description: 'Spezialisierte Lebensformen an extremen Tiefsee-Schloten.', facts: ['Leben in absoluter Dunkelheit', 'Nutzen chemische Energie', 'Symbiose mit Bakterien'] }

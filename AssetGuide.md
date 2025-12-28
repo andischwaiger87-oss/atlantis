@@ -108,6 +108,14 @@ Kopieren Sie die ID exakt als Dateipräfix:
 
 ### Ozean & Tiefsee
 - `sea-turtle` (Schildkröte)
+- `[ID]_healthy.png`: Optimaler Zustand (z.B. Korallenriff)
+- `[ID]_bleached.png`: Hitzestress/Bleiche (Korallen)
+- `[ID]_starving.png`: Nahrungsmangel (Wale, Fische)
+- `[ID]_suffocating.png`: Sauerstoffmangel (Tiefsee)
+- `[ID]_toxic.png`: Hohe Verschmutzung
+- `[ID]_leaking.png`: Austritt von Gasen (Methan)
+- `[ID]_deorbit.png`: Technologie vor Absturz/Ende
+- `[ID]_dead.png`: Endgültiges Absterben / Skelett
 - `coral-reef` (Korallenriff)
 - `humpback-whale` (Buckelwal)
 - `plastic-island` (Plastik-Insel)
