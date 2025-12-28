@@ -88,10 +88,10 @@ function ZoneIndicator() {
 
                 {/* Depth Display */}
                 <div className="mt-3 pt-3 border-t border-white/10 text-center">
-                    <span className="text-2xl font-bold text-[var(--color-accent)] tabular-nums block">
+                    <span className="text-xl md:text-2xl font-bold text-[var(--color-accent)] tabular-nums block">
                         {Math.round(Math.abs(depth))}m
                     </span>
-                    <span className="text-xs text-muted uppercase tracking-wider">
+                    <span className="text-[9px] md:text-xs text-muted uppercase tracking-wider">
                         {depth > 0 ? 'Höhe' : depth < 0 ? 'Tiefe' : 'Horizont'}
                     </span>
                 </div>

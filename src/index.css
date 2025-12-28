@@ -93,30 +93,75 @@
 
 /* Living Animations */
 @keyframes float {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-  50% { transform: translate(-50%, -50%) translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-12px);
+  }
 }
 
 @keyframes sea-ripple {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.1; }
-  50% { transform: scale(1.05) rotate(1deg); opacity: 0.15; }
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: scale(1.05) rotate(1deg);
+    opacity: 0.15;
+  }
 }
 
 @keyframes cloud-drift {
-  0% { transform: translateX(-100%) translateY(0); opacity: 0; }
-  20% { opacity: 0.4; }
-  80% { opacity: 0.4; }
-  100% { transform: translateX(200%) translateY(10px); opacity: 0; }
+  0% {
+    transform: translateX(-100%) translateY(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.4;
+  }
+
+  80% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: translateX(200%) translateY(10px);
+    opacity: 0;
+  }
 }
 
 @keyframes god-rays {
-  0%, 100% { opacity: 0.2; transform: rotate(-5deg) scaleY(1); }
-  50% { opacity: 0.4; transform: rotate(5deg) scaleY(1.1); }
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: rotate(-5deg) scaleY(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: rotate(5deg) scaleY(1.1);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.2); }
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.2);
+  }
 }
 
 @keyframes pulse-ring {
@@ -184,6 +229,70 @@
 
   50% {
     transform: translateX(5px);
+  }
+}
+
+/* Responsive Mobile Optimizations */
+@media (max-width: 768px) {
+
+  /* Scale down world elements */
+  .world-object {
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+
+  /* Stagger Horizon Objects to prevent overlap */
+  [data-zone="horizon"][data-static="true"]:nth-child(even) {
+    margin-top: -40px;
+  }
+
+  [data-zone="horizon"][data-static="true"]:nth-child(odd) {
+    margin-top: 40px;
+  }
+
+  /* Specific staggering for high-density areas if needed */
+  [data-id="oil-platform"] {
+    margin-left: -5px;
+  }
+
+  [data-id="offshore-wind"] {
+    margin-left: 5px;
+  }
+
+  /* Navigation Sidebar Enhancements */
+  .anchor-point {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Larger touch hit area for dots using pseudo-element */
+  .anchor-point::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+  }
+
+  /* Simplify sidebar - spacing and hidden non-essentials */
+  .panel {
+    width: 140px;
+    right: 8px;
+  }
+
+  .zone-btn span.block.text-sm {
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .zone-btn span.text-muted {
+    display: none;
+  }
+
+  /* InfoModal Mobile Tweaks */
+  .modal-container {
+    padding: 1rem;
+    max-height: 90vh;
   }
 }
 

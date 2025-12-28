@@ -206,6 +206,9 @@ function InteractiveObject({ object, onClick }) {
                 animationDelay: shouldFloat ? `${animDelay}s` : '0s',
                 zIndex: 10
             }}
+            data-id={object.id}
+            data-static={object.static ? 'true' : 'false'}
+            data-zone={depth < 2 && depth > -2 ? 'horizon' : 'other'}
         >
             {/* Hover glow pulse */}
             <div
