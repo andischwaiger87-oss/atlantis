@@ -81,7 +81,11 @@ const KnowledgeBase = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
+        <div
+            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto"
+            onWheel={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
+        >
             <div className="relative w-full max-w-2xl max-h-[85vh] overflow-hidden panel-glass rounded-3xl flex flex-col pointer-events-auto">
 
                 {/* Header */}

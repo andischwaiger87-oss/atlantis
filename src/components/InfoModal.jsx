@@ -17,8 +17,10 @@ function InfoModal({ object, onClose }) {
 
     return (
         <div
-            className="fixed inset-0 z-[1000] flex items-end md:items-center justify-center md:p-4 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-[1000] flex items-end md:items-center justify-center md:p-4 bg-black/80 backdrop-blur-sm pointer-events-auto"
             onClick={onClose}
+            onWheel={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
         >
             <div
                 className="panel w-full h-[90vh] md:h-auto md:max-w-lg overflow-hidden flex flex-col rounded-t-2xl md:rounded-xl"
