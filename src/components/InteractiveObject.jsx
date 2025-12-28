@@ -194,12 +194,32 @@ function InteractiveObject({ object, onClick }) {
     // Calculate mobile-safe X position (prevent edge clipping)
     const getMobileSafeX = (originalX) => {
         if (!isMobile) return originalX;
-        // Parse percentage value
         const xValue = parseFloat(originalX);
         if (isNaN(xValue)) return originalX;
         // Clamp to safe zone (15% - 85% on mobile to prevent clipping)
         const clampedX = Math.max(15, Math.min(85, xValue));
         return `${clampedX}%`;
+    };
+
+    // Calculate mobile-specific Y offset for horizon objects to stagger them vertically
+    const getMobileSafeY = (originalY, objectId) => {
+        if (!isMobile) return originalY;
+        // Only apply staggering to horizon zone objects
+        if (Math.abs(depth) > 2) return originalY;
+
+        // Use object ID hash to create consistent staggered positions
+        const staggerMap = {
+            'rocket-base': '42%',        // Upper
+            'sub-dock': '58%',           // Lower
+            'oil-platform': '38%',       // Upper
+            'desalination-plant': '62%', // Lower
+            'offshore-wind': '44%',      // Upper
+            'wave-energy': '56%',        // Lower
+            'ai-center': '40%',          // Upper
+            'cargo-tanker': '60%',       // Lower
+        };
+
+        return staggerMap[objectId] || originalY;
     };
 
     return (
@@ -212,7 +232,7 @@ function InteractiveObject({ object, onClick }) {
             `}
             style={{
                 left: getMobileSafeX(object.x),
-                top: object.y,
+                top: getMobileSafeY(object.y, object.id),
                 animation: shouldFloat ? `float ${floatDuration}s ease-in-out infinite` : 'none',
                 animationDelay: shouldFloat ? `${animDelay}s` : '0s',
                 zIndex: 10

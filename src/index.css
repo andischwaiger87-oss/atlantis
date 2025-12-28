@@ -245,22 +245,9 @@
     transform: translate(-50%, -50%) scale(0.7);
   }
 
-  /* Horizon objects: smaller but stay at water level (y: 50%) */
+  /* Horizon objects: consistent smaller scale - positioning is done in JS */
   [data-zone="horizon"] {
-    transform: translate(-50%, -50%) scale(0.55) !important;
-  }
-
-  /* Ensure objects near edges are moved inward to prevent clipping */
-  [data-zone="horizon"][style*="x: '8%'"],
-  [data-zone="horizon"][style*="x: '10%'"],
-  [data-id="rocket-base"] {
-    left: 12% !important;
-  }
-
-  [data-zone="horizon"][style*="x: '95%'"],
-  [data-zone="horizon"][style*="x: '92%'"],
-  [data-id="cargo-tanker"] {
-    left: 88% !important;
+    transform: translate(-50%, -50%) scale(0.6) !important;
   }
 
   /* Navigation Sidebar Enhancements */

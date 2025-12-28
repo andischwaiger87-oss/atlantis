@@ -63,14 +63,14 @@ function ZoneIndicator() {
             {/* Toggle Button - High Visibility AAA Styling */}
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className={`absolute -left-32 top-0 flex items-center gap-2 py-2 px-4 rounded-full backdrop-blur-xl border-2 transition-all duration-300 z-[110] pointer-events-auto
+                className={`absolute -left-12 md:-left-32 top-0 flex items-center gap-2 py-2 px-3 md:px-4 rounded-full backdrop-blur-xl border-2 transition-all duration-300 z-[110] pointer-events-auto
                     ${isExpanded
                         ? 'bg-red-500/20 border-red-500/50 text-red-100 shadow-[0_0_20px_rgba(239,68,68,0.3)]'
                         : 'bg-cyan-500/20 border-cyan-500/50 text-cyan-100 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:bg-cyan-500/30'}`}
                 title={isExpanded ? "Menü schließen" : "Menü öffnen"}
             >
                 {isExpanded ? <X size={18} /> : <Menu size={18} />}
-                <span className="text-[10px] font-black uppercase tracking-[0.2em]">Navigation</span>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] hidden md:inline">Navigation</span>
             </button>
 
             {/* Zone List */}
