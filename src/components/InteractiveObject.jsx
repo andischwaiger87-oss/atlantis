@@ -249,23 +249,38 @@ function InteractiveObject({ object, onClick }) {
 
             {/* Tooltip - ABOVE object with safe z-index */}
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[9999]">
-                <div className="bg-slate-900/95 border border-white/10 backdrop-blur-md px-4 py-2 rounded-xl whitespace-nowrap text-center shadow-2xl min-w-[120px]">
-                    {/* Tier 1: Object Name (Persistent) */}
-                    <span className="text-xs font-bold block text-white/50 uppercase tracking-tighter mb-0.5">{object.title}</span>
+                <div className="bg-[#0f172a]/95 border border-white/10 backdrop-blur-md px-4 py-3 rounded-2xl whitespace-nowrap text-center shadow-2xl min-w-[140px] flex flex-col items-center gap-1.5">
 
-                    {/* Tier 2: Current State/Activity */}
-                    <span className="text-sm font-bold block text-white">
-                        {isActuallyDead ? 'AUSGESTORBEN' : (activeTimelineState?.title || object.title)}
-                    </span>
+                    {/* colored badge tag */}
+                    <div
+                        className="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border"
+                        style={{
+                            backgroundColor: `${c.border}20`,
+                            color: c.border,
+                            borderColor: `${c.border}40`
+                        }}
+                    >
+                        {object.type === 'danger' ? 'GEFAHR' : (object.type === 'success' ? 'NUTZEN' : 'INFO')}
+                    </div>
 
-                    {/* Tier 3: Reason/Cause */}
-                    <div className="flex flex-col gap-0.5 mt-1 pt-1 border-t border-white/5">
+                    {/* Tier 1: Main Name (White, Primary) */}
+                    <span className="text-sm font-bold block text-white leading-tight">{object.title}</span>
+
+                    {/* Tier 2: Status (Muted/Secondary) */}
+                    {activeTimelineState?.title && (
+                        <span className="text-[11px] font-medium block text-gray-400">
+                            {isActuallyDead ? 'AUSGESTORBEN' : activeTimelineState.title}
+                        </span>
+                    )}
+
+                    {/* Tier 3: Reason/Details */}
+                    <div className="flex flex-col gap-0.5 mt-1 pt-1.5 border-t border-white/5 w-full">
                         {isSimulationActive && currentStateObject.simStateReason && (
                             <span className="text-[9px] text-red-400 font-bold uppercase tracking-wider">
                                 Ursache: {getSimReasonLabel(currentStateObject.simStateReason)}
                             </span>
                         )}
-                        <span className="text-[9px] text-gray-500 italic">Details anzeigen</span>
+                        <span className="text-[9px] text-gray-500 italic">Klicken für Details</span>
                     </div>
                 </div>
             </div>
