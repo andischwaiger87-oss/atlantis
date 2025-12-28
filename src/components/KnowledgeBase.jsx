@@ -82,7 +82,7 @@ const KnowledgeBase = ({ isOpen, onClose }) => {
 
     return (
         <div
-            className="fixed inset-0 z-[100000] flex items-center justify-center md:p-4 bg-black/90 md:bg-black/40 backdrop-blur-sm pointer-events-auto"
+            className="fixed inset-0 z-[999999] flex items-center justify-center md:p-4 bg-black/90 md:bg-black/40 backdrop-blur-sm pointer-events-auto"
             onClick={onClose}
             onWheel={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.stopPropagation()}

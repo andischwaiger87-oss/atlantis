@@ -208,15 +208,16 @@ function InteractiveObject({ object, onClick }) {
         if (Math.abs(depth) > 2) return originalY;
 
         // Use object ID hash to create consistent staggered positions
+        // Objects on horizon line: 50%, Objects below water: 65%
         const staggerMap = {
-            'rocket-base': '42%',        // Upper
-            'sub-dock': '58%',           // Lower
-            'oil-platform': '38%',       // Upper
-            'desalination-plant': '62%', // Lower
-            'offshore-wind': '44%',      // Upper
-            'wave-energy': '56%',        // Lower
-            'ai-center': '40%',          // Upper
-            'cargo-tanker': '60%',       // Lower
+            'rocket-base': '50%',
+            'sub-dock': '50%',
+            'oil-platform': '50%',
+            'desalination-plant': '65%',
+            'offshore-wind': '50%',
+            'wave-energy': '65%',
+            'ai-center': '50%',
+            'cargo-tanker': '65%',
         };
 
         return staggerMap[objectId] || originalY;
