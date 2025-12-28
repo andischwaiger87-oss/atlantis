@@ -119,7 +119,7 @@ const KnowledgeBase = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+                <div className="flex-1 overflow-y-auto p-6 min-h-0 overscroll-contain custom-scrollbar">
                     {activeTab === 'glossary' ? (
                         <div className="grid gap-4">
                             {GLOSSARY.map((item, idx) => (
@@ -183,12 +183,21 @@ const KnowledgeBase = ({ isOpen, onClose }) => {
                     border: 1px solid rgba(255, 255, 255, 0.1);
                     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
                 }
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 6px;
                 }
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 10px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: rgba(34, 211, 238, 0.2);
+                    border-radius: 10px;
+                    border: 2px solid transparent;
+                    background-clip: content-box;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: rgba(34, 211, 238, 0.4);
                 }
             `}</style>
         </div>
