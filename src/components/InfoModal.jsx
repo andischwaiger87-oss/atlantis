@@ -49,9 +49,12 @@ function InfoModal({ object, onClose }) {
                                     className="text-xs font-semibold uppercase tracking-wider"
                                     style={{ color: config.color }}
                                 >
-                                    {config.label}
+                                    {object.id === 'merlin-mission' || object.id === 'co2m-mission' ? 'Wissenschaft' : config.label}
                                 </span>
-                                <h2 className="text-2xl font-bold text-white mt-0.5">{object.title}</h2>
+                                <h2 className="text-2xl font-bold text-white mt-0.5">{object.id.includes('mission') || object.id.includes('sentinel') ? object.title : (object.title)}</h2>
+                                {object.title !== object.activeTitle && (
+                                    <span className="text-sm text-white/60 block">{object.activeTitle}</span>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -65,6 +68,24 @@ function InfoModal({ object, onClose }) {
 
                 {/* Content */}
                 <div className="p-5 md:p-6 space-y-6 overflow-y-auto flex-1">
+
+                    {/* Explicit Danger/Benefit Box */}
+                    <div
+                        className="flex items-center gap-4 p-4 rounded-xl border"
+                        style={{ backgroundColor: `${config.color}10`, borderColor: `${config.color}30` }}
+                    >
+                        <div className="p-2 rounded-lg" style={{ backgroundColor: `${config.color}20` }}>
+                            {object.type === 'danger' ? <Icons.Flame size={20} style={{ color: config.color }} /> : <Icons.Zap size={20} style={{ color: config.color }} />}
+                        </div>
+                        <div>
+                            <span className="text-xs font-bold uppercase tracking-widest block" style={{ color: config.color }}>
+                                {object.type === 'danger' ? 'Gefahrenpotential' : 'Nutzen / Funktion'}
+                            </span>
+                            <p className="text-sm text-white/80">
+                                {object.type === 'danger' ? 'Verstärkt Klimawandel oder gefährdet Ökosysteme.' : 'Hilft bei der Überwachung oder Abschwächung der Klimawandelfolgen.'}
+                            </p>
+                        </div>
+                    </div>
 
                     {/* Description */}
                     <p className="text-lg text-white/90 leading-relaxed">

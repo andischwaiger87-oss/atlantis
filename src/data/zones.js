@@ -9,10 +9,10 @@ export const ZONES = [
         background: 'linear-gradient(to bottom, #000000 0%, #01010a 20%, #04041a 50%, #080830 85%, #0c0c45 100%)',
         objects: [
             { id: 'satellite-graveyard', title: 'Satelliten-Friedhof', x: '15%', y: '25%', type: 'danger', icon: 'Satellite', startYear: 1960, description: 'Ein Bereich im Orbit, in dem ausgediente Satelliten "geparkt" werden. Durch den Klimawandel kühlt die Thermosphäre ab und zieht sich zusammen, was den natürlichen "Drag" verringert – Müll bleibt dadurch viel länger im Orbit.', facts: ['12.000+ Satelliten im Orbit (2025)', '30% längere Verweildauer durch CO2-Effekt', 'Erhöhtes Risiko des Kessler-Syndroms'] },
-            { id: 'solar-wind', title: 'Solar Wind Sensor', x: '75%', y: '15%', type: 'info', icon: 'Sun', startYear: 2020, description: 'Sensoren (wie auf der SWFO-L1 Mission), die 2025 während des solaren Maximums kritische Daten liefern, um geomagnetische Stürme vorherzusagen, die Stromnetze auf der Erde bedrohen.', facts: ['Solar Cycle 25 Maximum in 2025', 'Warnt vor geomagnetischen Stürmen', 'Schützt GPS & Stromnetze vor Ausfall'] },
+            { id: 'merlin-mission', title: 'MERLIN-Mission', x: '75%', y: '15%', type: 'info', icon: 'Sun', startYear: 2025, description: 'Der deutsch-französische Satellit MERLIN (Methane Remote Sensing Lidar Mission) misst ab 2025 die Methan-Konzentration in der Erdatmosphäre mit höchster Präzision.', facts: ['Misst Methan per Laser (Lidar)', 'Erkennt Leckagen in Gaspipelines', 'Wichtig für die Überwachung von Kipppunkten'] },
             {
                 id: 'iss-research',
-                title: 'ISS ECOSTRESS',
+                title: 'ISS Forschungsstation',
                 x: '55%',
                 y: '45%',
                 type: 'info',
@@ -20,9 +20,9 @@ export const ZONES = [
                 startYear: 1998,
                 endYear: 2031,
                 timeline: [
-                    { maxYear: 2010, suffix: '_const', title: 'ISS Aufbauphase', description: 'Die Internationale Raumstation wird Modul für Modul zusammengesetzt. Ein Symbol für friedliche, globale Kooperation.' },
-                    { maxYear: 2030, suffix: '', title: 'ISS Forschungsbetrieb', description: 'Das fliegende Labor liefert entscheidende Klimadaten (ECOSTRESS) und medizinische Erkenntnisse.' },
-                    { maxYear: 2040, suffix: '_deorbit', title: 'ISS Deorbit', description: 'Die Station wird kontrolliert zum Absturz gebracht und verglüht über dem Point Nemo im Pazifik.' }
+                    { maxYear: 2010, suffix: '_const', title: 'Aufbauphase', description: 'Die Internationale Raumstation wird Modul für Modul zusammengesetzt. Ein Symbol für friedliche, globale Kooperation.' },
+                    { maxYear: 2030, suffix: '', title: 'Forschungsbetrieb', description: 'Das fliegende Labor liefert entscheidende Klimadaten (ECOSTRESS) und medizinische Erkenntnisse.' },
+                    { maxYear: 2040, suffix: '_deorbit', title: 'Kontrollierter Absturz', description: 'Die Station wird kontrolliert zum Absturz gebracht und verglüht über dem Point Nemo im Pazifik.' }
                 ],
                 description: 'Das ECOSTRESS-Instrument auf der ISS misst die Temperatur von Pflanzen, um Wasserstress zu erkennen, bevor Dürren sichtbar werden – ein entscheidendes Tool für die globale Nahrungssicherheit.',
                 facts: ['Misst Pflanzen-Evapotranspiration', '70m genaue Auflösung einzelner Felder', 'Frühwarnsystem für globale Dürren']
@@ -38,7 +38,7 @@ export const ZONES = [
                 timeline: [
                     { maxYear: 1990, suffix: '_early', title: 'Erste Trümmer', description: 'Vereinzelte Raketenstufen und inaktive Satelliten beginnen sich im Orbit anzusammeln.' },
                     { maxYear: 2030, suffix: '', title: 'Kritisches Trümmerfeld', description: 'Millionen Teile rasen um die Erde. Ausweichmanöver für die ISS werden zur Routine.' },
-                    { maxYear: 2100, suffix: '_kessler', title: 'Kessler-Syndrom', description: 'Eine Kettenreaktion von Kollisionen macht den niedrigen Erdorbit unnutzbar. Raumfahrt wird fast unmöglich.' }
+                    { maxYear: 2100, suffix: '_kessler', title: 'Kessler-Syndrom', description: 'Eine Kettenreaktion von Kollisionen macht den niedrigen Erdorbit unnutzbar. Raumfahrt wird fast unmöglich.', isDead: true }
                 ],
                 description: 'Millionen winzige Schrottteile rasen mit 27.000 km/h um die Erde. Schon ein 1cm großes Teil hat die Sprengkraft einer Handgranate.',
                 facts: ['>1 Mio. Teile zwischen 1-10cm', 'Gesamtmasse über 15.000 Tonnen', 'Bedroht Klimasatelliten & ISS']
@@ -62,7 +62,7 @@ export const ZONES = [
             { id: 'ionosphere-drag', title: 'Ionosphären-Widerstand', x: '25%', y: '50%', type: 'danger', icon: 'Wind', startYear: 1957, description: 'Gase in der Thermosphäre bremsen Satelliten ab, was zu Abstürzen führen kann.', facts: ['Zunahme durch Sonnenaktivität', 'Atmosphärisches Aufblähen', 'Lebensdauerverkürzung für LEO-Sats'] },
             { id: 'starlink-train', title: 'Starlink-Kette', x: '75%', y: '65%', type: 'danger', icon: 'Wifi', startYear: 2019, description: 'Mega-Konstellationen stören nicht nur die Astronomie durch Lichtspuren. Beim Verglühen setzen sie Aluminiumoxide frei, die die Ozonschicht in der Stratosphäre schädigen könnten.', facts: ['Stört 30% der Hubble-Bilder', 'Aluminiumoxide schädigen Ozonschicht', 'Risiko für Kollisions-Kaskaden'] },
             { id: 'space-weather-buoy', title: 'DSCOVR Satellit', x: '15%', y: '20%', type: 'info', icon: 'Radio', startYear: 2015, description: 'Ein Satellit am Lagrange-Punkt L1, der das Weltraumwetter und die Erdatmosphäre (EPIC) überwacht.', facts: ['Misst Sonnenstürme in Echtzeit', 'Position 1,5 Mio. km von Erde', 'Warnsystem für Mobilfunk & Strom'] },
-            { id: 'micrometeoroid-explorer', title: 'Odin Nano-Sensor', x: '85%', y: '10%', type: 'info', icon: 'ShieldAlert', startYear: 2024, description: 'Innovative Sensoren zur Detektion kleinster Einschläge von Weltraumschrott und Meteoroiden im Jahr 2025.', facts: ['Entwickelt von Odin Space', 'Überwacht strukturelle Integrität', 'Frühwarnung vor Mikroschäden'] }
+            { id: 'metop-ash-detection', title: 'MetOp-Satellit', x: '85%', y: '10%', type: 'info', icon: 'ShieldAlert', startYear: 2006, description: 'Wetter-Satelliten wie MetOp erkennen auch feinste Vulkanasche-Wolken. Das ermöglicht rechtzeitige Flugwarnungen und gezielte Entwarnungen.', facts: ['Schützt Triebwerke vor Asche-Schäden', 'Erhöht Sicherheit im Flugverkehr', 'Misst Feuchtigkeit & Temperaturprofile'] }
         ]
     },
     // === MESOSPHÄRE ===
@@ -152,9 +152,9 @@ export const ZONES = [
                 static: true,
                 startYear: 1950,
                 timeline: [
-                    { maxYear: 1970, suffix: '_const', title: 'Bohr-Aufbau', description: 'Die Erschließung neuer Ölfelder beginnt. Risiken werden oft ignoriert.' },
-                    { maxYear: 2040, suffix: '', title: 'Hochbetrieb', description: 'Förderung fossiler Brennstoffe läuft auf Hochtouren. Haupttreiber der globalen Erwärmung.' },
-                    { maxYear: 2100, suffix: '_ruin', title: 'Verlassene Plattform', description: 'Ein "Stranded Asset" der fossilen Ära. Rostende Stahlkolosse im Meer, da Erneuerbare Energien übernommen haben.' }
+                    { maxYear: 1970, suffix: '_const', title: 'Aufbauphase', description: 'Die Erschließung neuer Ölfelder beginnt. Risiken werden oft ignoriert.' },
+                    { maxYear: 2040, suffix: '', title: 'Bohrbetrieb', description: 'Förderung fossiler Brennstoffe läuft auf Hochtouren. Haupttreiber der globalen Erwärmung.' },
+                    { maxYear: 2100, suffix: '_ruin', title: 'Industrie-Ruine', description: 'Ein "Stranded Asset" der fossilen Ära. Rostende Stahlkolosse im Meer, da Erneuerbare Energien übernommen haben.' }
                 ],
                 description: 'Förderung fossiler Brennstoffe, der Haupttreiber des Klimawandels.',
                 facts: ['Methan-Lecklagen', 'Risiko von Ölkatastrophen', 'CO2-Quelle Nummer 1']
@@ -184,9 +184,9 @@ export const ZONES = [
                 icon: 'Shell',
                 extinctionYear: 2070,
                 timeline: [
-                    { maxYear: 1980, suffix: '_healthy', title: 'Gesunde Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.', condition: { maxPollution: 20 } },
-                    { maxYear: 2060, suffix: '', title: 'Plastik-Gefahr', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.', condition: { minPollution: 21, maxPollution: 80 } },
-                    { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.', condition: { minPollution: 81 } }
+                    { maxYear: 1980, suffix: '_healthy', title: 'Stabile Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.', condition: { maxPollution: 20 } },
+                    { maxYear: 2060, suffix: '', title: 'Gefährdeter Bestand', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.', condition: { minPollution: 21, maxPollution: 75 } },
+                    { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.', condition: { minPollution: 76 }, isDead: true }
                 ],
                 description: 'Meeresschildkröten verwechseln schwimmende Plastiktüten oft mit ihrer Hauptnahrung, den Quallen. Das Plastik verstopft ihren Magen und führt zum langsamen Verhungern.',
                 facts: ['Plastik im Magen fast aller Arten', 'Verlust von Niststränden durch Meeresspiegel', 'Bestand sinkt dramatisch']
@@ -200,9 +200,9 @@ export const ZONES = [
                 icon: 'Flower2',
                 extinctionYear: 2050, // Keep for backward compatibility/danger logic
                 timeline: [
-                    { maxYear: 1980, suffix: '_1950', title: 'Gesundes Korallenriff', description: 'Ein farbenprächtiges, intaktes Ökosystem vor Beginn der massiven globalen Erwärmung.', condition: { maxTemp: 1.0, minPh: 8.0 } },
+                    { maxYear: 1980, suffix: '_1950', title: 'Intaktes Riff', description: 'Ein farbenprächtiges, intaktes Ökosystem vor Beginn der massiven globalen Erwärmung.', condition: { maxTemp: 1.0, minPh: 8.0 } },
                     { maxYear: 2030, suffix: '', title: 'Korallenbleiche', description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche). 90% Verlust droht.', condition: { minTemp: 1.1, maxTemp: 1.9, maxPh: 7.9 } },
-                    { maxYear: 2100, suffix: '_2050', title: 'Abgestorbenes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.', condition: { minTemp: 2.0, maxPh: 7.7 } }
+                    { maxYear: 2100, suffix: '_2050', title: 'Kollabiertes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.', condition: { minTemp: 2.0, maxPh: 7.7 }, isDead: true }
                 ],
                 description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche).',
                 facts: ['90% Verlust droht bis 2050', 'Heimat für 25% aller Fische', 'Küsten-Schutzschild']
@@ -216,8 +216,9 @@ export const ZONES = [
                 type: 'success',
                 icon: 'Fish',
                 timeline: [
-                    { maxYear: 2020, suffix: '_healthy', title: 'Gesunder Bestand', description: 'Buckelwale helfen dem Klima, indem sie als "Whale Pump" das Plankton düngen.', condition: { minFood: 41 } },
-                    { maxYear: 2100, suffix: '_starving', title: 'Hungernder Riese', description: 'Durch den Kollaps der Plankton-Bestände finden Wale nicht mehr genug Krill. Die Fortpflanzungsraten brechen ein.', condition: { maxFood: 40 } }
+                    { maxYear: 2020, suffix: '_healthy', title: 'Gesunder Wal-Bestand', description: 'Buckelwale helfen dem Klima, indem sie als "Whale Pump" das Plankton düngen.', condition: { minFood: 41 } },
+                    { maxYear: 2100, suffix: '_starving', title: 'Hungerzustand', description: 'Durch den Kollaps der Plankton-Bestände finden Wale nicht mehr genug Krill. Die Fortpflanzungsraten brechen ein.', condition: { maxFood: 40, minFood: 16 } },
+                    { maxYear: 2100, suffix: '_dead', title: 'Vollständiger Kollaps', description: 'Die Population ist aufgrund des totalen Nahrungsketten-Zusammenbruchs erloschen.', condition: { maxFood: 15 }, isDead: true }
                 ],
                 description: 'Wale sind riesige Kohlenstoffspeicher. Ein großer Wal speichert durchschnittlich 33 Tonnen CO2. Wenn er stirbt, sinkt er in die Tiefe und entzieht diesen Kohlenstoff der Atmosphäre für Jahrhunderte.',
                 facts: ['"Whale Pump" düngt Plankton', 'Speichert so viel CO2 wie 1000 Bäume', 'Erholung der Bestände hilft Klima']
@@ -231,9 +232,9 @@ export const ZONES = [
                 icon: 'Trash2',
                 startYear: 1970,
                 timeline: [
-                    { maxYear: 2000, suffix: '_early', title: 'Entstehender Müllstrudel', description: 'Erste Anzeichen einer Akkumulation von Plastikteilen durch Meeresströmungen.', condition: { maxPollution: 20 } },
-                    { maxYear: 2040, suffix: '', title: 'Great Pacific Garbage Patch', description: 'Ein riesiger Müllteppich, dreimal so groß wie Frankreich. Mikroplastik ist allgegenwärtig.', condition: { minPollution: 21, maxPollution: 70 } },
-                    { maxYear: 2100, suffix: '_dense', title: 'Plastik-Kontinent', description: 'Der Müll hat sich zu einer dichten Schicht verdichtet. Ein eigenes Ökosystem ("Neopelagic") hat sich auf dem Plastik gebildet.', condition: { minPollution: 71 } }
+                    { maxYear: 2000, suffix: '_early', title: 'Junger Müllstrudel', description: 'Erste Anzeichen einer Akkumulation von Plastikteilen durch Meeresströmungen.', condition: { maxPollution: 20 } },
+                    { maxYear: 2040, suffix: '', title: 'Waste-Continent', description: 'Ein riesiger Müllteppich, dreimal so groß wie Frankreich. Mikroplastik ist allgegenwärtig.', condition: { minPollution: 21, maxPollution: 70 } },
+                    { maxYear: 2100, suffix: '_dense', title: 'Plastik-Kollaps', description: 'Der Müll hat sich zu einer dichten Schicht verdichtet. Ein eigenes Ökosystem ("Neopelagic") hat sich auf dem Plastik gebildet.', condition: { minPollution: 71 } }
                 ],
                 description: 'Ein riesiger Müllstrudel im Pazifik, dreimal so groß wie Frankreich. Mikroplastik-Konzentrationen haben sich dort in wenigen Jahren verzehnfacht.',
                 facts: ['>1.5 Mio. Plastikteile pro km²', '94% davon ist Mikroplastik', 'Tausende Tonnen Geisternetze']
@@ -248,8 +249,8 @@ export const ZONES = [
                 icon: 'Map',
                 // New Timeline for Sim
                 timeline: [
-                    { maxYear: 2020, suffix: '_healthy', title: 'Blühendes Plankton', description: 'Die Grundlage der marinen Nahrungskette ist stabil.', condition: { maxTemp: 1.5, minPh: 8.0 } },
-                    { maxYear: 2100, suffix: '_collapse', title: 'Plankton-Kollaps', description: 'Durch Versauerung und Erwärmung bricht die Basis des Nahrungsnetzes weg. Das Meer hungert.', condition: { minTemp: 3.0, maxPh: 7.8 } }
+                    { maxYear: 2020, suffix: '_healthy', title: 'Plankton-Blüte', description: 'Die Grundlage der marinen Nahrungskette ist stabil.', condition: { maxTemp: 1.5, minPh: 8.0 } },
+                    { maxYear: 2100, suffix: '_collapse', title: 'Bestands-Kollaps', description: 'Durch Versauerung und Erwärmung bricht die Basis des Nahrungsnetzes weg. Das Meer hungert.', condition: { minTemp: 3.0, maxPh: 7.8 }, isDead: true }
                 ],
                 description: 'Das Phytoplankton produziert 50% des Sauerstoffs, den wir atmen. Durch steigende Wassertemperaturen und Versauerung geht die Menge global zurück.',
                 facts: ['Basis der Nahrungskette', 'Sinkt die Menge, hungert das Meer', 'Bindet Milliarden Tonnen CO2']
@@ -274,13 +275,27 @@ export const ZONES = [
                 type: 'info',
                 icon: 'Eye',
                 timeline: [
-                    { maxYear: 2020, suffix: '', title: 'Gigant der Tiefe', description: 'Lebt in der Dämmerzone und jagt Fische sowie kleinere Kalmare.', condition: { minOxygen: 50 } },
-                    { maxYear: 2100, suffix: '_suffocating', title: 'Sauerstoffnot', description: 'Riesenkalmare haben einen hohen Stoffwechsel und reagieren extrem empfindlich auf die Ausdehnung von sauerstoffarmen Zonen.', condition: { maxOxygen: 49 } }
+                    { maxYear: 2020, suffix: '', title: 'Gesunder Koloss', description: 'Lebt in der Dämmerzone und jagt Fische sowie kleinere Kalmare.', condition: { minOxygen: 50 } },
+                    { maxYear: 2100, suffix: '_suffocating', title: 'Erloschen (Erstickt)', description: 'Riesenkalmare haben einen hohen Stoffwechsel und reagieren extrem empfindlich auf die Ausdehnung von sauerstoffarmen Zonen.', condition: { maxOxygen: 49 }, isDead: true }
                 ],
                 description: 'Einer der geheimnisvollsten Bewohner der Dämmerzone, der empfindlich auf sinkende Sauerstoffwerte in der Tiefe (Deoxygenierung) reagiert.',
                 facts: ['Augen so groß wie Basketbälle', 'Leidet unter Sauerstoffarmut', 'Klimawandel erweitert "Todeszonen"']
             },
-            { id: 'ghost-nets', title: 'Geisternetze', x: '45%', y: '40%', type: 'danger', icon: 'Wind', startYear: 1960, description: 'Verlorene Fischernetze aus Plastik "fischen" jahrzehntelang weiter. Sie bestehen oft aus Nylon, das sich in Mikroplastik zersetzt, aber nicht verschwindet.', facts: ['46% des Mülls im Pazifik-Strudel', 'Todesfalle für Robben & Wale', 'Brauchen 600 Jahre zum Abbau'] },
+            {
+                id: 'ghost-nets',
+                title: 'Geisternetze',
+                x: '45%',
+                y: '40%',
+                type: 'danger',
+                icon: 'Wind',
+                startYear: 1960,
+                timeline: [
+                    { maxYear: 2020, suffix: '', title: 'Aktive Falle', description: 'Verlorene Fischernetze "fischen" jahrzehntelang weiter.' },
+                    { maxYear: 2100, suffix: '_micro', title: 'Zersetzung', description: 'Die Netze zerfallen zu Mikroplastik, das in die Nahrungskette gelangt.', condition: { minPollution: 60 } }
+                ],
+                description: 'Verlorene Fischernetze aus Plastik "fischen" jahrzehntelang weiter. Sie bestehen oft aus Nylon, das sich in Mikroplastik zersetzt, aber nicht verschwindet.',
+                facts: ['46% des Mülls im Pazifik-Strudel', 'Todesfalle für Robben & Wale', 'Brauchen 600 Jahre zum Abbau']
+            },
             { id: 'acoustic-monitoring', title: 'Schall-Station', x: '15%', y: '75%', type: 'info', icon: 'Mic', startYear: 1950, description: 'Überwacht den marinen Lärmteppich durch Schifffahrt und Bohrungen.', facts: ['Identifiziert Walgesänge', 'Misst Lärmbelastung', 'Wichtig für Artenschutz'] }
         ]
     },
@@ -301,8 +316,8 @@ export const ZONES = [
                 type: 'info',
                 icon: 'Lightbulb',
                 timeline: [
-                    { maxYear: 2020, suffix: '', title: 'Tiefsee-Angler', description: 'Nutzt seine Biolumineszenz, um Beute im ewigen Dunkel anzulocken.', condition: { minFood: 31 } },
-                    { maxYear: 2100, suffix: '_starving', title: 'Nahrungsmangel', description: 'Wenn der "Meeresschnee" von der Oberfläche ausbleibt, verhungern die Jäger der Tiefe.', condition: { maxFood: 30 } }
+                    { maxYear: 2020, suffix: '', title: 'Hunger-Stress', description: 'Nutzt seine Biolumineszenz, um Beute im ewigen Dunkel anzulocken.', condition: { minFood: 31 } },
+                    { maxYear: 2100, suffix: '_starving', title: 'Erloschen (Hunger)', description: 'Wenn der "Meeresschnee" von der Oberfläche ausbleibt, verhungern die Jäger der Tiefe.', condition: { maxFood: 30 }, isDead: true }
                 ],
                 description: 'Hat eine leuchtende Angel am Kopf entwickelt, um Beute anzulocken.',
                 facts: ['Extreme Druckanpassung', 'Parasitäre Paarung', 'Überlebt bei 400 Bar']
@@ -323,18 +338,19 @@ export const ZONES = [
             },
             { id: 'marine-snow', title: 'Meeresschnee (Kohlenstoff-Pumpe)', x: '15%', y: '60%', type: 'success', icon: 'Snowflake', description: 'Ein kontinuierlicher Regen aus organischem Material, der CO2 von der Oberfläche in die Tiefe transportiert ("Biologische Kohlenstoffpumpe"). Ozeanversauerung könnte diesen Prozess schwächen.', facts: ['Transportiert Megatonnen CO2', 'Speichert Kohlenstoff für Jahrtausende', 'Nahrungsgrundlage der Tiefsee'] },
             {
-                id: 'methane-seepage',
+                id: 'methane-leak',
                 title: 'Methan-Austritt',
-                x: '75%',
-                y: '80%',
+                x: '80%',
+                y: '20%',
                 type: 'danger',
                 icon: 'Flame',
+                startYear: 1990,
                 timeline: [
-                    { maxYear: 2020, suffix: '_stable', title: 'Gefrorenes Methanhydrat', description: 'Unter hohem Druck und Kälte ist das Methan stabil im Eis eingeschlossen.', condition: { maxTemp: 1.5 } },
-                    { maxYear: 2100, suffix: '_leaking', title: 'Kipppunkt erreicht', description: 'Durch die Erwärmung der Tiefsee gast das Methan massiv aus. Ein fataler Feedback-Loop beginnt.', condition: { minTemp: 2.5 } }
+                    { maxYear: 2010, suffix: '', title: 'Geringe Aktivität', description: 'Natürliche Methanaustritte am Meeresgrund. Das Gas wird meist im Wasser gelöst.' },
+                    { maxYear: 2100, suffix: '_leaking', title: 'Explosiver Austritt', description: 'Durch die Erwärmung des Tiefenwassers werden Methanhydrate instabil. Ein massiver Treibhauseffekt droht.', condition: { minTemp: 2.5 } }
                 ],
-                description: 'Erwärmt sich der Ozean, könnte gefrorenes Methanhydrat am Boden instabil werden und als starkes Treibhausgas aufsteigen.',
-                facts: ['Gefahr eines "Kipppunkts"', 'Methan ist 25x stärker als CO2', 'Forschung überwacht Stabilität']
+                description: 'Methan ist als Treibhausgas 25-mal potenter als CO2. Die Arktis und die Tiefsee bergen gigantische Mengen davon in gefrorener Form.',
+                facts: ['Treibhaus-Beschleuniger', 'Teufelskreis-Gefahr', 'Wird durch MERLIN überwacht']
             },
             { id: 'hydrothermal-vent', title: 'Schwarzer Raucher', x: '45%', y: '85%', type: 'info', icon: 'Zap', description: 'Extrem-Lebensräume, die abhängig von Chemosynthese sind. Sie könnten erste Hinweise liefern, wie Leben unter extremen Klimabedingungen (oder auf anderen Planeten) existiert.', facts: ['Bis zu 400°C heißes Wasser', 'Unabhängig vom Sonnenlicht', 'Symbiose von Bakterien & Tieren'] }
         ]

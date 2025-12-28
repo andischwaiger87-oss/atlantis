@@ -172,6 +172,8 @@ function InteractiveObject({ object, onClick }) {
 
     if (!isVisible) return null;
 
+    const isActuallyDead = activeTimelineState?.isDead || isExtinct;
+
     const getSimReasonLabel = (key) => {
         const labels = {
             minTemp: 'Temperatur stress',
@@ -195,7 +197,7 @@ function InteractiveObject({ object, onClick }) {
             className={`
                 absolute transform -translate-x-1/2 -translate-y-1/2
                 transition-all duration-300 cursor-pointer group
-                ${isExtinct ? 'opacity-40 grayscale filter blur-[1px]' : 'hover:scale-110'}
+                ${isActuallyDead ? 'opacity-40 grayscale filter blur-[1px]' : 'hover:scale-110'}
             `}
             style={{
                 left: object.x,
@@ -209,7 +211,7 @@ function InteractiveObject({ object, onClick }) {
             <div
                 className="absolute inset-[-25px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
-                    background: `radial-gradient(circle, ${c.glow} 0%, transparent 70%)`,
+                    background: `radial-gradient(circle, ${isActuallyDead ? 'rgba(255,255,255,0.1)' : c.glow} 0%, transparent 70%)`,
                     animation: 'pulse 2s ease-in-out infinite'
                 }}
             />
@@ -247,15 +249,23 @@ function InteractiveObject({ object, onClick }) {
 
             {/* Tooltip - ABOVE object with safe z-index */}
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[9999]">
-                <div className="bg-slate-900/95 border border-white/10 backdrop-blur-md px-4 py-2 rounded-xl whitespace-nowrap text-center shadow-2xl">
-                    <span className="text-sm font-bold block text-white">{currentStateObject.title}</span>
-                    <div className="flex flex-col gap-0.5">
+                <div className="bg-slate-900/95 border border-white/10 backdrop-blur-md px-4 py-2 rounded-xl whitespace-nowrap text-center shadow-2xl min-w-[120px]">
+                    {/* Tier 1: Object Name (Persistent) */}
+                    <span className="text-xs font-bold block text-white/50 uppercase tracking-tighter mb-0.5">{object.title}</span>
+
+                    {/* Tier 2: Current State/Activity */}
+                    <span className="text-sm font-bold block text-white">
+                        {isActuallyDead ? 'AUSGESTORBEN' : (activeTimelineState?.title || object.title)}
+                    </span>
+
+                    {/* Tier 3: Reason/Cause */}
+                    <div className="flex flex-col gap-0.5 mt-1 pt-1 border-t border-white/5">
                         {isSimulationActive && currentStateObject.simStateReason && (
-                            <span className="text-[10px] text-red-400 font-bold uppercase tracking-wider">
+                            <span className="text-[9px] text-red-400 font-bold uppercase tracking-wider">
                                 Ursache: {getSimReasonLabel(currentStateObject.simStateReason)}
                             </span>
                         )}
-                        <span className="text-[10px] text-gray-400">Klicken für Details</span>
+                        <span className="text-[9px] text-gray-500 italic">Details anzeigen</span>
                     </div>
                 </div>
             </div>
