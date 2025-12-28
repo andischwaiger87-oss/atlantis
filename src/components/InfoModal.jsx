@@ -17,13 +17,13 @@ function InfoModal({ object, onClose }) {
 
     return (
         <div
-            className="fixed inset-0 z-[1000] flex items-end md:items-center justify-center md:p-4 bg-black/80 backdrop-blur-sm pointer-events-auto"
+            className="fixed inset-0 z-[100000] flex items-end md:items-center justify-center md:p-4 bg-black/95 md:bg-black/80 backdrop-blur-sm pointer-events-auto"
             onClick={onClose}
             onWheel={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.stopPropagation()}
         >
             <div
-                className="panel w-full h-[100dvh] md:h-auto md:max-w-lg md:max-h-[90vh] overflow-hidden flex flex-col md:rounded-xl"
+                className="w-full h-full md:h-auto md:max-w-lg md:max-h-[90vh] overflow-hidden flex flex-col bg-[#0a0f1a] md:bg-[var(--color-surface)] md:rounded-xl md:border md:border-white/10"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Custom Photo Header - prioritized WebP as requested */}

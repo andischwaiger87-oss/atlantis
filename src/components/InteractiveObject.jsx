@@ -191,6 +191,17 @@ function InteractiveObject({ object, onClick }) {
         return labels[key] || 'Klima-Stress';
     };
 
+    // Calculate mobile-safe X position (prevent edge clipping)
+    const getMobileSafeX = (originalX) => {
+        if (!isMobile) return originalX;
+        // Parse percentage value
+        const xValue = parseFloat(originalX);
+        if (isNaN(xValue)) return originalX;
+        // Clamp to safe zone (15% - 85% on mobile to prevent clipping)
+        const clampedX = Math.max(15, Math.min(85, xValue));
+        return `${clampedX}%`;
+    };
+
     return (
         <div
             onClick={() => onClick(currentStateObject)}
@@ -200,7 +211,7 @@ function InteractiveObject({ object, onClick }) {
                 ${isActuallyDead ? 'opacity-40 grayscale filter blur-[1px]' : 'hover:scale-110'}
             `}
             style={{
-                left: object.x,
+                left: getMobileSafeX(object.x),
                 top: object.y,
                 animation: shouldFloat ? `float ${floatDuration}s ease-in-out infinite` : 'none',
                 animationDelay: shouldFloat ? `${animDelay}s` : '0s',

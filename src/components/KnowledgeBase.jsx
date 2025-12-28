@@ -82,12 +82,15 @@ const KnowledgeBase = ({ isOpen, onClose }) => {
 
     return (
         <div
-            className="fixed inset-0 z-[1000] flex items-center justify-center md:p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto"
+            className="fixed inset-0 z-[100000] flex items-center justify-center md:p-4 bg-black/90 md:bg-black/40 backdrop-blur-sm pointer-events-auto"
+            onClick={onClose}
             onWheel={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.stopPropagation()}
         >
-            <div className="relative w-full h-full md:h-auto md:max-w-2xl md:max-h-[85vh] overflow-hidden panel-glass md:rounded-3xl flex flex-col pointer-events-auto">
-
+            <div
+                className="relative w-full h-full md:h-auto md:max-w-2xl md:max-h-[85vh] overflow-hidden bg-[#0a0f1a] md:bg-transparent panel-glass md:rounded-3xl flex flex-col pointer-events-auto"
+                onClick={(e) => e.stopPropagation()}
+            >
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10">
                     <div className="flex items-center gap-3">

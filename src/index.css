@@ -235,43 +235,32 @@
 /* Responsive Mobile Optimizations */
 @media (max-width: 768px) {
 
-  /* Scale down world elements */
+  /* Ensure world container doesn't clip objects */
+  .world-canvas {
+    overflow: visible !important;
+  }
+
+  /* Scale down world elements but keep centered */
   .world-object {
-    transform: translate(-50%, -50%) scale(0.85);
+    transform: translate(-50%, -50%) scale(0.7);
   }
 
-  /* Stagger Horizon Objects to prevent overlap */
+  /* Horizon objects: smaller but stay at water level (y: 50%) */
   [data-zone="horizon"] {
-    transform: translate(-50%, -50%) scale(1) !important;
+    transform: translate(-50%, -50%) scale(0.55) !important;
   }
 
-  [data-zone="horizon"]:nth-of-type(4n+1) {
-    transform: translate(-50%, -85%) !important;
+  /* Ensure objects near edges are moved inward to prevent clipping */
+  [data-zone="horizon"][style*="x: '8%'"],
+  [data-zone="horizon"][style*="x: '10%'"],
+  [data-id="rocket-base"] {
+    left: 12% !important;
   }
 
-  [data-zone="horizon"]:nth-of-type(4n+2) {
-    transform: translate(-50%, -15%) !important;
-  }
-
-  [data-zone="horizon"]:nth-of-type(4n+3) {
-    transform: translate(-50%, -110%) !important;
-  }
-
-  [data-zone="horizon"]:nth-of-type(4n+4) {
-    transform: translate(-50%, 10%) !important;
-  }
-
-  /* Specific staggering for high-density areas */
-  [data-id="oil-platform"] {
-    transform: translate(-50%, -100%) !important;
-  }
-
-  [data-id="desalination-plant"] {
-    transform: translate(-50%, 0%) !important;
-  }
-
-  [data-id="offshore-wind"] {
-    transform: translate(-50%, -90%) !important;
+  [data-zone="horizon"][style*="x: '95%'"],
+  [data-zone="horizon"][style*="x: '92%'"],
+  [data-id="cargo-tanker"] {
+    left: 88% !important;
   }
 
   /* Navigation Sidebar Enhancements */
@@ -290,12 +279,7 @@
     bottom: -15px;
   }
 
-  /* Simplify sidebar - spacing and hidden non-essentials */
-  .panel {
-    width: 140px;
-    right: 8px;
-  }
-
+  /* Simplify sidebar zone buttons - spacing and hidden non-essentials */
   .zone-btn span.block.text-sm {
     font-size: 11px;
     white-space: normal;
