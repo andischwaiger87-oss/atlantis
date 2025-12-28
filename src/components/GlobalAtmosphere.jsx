@@ -1,54 +1,63 @@
 import React from 'react';
 import useSimulationStore from '../store/useSimulationStore';
+import { useClimateStore } from '../store/useClimateStore';
 
 const GlobalAtmosphere = () => {
-    const { isSimulationActive, temperatureAnomaly, pollutionLevel, getEcosystemStats } = useSimulationStore();
+    const {
+        isSimulationActive,
+        getEcosystemStats
+    } = useSimulationStore();
 
-    if (!isSimulationActive) return null;
+    const depth = useClimateStore((state) => state.depth);
 
-    const stats = getEcosystemStats ? getEcosystemStats() : { oxygen: 100, foodSupply: 100, calcification: 100 };
+    // Ensure getEcosystemStats is a function before calling
+    const stats = typeof getEcosystemStats === 'function' ? getEcosystemStats() : { oxygen: 100, foodSupply: 100 };
+    const isCrisis = isSimulationActive && (stats.oxygen < 70 || stats.foodSupply < 50);
 
-    // Calculate dynamic styles
-    // Temperature: 0 -> 4°C. 
-    // At 0: Blueish/Neutral. At 1.5: Slight Orange. At 4: Intense Red/Orange.
-    const heatOpacity = Math.max(0, (temperatureAnomaly - 0.5) / 4) * 0.4; // Max 40% red tint
+    // Depth scales: Space > 500, Horizon = 0, Deep < -500
+    // depth 0 is sea level. 
+    // depth > 0 is upwards (Space)
+    // depth < 0 is downwards (Underwater)
 
-    // Pollution: 0 -> 100%.
-    // At 50: Little murk. At 100: Brownish/Grey overlay.
-    const pollutionOpacity = (pollutionLevel / 100) * 0.5; // Max 50% murk
-
-    // Ecosystem Collapse (Desaturation/Dead zones)
-    // Desaturate if Oxygen < 40 or Food < 30
-    const collapseOpacity = Math.max(0, (60 - stats.oxygen) / 60, (50 - stats.foodSupply) / 50) * 0.6;
+    // We want effects based on depth:
+    const isInAtmosphere = depth > -100; // Sky or surface
+    const isAtSurface = depth < 100 && depth > -200; // Near horizon
+    const isUnderwater = depth < -10;
 
     return (
-        <div
-            className="fixed inset-0 pointer-events-none z-[5] transition-all duration-1000 ease-in-out"
-            style={{
-                backdropFilter: `saturate(${100 - (collapseOpacity * 100)}%)`
-            }}
-        >
-            {/* Heat Overlay (Red/Orange hot) */}
-            <div
-                className="absolute inset-0 bg-orange-600 mix-blend-overlay transition-opacity duration-1000"
-                style={{ opacity: heatOpacity }}
-            />
+        <div className="fixed inset-0 pointer-events-none z-[50]">
+            {/* Atmospheric Depth Overlays */}
 
-            {/* Pollution Overlay (Murky Green/Brown) */}
-            <div
-                className="absolute inset-0 bg-[#4a5d23] mix-blend-multiply transition-opacity duration-1000"
-                style={{ opacity: pollutionOpacity }}
-            />
+            {/* God Rays (Sunlight Zone) */}
+            {isAtSurface && isUnderwater && (
+                <div className="absolute inset-0 overflow-hidden opacity-30">
+                    <div className="absolute top-0 left-1/4 w-[20%] h-[200%] bg-gradient-to-b from-white/20 to-transparent rotate-[15deg] origin-top animate-[god-rays_8s_ease-in-out_infinite]" />
+                    <div className="absolute top-0 left-1/2 w-[15%] h-[200%] bg-gradient-to-b from-white/10 to-transparent rotate-[-10deg] origin-top animate-[god-rays_12s_ease-in-out_infinite_1s]" />
+                </div>
+            )}
 
-            {/* Dead Zone (Gray-out) */}
-            <div
-                className="absolute inset-0 bg-gray-900 mix-blend-color transition-opacity duration-1000"
-                style={{ opacity: collapseOpacity * 0.5 }}
-            />
+            {/* Sea Ripples (Surface/Sub-surface) */}
+            {isAtSurface && (
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/water.png')] opacity-10 animate-[sea-ripple_20s_linear_infinite]" />
+            )}
 
-            {/* Vignette for dramatic effect in crisis mode */}
-            {(temperatureAnomaly > 2.5 || pollutionLevel > 70 || stats.oxygen < 50 || stats.foodSupply < 40) && (
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)] animate-pulse-slow" />
+            {/* Clouds (Troposphere/Atmosphere) */}
+            {isInAtmosphere && depth > 50 && depth < 2000 && (
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute top-[20%] left-[-20%] w-64 h-32 bg-white/20 blur-3xl rounded-full animate-[cloud-drift_40s_linear_infinite]" />
+                    <div className="absolute top-[50%] left-[-30%] w-96 h-48 bg-white/10 blur-[100px] rounded-full animate-[cloud-drift_60s_linear_infinite_10s]" />
+                </div>
+            )}
+
+            {/* Crisis Overlays (Desaturation & Vignette) */}
+            <div className={`absolute inset-0 transition-all duration-1000 ${isCrisis ? 'backdrop-grayscale-[0.4] contrast-[0.9]' : 'opacity-0'}`} />
+
+            {/* Dark/Dead Vignette */}
+            <div className={`absolute inset-0 transition-all duration-1000 pointer-events-none ${isCrisis ? 'shadow-[inset_0_0_150px_rgba(0,0,0,0.8)]' : 'opacity-0'}`} />
+
+            {/* "Dead Zone" Gray Overlay - intensifies with crisis */}
+            {isCrisis && (
+                <div className="absolute inset-0 bg-slate-900/20 mix-blend-multiply transition-opacity duration-1000" />
             )}
         </div>
     );

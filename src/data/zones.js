@@ -97,15 +97,28 @@ export const ZONES = [
                 type: 'success',
                 icon: 'ShieldCheck',
                 timeline: [
-                    { maxYear: 1980, suffix: '_intact', title: 'Intakte Ozonschicht', description: 'Vor der massiven Nutzung von FCKW war der UV-Schutz der Erde stabil.', condition: { maxTemp: 1.0 } },
-                    { maxYear: 2015, suffix: '_hole', title: 'Ozonloch-Krise', description: 'Massive Ausdünnung über der Antarktis. Hautkrebsraten steigen weltweit.', condition: { minTemp: 1.1, maxTemp: 1.5 } }, // Artistic license, linking to general enviro stress
-                    { maxYear: 2100, suffix: '', title: 'Erholte Ozonschicht', description: 'Dank des Montreal-Protokolls hat sich die Schutzschicht fast vollständig regeneriert. Ein Sieg für die Umweltpolitik.', condition: { minTemp: 0 } }
+                    { maxYear: 1980, suffix: '_intact', title: 'Intakter Schutzschild', description: 'Die Ozonschicht filtert gefährliche UV-B-Strahlung fast vollständig.', condition: { maxTemp: 1.0, maxPollution: 20 } },
+                    { maxYear: 2015, suffix: '_hole', title: 'Ozonloch-Maximum', description: 'FCKW-Emissionen rissen ein gewaltiges Loch in den Schutzschild. Hautkrebsraten stiegen sprunghaft.', condition: { minTemp: 1.1, minPollution: 50 } },
+                    { maxYear: 2100, suffix: '', title: 'Wiederherstellung', description: 'Ein Triumph der Wissenschaft: Dank des Montreal-Protokolls heilt die Schicht messbar. Vollständige Erholung bis 2066 erwartet.', condition: { maxPollution: 30 } }
                 ],
                 description: 'Ein globaler Erfolg: Dank des Montreal-Protokolls schließt sich das Ozonloch. 2025 war das antarktische Loch das kleinste seit 1992.',
                 facts: ['Vollständige Erholung bis 2066', 'Verhinderte zusätzlich 0.5°C Erwärmung', 'Schutz vor UV-Strahlung rettet Millionen']
             },
             { id: 'weather-balloon', title: 'Klimaballon', x: '25%', y: '60%', type: 'info', icon: 'Wind', startYear: 1930, description: 'Radiosonden messen CO2-Gehalt und Temperatur in extremer Höhe.', facts: ['Wichtige Daten für Vorhersagen', 'Bis 40km Höhe', 'Unverzichtbar für Klimamodelle'] },
-            { id: 'jet-stream', title: 'Jetstream-Instabilität', x: '75%', y: '45%', type: 'danger', icon: 'MoveLeft', description: 'Durch die schnelle Erwärmung der Arktis ("Arctic Amplification") verlangsamt sich der Jetstream und beginnt zu schlingern ("meandering"). Das führt zu wochenlangen, extremen Wetterlagen.', facts: ['Verursacht stehende Hitzewellen', 'Bringt Polarluft weit nach Süden', 'Ursache für blockierte Wetterlagen'] },
+            {
+                id: 'jet-stream',
+                title: 'Jetstream',
+                x: '75%',
+                y: '45%',
+                type: 'danger',
+                icon: 'MoveLeft',
+                timeline: [
+                    { maxYear: 2020, suffix: '', title: 'Stabiles Windband', description: 'Hohe Temperaturunterschiede zwischen Arktis und Tropen halten den Jetstream stabil.' },
+                    { maxYear: 2100, suffix: '_meandering', title: 'Jetstream-Schlingern', description: 'Durch "Arctic Amplification" verlangsamt sich der Jetstream. Extreme Hitzewellen oder Kälteeinbrüche "frieren" wochenlang ein.', condition: { minTemp: 1.8 } }
+                ],
+                description: 'Ein mächtiges Windband in 10km Höhe, das unser Wetter lenkt. Seine Instabilität führt zu katastrophalen blockierten Wetterlagen.',
+                facts: ['Arctic Amplification als Ursache', 'Bringt Extremwetter-Blockaden', 'Messdaten von ESA Aeolus']
+            },
             { id: 'ozone-sampling-drone', title: 'Global Hawk (NASA)', x: '10%', y: '25%', type: 'info', icon: 'Plane', startYear: 2010, description: 'Unbemannte Forschungsdrohne, die in der Stratosphäre Schadstoffe und Ozonkonzentrationen sammelt.', facts: ['Fliegt über 20 km Höhe', 'Kein Pilot an Bord nötig', 'Dauereinsätze von 30+ Stunden'] },
             { id: 'stratospheric-bacteria', title: 'Bioaerosole', x: '85%', y: '15%', type: 'info', icon: 'Bug', description: 'Mikroorganismen, die als Kristallisationskerne für Wolken dienen und das Albedo der Erde beeinflussen.', facts: ['Transport durch Jetstreams', 'Einfluss auf regionale Dürren', 'Überleben in extremer UV-Strahlung'] },
             { id: 'alpine-swift', title: 'Alpensegler', x: '40%', y: '80%', type: 'info', icon: 'Bird', description: 'Vögel, die monatelang in der Luft bleiben und in großen Höhen Insekten jagen.', facts: ['Schlafen im Flug', 'Höhen bis zu 3000m+', 'Indikatoren für Insektenreichtum'] }
@@ -140,7 +153,22 @@ export const ZONES = [
         maxDepth: 1,
         background: 'linear-gradient(to bottom, #87CEEB 0%, #87CEEB 48.5%, #ffffff 49.5%, #ffffff 50.5%, #0088aa 51.5%, #006994 100%)',
         objects: [
-            { id: 'rocket-base', title: 'Raketenrampe', x: '8%', y: '50%', type: 'vehicle', icon: 'Rocket', static: true, startYear: 1957, description: 'Technologie zur Überwachung des Klimas aus dem Weltraum.', facts: ['Erdbeobachtungsprogramme', 'CO2-Mess-Missionen', 'Startplatz für Forschung'] },
+            {
+                id: 'rocket-base',
+                title: 'Wissenschafts-Zentrum',
+                x: '8%',
+                y: '50%',
+                type: 'vehicle',
+                icon: 'Rocket',
+                static: true,
+                startYear: 1957,
+                timeline: [
+                    { maxYear: 2020, suffix: '', title: 'Erdbeobachtung', description: 'Startplatz für Klimasatelliten wie CO2M und MERLIN.' },
+                    { maxYear: 2100, suffix: '_dormant', title: 'Inaktive Station', description: 'Budgetkürzungen behindern die wichtige Überwachung der planetaren Grenzen.', condition: { minTemp: 3.5 } }
+                ],
+                description: 'Technologie zur Überwachung des Klimas aus dem Weltraum. Lebenswichtige Daten zur Messung planetarer Grenzwerte.',
+                facts: ['Startet ESA-Missionen', 'Überwacht Gletscherschmelze', 'Daten-Basis für IPPC Reports']
+            },
             { id: 'sub-dock', title: 'Deepsea Dock', x: '24%', y: '50%', type: 'vehicle', icon: 'Anchor', static: true, startYear: 2010, description: 'Basis für autonome Forschungs-U-Boote (AUVs), die bis in den Marianengraben tauchen, um dort Temperatur und Plastikverschmutzung zu messen.', facts: ['Wartet autonome "Glider"', 'Schnittstelle für Tiefsee-Daten', 'Startpunkt für Hadal-Missionen'] },
             {
                 id: 'oil-platform',
@@ -346,8 +374,8 @@ export const ZONES = [
                 icon: 'Flame',
                 startYear: 1990,
                 timeline: [
-                    { maxYear: 2010, suffix: '', title: 'Geringe Aktivität', description: 'Natürliche Methanaustritte am Meeresgrund. Das Gas wird meist im Wasser gelöst.' },
-                    { maxYear: 2100, suffix: '_leaking', title: 'Explosiver Austritt', description: 'Durch die Erwärmung des Tiefenwassers werden Methanhydrate instabil. Ein massiver Treibhauseffekt droht.', condition: { minTemp: 2.5 } }
+                    { maxYear: 2030, suffix: '', title: 'Gefrorenes Methan', description: 'In Form von Methanhydrat ("brennendes Eis") ist das Gas im kalten Boden gebunden.', condition: { maxTemp: 1.9 } },
+                    { maxYear: 2100, suffix: '_leaking', title: 'Explosive Entgasung', description: 'Durch die Erwärmung des Tiefenwassers werden Hydrate instabil. Das freigesetzte Methan wirkt 80x stärker als CO2.', condition: { minTemp: 2.0 }, isDead: true }
                 ],
                 description: 'Methan ist als Treibhausgas 25-mal potenter als CO2. Die Arktis und die Tiefsee bergen gigantische Mengen davon in gefrorener Form.',
                 facts: ['Treibhaus-Beschleuniger', 'Teufelskreis-Gefahr', 'Wird durch MERLIN überwacht']

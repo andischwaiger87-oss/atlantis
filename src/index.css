@@ -84,31 +84,39 @@
   .text-muted {
     color: var(--color-text-muted);
   }
+
+  .font-cinzel {
+    font-family: 'Cinzel Decorative', cursive;
+    letter-spacing: 0.1em;
+  }
 }
 
 /* Living Animations */
 @keyframes float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-12px); }
+}
 
-  0%,
-  100% {
-    transform: translate(-50%, -50%) translateY(0);
-  }
+@keyframes sea-ripple {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.1; }
+  50% { transform: scale(1.05) rotate(1deg); opacity: 0.15; }
+}
 
-  50% {
-    transform: translate(-50%, -50%) translateY(-12px);
-  }
+@keyframes cloud-drift {
+  0% { transform: translateX(-100%) translateY(0); opacity: 0; }
+  20% { opacity: 0.4; }
+  80% { opacity: 0.4; }
+  100% { transform: translateX(200%) translateY(10px); opacity: 0; }
+}
+
+@keyframes god-rays {
+  0%, 100% { opacity: 0.2; transform: rotate(-5deg) scaleY(1); }
+  50% { opacity: 0.4; transform: rotate(5deg) scaleY(1.1); }
 }
 
 @keyframes pulse-glow {
-
-  0%,
-  100% {
-    filter: brightness(1);
-  }
-
-  50% {
-    filter: brightness(1.2);
-  }
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
 }
 
 @keyframes pulse-ring {
