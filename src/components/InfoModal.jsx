@@ -27,12 +27,17 @@ function InfoModal({ object, onClose }) {
                 {/* Custom Photo Header - prioritized WebP as requested */}
                 <div className="relative w-full h-64 md:h-80 bg-slate-800 overflow-hidden flex-shrink-0">
                     <img
-                        src={`/assets/objects/${object.id}.webp`}
+                        src={`/assets/objects/${object.id}${object.suffix || ''}.webp`}
                         alt={object.title}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                            // If no image is found, hide the image container
-                            e.target.closest('.relative').style.display = 'none';
+                            const baseSrc = `/assets/objects/${object.id}.webp`;
+                            if (e.target.src !== window.location.origin + baseSrc) {
+                                e.target.src = baseSrc;
+                            } else {
+                                // If base image also fails, hide the container
+                                e.target.closest('.relative').style.display = 'none';
+                            }
                         }}
                     />
                     {/* Header Overlay */}
