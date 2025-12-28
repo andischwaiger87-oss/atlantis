@@ -173,11 +173,11 @@ export const ZONES = [
                 description: 'Startplatz für internationale Erdbeobachtungs-Missionen. Satelliten wie Copernicus (EU), Landsat (NASA) oder ALOS (JAXA) liefern die Datenbasis für globale Klimaentscheidungen.',
                 facts: ['Daten-Basis für IPCC-Berichte', 'Überwacht Kipppunkte der Biosphäre', 'Schnittstelle für globale Geodaten']
             },
-            { id: 'sub-dock', title: 'Global Deepsea Dock', x: '24%', y: '50%', type: 'vehicle', icon: 'Anchor', static: true, startYear: 2010, description: 'Basis für autonome Forschungs-U-Boote (AUVs). Sie sind Teil des globalen ARGO-Netzwerkes, das über 4.000 Roboter-Bojen zur Messung der Ozeanwärme weltweit betreibt.', facts: ['Schnittstelle für globale Tiefsee-Daten', 'Vernetzt mit Ocean Networks Canada', 'Wartet autonome "Glider"'] },
+            { id: 'sub-dock', title: 'Global Deepsea Dock', x: '18%', y: '50%', type: 'vehicle', icon: 'Anchor', static: true, startYear: 2010, description: 'Basis für autonome Forschungs-U-Boote (AUVs). Sie sind Teil des globalen ARGO-Netzwerkes, das über 4.000 Roboter-Bojen zur Messung der Ozeanwärme weltweit betreibt.', facts: ['Schnittstelle für globale Tiefsee-Daten', 'Vernetzt mit Ocean Networks Canada', 'Wartet autonome "Glider"'] },
             {
                 id: 'oil-platform',
                 title: 'Öl-Plattform',
-                x: '40%',
+                x: '31%',
                 y: '50%',
                 type: 'danger',
                 icon: 'Factory',
@@ -191,11 +191,11 @@ export const ZONES = [
                 description: 'Förderung fossiler Brennstoffe, der Haupttreiber des Klimawandels.',
                 facts: ['Methan-Lecklagen', 'Risiko von Ölkatastrophen', 'CO2-Quelle Nummer 1']
             },
-            { id: 'offshore-wind', title: 'Windpark Alpha', x: '56%', y: '50%', type: 'success', icon: 'Wind', static: true, startYear: 1991, description: 'Grüne Energiegewinnung durch konstante Küstenwinde.', facts: ['Saubere Energie', 'Keine CO2-Emissionen', 'Wichtiger Pfeiler der Energiewende'] },
-            { id: 'ai-center', title: 'AI Gigafactory', x: '72%', y: '50%', type: 'danger', icon: 'Cpu', static: true, startYear: 2023, description: 'Gigantische Rechenzentren für KI-Modelle. Sie verbrauchen enorme Mengen an Energie und Wasser zur Kühlung.', facts: ['2% globaler Stromverbrauch', 'Kühlungsbedarf durch Meerwasser', 'Wärmebelastung für Küsten-Ökosysteme'] },
-            { id: 'cargo-tanker', title: 'Industrie-Logistik', x: '88%', y: '50%', type: 'danger', icon: 'Ship', static: true, startYear: 1950, description: '90% des Welthandels verursacht massive Schwefelemissionen.', facts: ['Schweröl-Verbrennung', 'Belastung der Weltmeere', 'Lärmverschmutzung für Wale'] },
-            { id: 'desalination-plant', title: 'Meerwasser-Entsalzung', x: '48%', y: '50%', type: 'info', icon: 'Droplets', static: true, startYear: 1965, description: 'Wird in Dürre-Regionen überlebenswichtig. Das Problem: Es bleibt hochkonzentrierte, chemisch belastete Salzlauge ("Brine") zurück, die Meeresböden ersticken kann.', facts: ['50% des Wassers wird zu "Brine"', 'Hoher Energieverbrauch', 'Risiko für Küsten-Ökosysteme'] },
-            { id: 'wave-energy', title: 'Wellenkraftwerk', x: '64%', y: '50%', type: 'success', icon: 'Waves', static: true, startYear: 2005, description: 'Nutzt die kinetische Energie der Wellen zur Stromerzeugung.', facts: ['Nachhaltige Ozean-Energie', 'Schutzraum für Fische', 'Konstante Energiequelle'] }
+            { id: 'desalination-plant', title: 'Meerwasser-Entsalzung', x: '44%', y: '50%', type: 'info', icon: 'Droplets', static: true, startYear: 1965, description: 'Wird in Dürre-Regionen überlebenswichtig. Das Problem: Es bleibt hochkonzentrierte, chemisch belastete Salzlauge ("Brine") zurück, die Meeresböden ersticken kann.', facts: ['50% des Wassers wird zu "Brine"', 'Hoher Energieverbrauch', 'Risiko für Küsten-Ökosysteme'] },
+            { id: 'offshore-wind', title: 'Windpark Alpha', x: '57%', y: '50%', type: 'success', icon: 'Wind', static: true, startYear: 1991, description: 'Grüne Energiegewinnung durch konstante Küstenwinde.', facts: ['Saubere Energie', 'Keine CO2-Emissionen', 'Wichtiger Pfeiler der Energiewende'] },
+            { id: 'wave-energy', title: 'Wellenkraftwerk', x: '70%', y: '50%', type: 'success', icon: 'Waves', static: true, startYear: 2005, description: 'Nutzt die kinetische Energie der Wellen zur Stromerzeugung.', facts: ['Nachhaltige Ozean-Energie', 'Schutzraum für Fische', 'Konstante Energiequelle'] },
+            { id: 'ai-center', title: 'AI Gigafactory', x: '83%', y: '50%', type: 'danger', icon: 'Cpu', static: true, startYear: 2023, description: 'Gigantische Rechenzentren für KI-Modelle. Sie verbrauchen enorme Mengen an Energie und Wasser zur Kühlung.', facts: ['2% globaler Stromverbrauch', 'Kühlungsbedarf durch Meerwasser', 'Wärmebelastung für Küsten-Ökosysteme'] },
+            { id: 'cargo-tanker', title: 'Industrie-Logistik', x: '95%', y: '50%', type: 'danger', icon: 'Ship', static: true, startYear: 1950, description: '90% des Welthandels verursacht massive Schwefelemissionen.', facts: ['Schweröl-Verbrennung', 'Belastung der Weltmeere', 'Lärmverschmutzung für Wale'] }
         ]
     },
     // === SONNENLICHTZONE ===

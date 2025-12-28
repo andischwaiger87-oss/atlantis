@@ -73,6 +73,31 @@ function WorldCanvas() {
         }));
     }, []);
 
+    // Ambient particles (Dust in sky, Marine snow in sea)
+    const ambientParticles = useMemo(() => {
+        return Array.from({ length: 100 }).map((_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            size: Math.random() * 3 + 1,
+            delay: Math.random() * 10,
+            duration: Math.random() * 15 + 10,
+            type: i % 2 === 0 ? 'dust' : 'snow'
+        }));
+    }, []);
+
+    // Wind streaks for troposphere
+    const windStreaks = useMemo(() => {
+        return Array.from({ length: 15 }).map((_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            y: 10 + Math.random() * 80,
+            width: 100 + Math.random() * 200,
+            delay: Math.random() * 5,
+            duration: Math.random() * 3 + 4
+        }));
+    }, []);
+
     useEffect(() => {
         lastDepth.current = depth;
     }, [depth]);
@@ -261,11 +286,76 @@ function WorldCanvas() {
                 </div>
             )}
 
+            {/* Ambient Particles */}
+            <div className="absolute inset-0 pointer-events-none">
+                {ambientParticles.map(p => {
+                    const isParticleVisible = p.type === 'snow' ? isUnderwater : !isUnderwater;
+                    return isParticleVisible && (
+                        <div
+                            key={p.id}
+                            className="absolute rounded-full"
+                            style={{
+                                left: `${p.x}%`,
+                                top: `${p.y}%`,
+                                width: `${p.size}px`,
+                                height: `${p.size}px`,
+                                background: p.type === 'snow' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)',
+                                animation: `particle-float ${p.duration}s ease-in-out infinite`,
+                                animationDelay: `${p.delay}s`
+                            }}
+                        />
+                    );
+                })}
+            </div>
+
+            {/* Wind Streaks in Troposphere */}
+            {depth > 0 && depth < 2000 && (
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    {windStreaks.map(streak => (
+                        <div
+                            key={streak.id}
+                            className="absolute h-[1px] bg-white/10 blur-[1px]"
+                            style={{
+                                left: `${streak.x}%`,
+                                top: `${streak.y}%`,
+                                width: `${streak.width}px`,
+                                animation: `wind-drift ${streak.duration}s linear infinite`,
+                                animationDelay: `${streak.delay}s`
+                            }}
+                        />
+                    ))}
+                </div>
+            )}
+
             {/* World Container - 0m is at screen center */}
             <div
                 className="absolute w-full left-0"
                 style={{ top: '50%', transform: `translateY(${translateY}px)` }}
             >
+                {/* Surface Wave Animation Layer */}
+                {depth > -100 && depth < 100 && (
+                    <div className="absolute top-0 left-0 w-full h-[100px] pointer-events-none -translate-y-1/2">
+                        {[...Array(3)].map((_, i) => (
+                            <div
+                                key={i}
+                                className="absolute inset-0 opacity-20"
+                                style={{
+                                    animation: `wave ${8 + i * 2}s ease-in-out infinite`,
+                                    animationDelay: `${i * -2}s`,
+                                }}
+                            >
+                                <svg width="200%" height="100" viewBox="0 0 1000 100" preserveAspectRatio="none" className="w-full h-full text-cyan-400">
+                                    <path
+                                        d="M0,50 Q250,20 500,50 T1000,50 V100 H0 Z"
+                                        fill="currentColor"
+                                        className="animate-pulse"
+                                        style={{ animationDuration: `${10 + i * 5}s` }}
+                                    />
+                                </svg>
+                            </div>
+                        ))}
+                    </div>
+                )}
                 {ZONES.map((zone) => (
                     <Zone
                         key={zone.id}
