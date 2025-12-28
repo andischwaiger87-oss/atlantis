@@ -212,12 +212,12 @@ export const ZONES = [
                 icon: 'Shell',
                 extinctionYear: 2070,
                 timeline: [
-                    { maxYear: 2040, suffix: '_healthy', title: 'Stabile Population', description: 'Schildkröten finden reichlich Nahrung (Quallen) und ungestörte Niststrände.', condition: { maxPollution: 20 } },
-                    { maxYear: 2080, suffix: '', title: 'Gefährdeter Bestand', description: 'Verwechslung von Quallen mit Plastiktüten wird zur tödlichen Falle. Nistplätze gehen durch Meeresspiegelanstieg verloren.', condition: { minPollution: 21, maxPollution: 75 } },
-                    { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.', condition: { minPollution: 76 }, isDead: true }
+                    { maxYear: 2020, suffix: '_healthy', title: 'Relativ stabiler Bestand', description: 'Schildkröten-Populationen erholten sich durch Schutzmaßnahmen regional, stehen aber unter Dauerstress.', condition: { maxPollution: 10 } },
+                    { maxYear: 2060, suffix: '', title: 'Gefährdeter Bestand', description: 'Im Jahr 2025 leiden Bestände massiv unter Plastikverschmutzung und dem Verlust von Niststränden durch den Meeresspiegelanstieg. Die Erwärmung des Sands verändert zudem das Geschlechterverhältnis fatal.', condition: { minPollution: 11, maxPollution: 70 } },
+                    { maxYear: 2100, suffix: '_critical', title: 'Funktional Ausgestorben', description: 'Nur noch wenige Exemplare in Schutzstationen. In freier Wildbahn kaum mehr anzutreffen.', condition: { minPollution: 71 }, isDead: true }
                 ],
-                description: 'Meeresschildkröten verwechseln schwimmende Plastiktüten oft mit ihrer Hauptnahrung, den Quallen. Das Plastik verstopft ihren Magen und führt zum langsamen Verhungern.',
-                facts: ['Plastik im Magen fast aller Arten', 'Verlust von Niststränden durch Meeresspiegel', 'Bestand sinkt dramatisch']
+                description: 'Meeresschildkröten sind Indikatoren für die Ozeangesundheit. Im Jahr 2025 sind fast alle Exemplare durch Mikroplastik oder Beifang belastet.',
+                facts: ['Sanderwärmung (Feminisierung)', 'Plastikmüll in 100% der Proben', 'Verlust von Korallen-Nahrungsgründen']
             },
             {
                 id: 'coral-reef',
@@ -226,14 +226,14 @@ export const ZONES = [
                 y: '80%',
                 type: 'danger',
                 icon: 'Flower2',
-                extinctionYear: 2050, // Keep for backward compatibility/danger logic
+                extinctionYear: 2050,
                 timeline: [
-                    { maxYear: 2030, suffix: '_1950', title: 'Intaktes Riff', description: 'Ein farbenprächtiges, intaktes Ökosystem. Es zeigt jedoch bereits erste Stressanzeichen durch punktuelle Hitzewellen.', condition: { maxTemp: 1.0, minPh: 8.0 } },
-                    { maxYear: 2050, suffix: '', title: 'Korallenbleiche', description: 'Massives Sterben der Korallenriffe durch zu hohe Wassertemperaturen (Bleiche). Ein globaler Kipppunkt.', condition: { minTemp: 1.1, maxTemp: 1.9, maxPh: 7.9 } },
-                    { maxYear: 2100, suffix: '_2050', title: 'Kollabiertes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.', condition: { minTemp: 2.0, maxPh: 7.7 }, isDead: true }
+                    { maxYear: 2010, suffix: '_1950', title: 'Intaktes Riff', description: 'Ein farbenprächtiges, intaktes Ökosystem. Bis zur Jahrtausendwende waren die meisten Riffe noch gesund.', condition: { maxTemp: 0.8, minPh: 8.1 } },
+                    { maxYear: 2045, suffix: '', title: 'Korallenbleiche', description: 'Im Jahr 2025 erleben wir die vierte globale Korallenbleiche. Temperaturen steigen über die Toleranzschwelle der Symbiose-Algen.', condition: { minTemp: 0.9, maxTemp: 1.9, maxPh: 7.9 } },
+                    { maxYear: 2100, suffix: '_2050', title: 'Kollabiertes Riff', description: 'Ein von Algen überwachsenes Skelett eines einst lebendigen Riffs. Die Biodiversität ist zusammengebrochen.', condition: { minTemp: 2.0, maxPh: 7.6 }, isDead: true }
                 ],
-                description: 'Sterbende Korallenriffe durch zu hohe Wassertemperaturen (Bleiche).',
-                facts: ['90% Verlust droht bis 2050', 'Heimat für 25% aller Fische', 'Küsten-Schutzschild']
+                description: 'Korallenriffe sind die "Regenwälder der Meere". Im Jahr 2025 sind bereits 50% der weltweiten Korallenbestände verloren gegangen.',
+                facts: ['90% Verlust bei +2°C erwartet', 'Heimat für 25% aller Fische', 'Küsten-Schutzschild gegen Stürme']
             },
 
             {
@@ -244,12 +244,12 @@ export const ZONES = [
                 type: 'success',
                 icon: 'Fish',
                 timeline: [
-                    { maxYear: 2045, suffix: '_healthy', title: 'Gesunder Wal-Bestand', description: 'Buckelwale helfen dem Klima, indem sie als "Whale Pump" das Plankton düngen. Aktuell erholen sich viele Populationen.', condition: { minFood: 41 } },
-                    { maxYear: 2080, suffix: '_starving', title: 'Hungerzustand', description: 'Durch den Kollaps der Plankton-Bestände finden Wale nicht mehr genug Krill. Die Fortpflanzungsraten brechen ein.', condition: { maxFood: 40, minFood: 16 } },
+                    { maxYear: 2040, suffix: '_healthy', title: 'Vulnerable Erholung', description: 'Bestände erholen sich langsam vom kommerziellen Walfang, leiden 2025 aber unter Nahrungsmangel durch schwindenden Krill.', condition: { minFood: 60 } },
+                    { maxYear: 2075, suffix: '_starving', title: 'Hungerzustand', description: 'Durch den Kollaps der Plankton-Bestände (Krill) finden Wale nicht mehr genug Nahrung. Die Geburtenraten sinken dramatisch.', condition: { maxFood: 59, minFood: 16 } },
                     { maxYear: 2100, suffix: '_dead', title: 'Bestand Erloschen', description: 'Die Population ist aufgrund des totalen Nahrungsketten-Zusammenbruchs erloschen.', condition: { maxFood: 15 }, isDead: true }
                 ],
-                description: 'Wale sind riesige Kohlenstoffspeicher. Ein großer Wal speichert durchschnittlich 33 Tonnen CO2. Wenn er stirbt, sinkt er in die Tiefe und entzieht diesen Kohlenstoff der Atmosphäre für Jahrhunderte.',
-                facts: ['"Whale Pump" düngt Plankton', 'Speichert so viel CO2 wie 1000 Bäume', 'Erholung der Bestände hilft Klima']
+                description: 'Wale sind gigantische Kohlenstoffspeicher. Im Jahr 2025 sind sie jedoch zunehmend durch Schiffskollisionen und schwindende Nahrungsquellen bedroht.',
+                facts: ['"Whale Pump" düngt Plankton', 'Speichert 33 Tonnen CO2 pro Wal', 'Krill-Rückgang bedroht Fortbestand']
             },
             {
                 id: 'plastic-island',

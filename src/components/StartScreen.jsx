@@ -26,25 +26,25 @@ const StartScreen = ({ onEnter }) => {
 
             {/* Content */}
             <div className="relative flex flex-col items-center text-center px-6">
-                <div className="mb-2 overflow-hidden">
-                    <span className="block text-cyan-400 text-xs font-bold uppercase tracking-[0.3em] animate-[slide-up_1s_ease-out]">
-                        System Archeology Simulation
-                    </span>
-                </div>
-
-                <h1 className="text-7xl md:text-9xl font-cinzel text-white mb-8 drop-shadow-[0_0_30px_rgba(0,212,255,0.3)] animate-[fade-in_2s_ease-out]">
+                <h1 className="text-7xl md:text-9xl font-cinzel text-white mb-12 drop-shadow-[0_0_30px_rgba(0,212,255,0.3)] animate-[fade-in_2s_ease-out]">
                     ATLANTIS
                 </h1>
 
-                <p className="max-w-md text-white/50 text-sm md:text-lg leading-relaxed mb-12 animate-[fade-in_2s_ease-out_0.5s_both]">
+                <div className="mb-12 overflow-hidden">
+                    <span className="block text-cyan-400 text-sm md:text-base font-bold uppercase tracking-[0.4em] animate-[slide-up_1s_ease-out_0.5s_both]">
+                        Simulation System-Archäologie
+                    </span>
+                </div>
+
+                <p className="max-w-md text-white/50 text-sm md:text-lg leading-relaxed mb-12 animate-[fade-in_2s_ease-out_0.8s_both]">
                     Erforsche die vertikale Tiefe unseres Planeten – vom Weltraum bis zum Meeresgrund – und simuliere die Auswirkungen des Klimawandels auf fragile Ökosysteme.
                 </p>
 
                 <button
                     onClick={handleEnter}
-                    className="group relative px-12 py-4 bg-transparent border border-white/20 rounded-full text-white font-bold tracking-widest hover:border-cyan-400 transition-all duration-500 animate-[fade-in_2s_ease-out_1s_both]"
+                    className="group relative px-12 py-4 bg-transparent border border-white/20 rounded-full text-white font-bold tracking-widest hover:border-cyan-400 transition-all duration-500 animate-[fade-in_2s_ease-out_1.2s_both]"
                 >
-                    <span className="relative z-10">ENTER SYSTEM</span>
+                    <span className="relative z-10">SYSTEM BETRETEN</span>
                     <div className="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/10 rounded-full transition-all duration-500" />
                     <div className="absolute -inset-0.5 bg-cyan-400 opacity-0 group-hover:opacity-20 blur-md rounded-full transition-all duration-500" />
                 </button>
@@ -52,7 +52,7 @@ const StartScreen = ({ onEnter }) => {
 
             {/* Footer */}
             <div className="absolute bottom-8 text-[10px] text-white/20 uppercase tracking-widest font-mono">
-                Project Atlantis © 2025 // Data-Driven Climate Awareness
+                Projekt Atlantis © 2025 // Datenbasierte Klima-Aufklärung
             </div>
 
             <style>{`
