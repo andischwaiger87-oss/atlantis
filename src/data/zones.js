@@ -191,11 +191,8 @@ export const ZONES = [
                 description: 'Förderung fossiler Brennstoffe, der Haupttreiber des Klimawandels.',
                 facts: ['Methan-Lecklagen', 'Risiko von Ölkatastrophen', 'CO2-Quelle Nummer 1']
             },
-            { id: 'desalination-plant', title: 'Meerwasser-Entsalzung', x: '44%', y: '65%', type: 'info', icon: 'Droplets', static: true, startYear: 1965, description: 'Wird in Dürre-Regionen überlebenswichtig. Das Problem: Es bleibt hochkonzentrierte, chemisch belastete Salzlauge ("Brine") zurück, die Meeresböden ersticken kann.', facts: ['50% des Wassers wird zu "Brine"', 'Hoher Energieverbrauch', 'Risiko für Küsten-Ökosysteme'] },
             { id: 'offshore-wind', title: 'Windpark Alpha', x: '57%', y: '50%', type: 'success', icon: 'Wind', static: true, startYear: 1991, description: 'Grüne Energiegewinnung durch konstante Küstenwinde.', facts: ['Saubere Energie', 'Keine CO2-Emissionen', 'Wichtiger Pfeiler der Energiewende'] },
-            { id: 'wave-energy', title: 'Wellenkraftwerk', x: '70%', y: '65%', type: 'success', icon: 'Waves', static: true, startYear: 2005, description: 'Nutzt die kinetische Energie der Wellen zur Stromerzeugung.', facts: ['Nachhaltige Ozean-Energie', 'Schutzraum für Fische', 'Konstante Energiequelle'] },
-            { id: 'ai-center', title: 'AI Gigafactory', x: '83%', y: '50%', type: 'danger', icon: 'Cpu', static: true, startYear: 2023, description: 'Gigantische Rechenzentren für KI-Modelle. Sie verbrauchen enorme Mengen an Energie und Wasser zur Kühlung.', facts: ['2% globaler Stromverbrauch', 'Kühlungsbedarf durch Meerwasser', 'Wärmebelastung für Küsten-Ökosysteme'] },
-            { id: 'cargo-tanker', title: 'Industrie-Logistik', x: '95%', y: '65%', type: 'danger', icon: 'Ship', static: true, startYear: 1950, description: '90% des Welthandels verursacht massive Schwefelemissionen.', facts: ['Schweröl-Verbrennung', 'Belastung der Weltmeere', 'Lärmverschmutzung für Wale'] }
+            { id: 'ai-center', title: 'AI Gigafactory', x: '83%', y: '50%', type: 'danger', icon: 'Cpu', static: true, startYear: 2023, description: 'Gigantische Rechenzentren für KI-Modelle. Sie verbrauchen enorme Mengen an Energie und Wasser zur Kühlung.', facts: ['2% globaler Stromverbrauch', 'Kühlungsbedarf durch Meerwasser', 'Wärmebelastung für Küsten-Ökosysteme'] }
         ]
     },
     // === SONNENLICHTZONE ===
@@ -207,6 +204,10 @@ export const ZONES = [
         maxDepth: -1,
         background: 'linear-gradient(to bottom, #006994 0%, #005a80 25%, #004d70 55%, #004060 85%, #003050 100%)',
         objects: [
+            // Underwater horizon objects - near surface
+            { id: 'desalination-plant', title: 'Meerwasser-Entsalzung', x: '44%', y: '5%', type: 'info', icon: 'Droplets', static: true, startYear: 1965, description: 'Wird in Dürre-Regionen überlebenswichtig. Das Problem: Es bleibt hochkonzentrierte, chemisch belastete Salzlauge ("Brine") zurück, die Meeresböden ersticken kann.', facts: ['50% des Wassers wird zu "Brine"', 'Hoher Energieverbrauch', 'Risiko für Küsten-Ökosysteme'] },
+            { id: 'wave-energy', title: 'Wellenkraftwerk', x: '70%', y: '8%', type: 'success', icon: 'Waves', static: true, startYear: 2005, description: 'Nutzt die kinetische Energie der Wellen zur Stromerzeugung.', facts: ['Nachhaltige Ozean-Energie', 'Schutzraum für Fische', 'Konstante Energiequelle'] },
+            { id: 'cargo-tanker', title: 'Industrie-Logistik', x: '92%', y: '6%', type: 'danger', icon: 'Ship', static: true, startYear: 1950, description: '90% des Welthandels verursacht massive Schwefelemissionen.', facts: ['Schweröl-Verbrennung', 'Belastung der Weltmeere', 'Lärmverschmutzung für Wale'] },
             {
                 id: 'sea-turtle',
                 title: 'Schildkröte',
