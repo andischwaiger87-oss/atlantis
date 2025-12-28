@@ -34,7 +34,7 @@ const ClimateControlPanel = () => {
 
             {/* Main Interface Panel */}
             <div className={`
-                panel p-4 w-72 transition-all duration-300 origin-bottom-right pointer-events-auto
+                panel p-4 w-[calc(100vw-2rem)] md:w-72 transition-all duration-300 origin-bottom-right pointer-events-auto
                 ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-4 pointer-events-none hidden'}
             `}>
                 <div className="flex justify-between items-center mb-4">

@@ -82,19 +82,19 @@ const KnowledgeBase = ({ isOpen, onClose }) => {
 
     return (
         <div
-            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto"
+            className="fixed inset-0 z-[1000] flex items-center justify-center md:p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto"
             onWheel={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.stopPropagation()}
         >
-            <div className="relative w-full max-w-2xl max-h-[85vh] overflow-hidden panel-glass rounded-3xl flex flex-col pointer-events-auto">
+            <div className="relative w-full h-full md:h-auto md:max-w-2xl md:max-h-[85vh] overflow-hidden panel-glass md:rounded-3xl flex flex-col pointer-events-auto">
 
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10">
                     <div className="flex items-center gap-3">
                         <div className="p-2 bg-cyan-500/20 rounded-xl text-cyan-400">
-                            <Book size={20} />
+                            <Book size={18} className="md:w-5 md:h-5" />
                         </div>
-                        <h2 className="text-xl font-bold text-white tracking-tight">Wissensbereich</h2>
+                        <h2 className="text-lg md:text-xl font-bold text-white tracking-tight">Wissensbereich</h2>
                     </div>
                     <button
                         onClick={onClose}

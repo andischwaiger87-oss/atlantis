@@ -241,21 +241,37 @@
   }
 
   /* Stagger Horizon Objects to prevent overlap */
-  [data-zone="horizon"][data-static="true"]:nth-child(even) {
-    margin-top: -40px;
+  [data-zone="horizon"] {
+    transform: translate(-50%, -50%) scale(1) !important;
   }
 
-  [data-zone="horizon"][data-static="true"]:nth-child(odd) {
-    margin-top: 40px;
+  [data-zone="horizon"]:nth-of-type(4n+1) {
+    transform: translate(-50%, -85%) !important;
   }
 
-  /* Specific staggering for high-density areas if needed */
+  [data-zone="horizon"]:nth-of-type(4n+2) {
+    transform: translate(-50%, -15%) !important;
+  }
+
+  [data-zone="horizon"]:nth-of-type(4n+3) {
+    transform: translate(-50%, -110%) !important;
+  }
+
+  [data-zone="horizon"]:nth-of-type(4n+4) {
+    transform: translate(-50%, 10%) !important;
+  }
+
+  /* Specific staggering for high-density areas */
   [data-id="oil-platform"] {
-    margin-left: -5px;
+    transform: translate(-50%, -100%) !important;
+  }
+
+  [data-id="desalination-plant"] {
+    transform: translate(-50%, 0%) !important;
   }
 
   [data-id="offshore-wind"] {
-    margin-left: 5px;
+    transform: translate(-50%, -90%) !important;
   }
 
   /* Navigation Sidebar Enhancements */

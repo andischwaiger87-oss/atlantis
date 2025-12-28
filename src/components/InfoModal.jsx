@@ -23,7 +23,7 @@ function InfoModal({ object, onClose }) {
             onKeyDown={(e) => e.stopPropagation()}
         >
             <div
-                className="panel w-full h-[90vh] md:h-auto md:max-w-lg overflow-hidden flex flex-col rounded-t-2xl md:rounded-xl"
+                className="panel w-full h-[100dvh] md:h-auto md:max-w-lg md:max-h-[90vh] overflow-hidden flex flex-col md:rounded-xl"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Custom Photo Header - prioritized WebP as requested */}

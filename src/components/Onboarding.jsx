@@ -34,10 +34,10 @@ const Onboarding = ({ onComplete }) => {
     };
 
     return (
-        <div className="fixed inset-0 z-[150000] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-            <div className="panel max-w-md w-full p-8 flex flex-col items-center text-center relative overflow-hidden">
+        <div className="fixed inset-0 z-[151000] flex items-center justify-center md:p-4 bg-[var(--color-bg)]/80 backdrop-blur-xl animate-in fade-in duration-500">
+            <div className="relative w-full h-full md:h-auto md:max-w-md overflow-hidden panel-glass md:rounded-3xl flex flex-col items-center text-center p-8 md:p-10 shadow-2xl">
                 {/* Background Glow */}
-                <div className={`absolute -top-24 -left-24 w-48 h-48 rounded-full blur-[80px] opacity-20 transition-colors duration-500`}
+                <div className="absolute -top-24 -left-24 w-48 h-48 rounded-full blur-[80px] opacity-20 transition-colors duration-500"
                     style={{ backgroundColor: step === 0 ? '#22d3ee' : step === 1 ? '#60a5fa' : '#fb923c' }} />
 
                 <button

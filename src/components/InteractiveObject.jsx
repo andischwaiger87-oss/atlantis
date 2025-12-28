@@ -226,8 +226,16 @@ function InteractiveObject({ object, onClick }) {
                         src={currentSrc}
                         alt={object.title}
                         style={{
-                            width: isMobile ? (object.size ? object.size * 0.6 : 90) : (object.size || 150),
-                            height: isMobile ? (object.size ? object.size * 0.6 : 90) : (object.size || 150),
+                            width: isMobile
+                                ? (object.id === 'rocket-base' || depth < 2 && depth > -2
+                                    ? (object.size ? object.size * 0.45 : 65)
+                                    : (object.size ? object.size * 0.6 : 90))
+                                : (object.size || 150),
+                            height: isMobile
+                                ? (object.id === 'rocket-base' || depth < 2 && depth > -2
+                                    ? (object.size ? object.size * 0.45 : 65)
+                                    : (object.size ? object.size * 0.6 : 90))
+                                : (object.size || 150),
                             objectFit: 'contain'
                         }}
                         onError={handleImageError}
