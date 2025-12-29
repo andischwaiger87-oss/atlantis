@@ -32,7 +32,7 @@ const StartScreen = ({ onEnter }) => {
 
                 <div className="mb-6 md:mb-12 overflow-hidden">
                     <span className="block text-cyan-400 text-xs md:text-base font-bold uppercase tracking-[0.4em] animate-[slide-up_1s_ease-out_0.5s_both]">
-                        Simulation System-Archäologie
+                        Interaktive Klima-Simulation
                     </span>
                 </div>
 
@@ -44,7 +44,7 @@ const StartScreen = ({ onEnter }) => {
                     onClick={handleEnter}
                     className="group relative px-10 md:px-12 py-3 md:py-4 bg-transparent border border-white/20 rounded-full text-white text-xs md:text-sm font-bold tracking-widest hover:border-cyan-400 transition-all duration-500 animate-[fade-in_2s_ease-out_1.2s_both]"
                 >
-                    <span className="relative z-10">SYSTEM BETRETEN</span>
+                    <span className="relative z-10">ERKUNDUNG STARTEN</span>
                     <div className="absolute inset-0 bg-cyan-400/0 group-hover:bg-cyan-400/10 rounded-full transition-all duration-500" />
                     <div className="absolute -inset-0.5 bg-cyan-400 opacity-0 group-hover:opacity-20 blur-md rounded-full transition-all duration-500" />
                 </button>
@@ -52,7 +52,7 @@ const StartScreen = ({ onEnter }) => {
 
             {/* Footer */}
             <div className="absolute bottom-12 md:bottom-8 px-4 text-[10px] text-white/10 uppercase tracking-widest font-mono text-center">
-                Projekt Atlantis © 2025 // Datenbasierte Klima-Aufklärung
+                Projekt Atlantis © 2026 // Datenbasierte Klima-Aufklärung
             </div>
 
             <style>{`

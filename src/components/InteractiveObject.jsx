@@ -156,12 +156,12 @@ function InteractiveObject({ object, onClick }) {
         CustomSVG = EmptyDock;
     }
 
-    // Type colors with stronger glow
+    // Type colors with stronger glow - enhanced visibility
     const colors = {
-        danger: { bg: 'rgba(255, 71, 87, 0.2)', border: '#ff4757', glow: 'rgba(255,71,87,0.5)' },
-        success: { bg: 'rgba(46, 213, 115, 0.2)', border: '#2ed573', glow: 'rgba(46,213,115,0.5)' },
-        vehicle: { bg: 'rgba(255, 165, 2, 0.2)', border: '#ffa502', glow: 'rgba(255,165,2,0.5)' },
-        info: { bg: 'rgba(0, 212, 255, 0.2)', border: '#00d4ff', glow: 'rgba(0,212,255,0.5)' }
+        danger: { bg: 'rgba(255, 71, 87, 0.25)', border: '#ff4757', glow: 'rgba(255,71,87,0.7)', ring: 'rgba(255,71,87,0.4)' },
+        success: { bg: 'rgba(46, 213, 115, 0.25)', border: '#2ed573', glow: 'rgba(46,213,115,0.7)', ring: 'rgba(46,213,115,0.4)' },
+        vehicle: { bg: 'rgba(255, 165, 2, 0.25)', border: '#ffa502', glow: 'rgba(255,165,2,0.7)', ring: 'rgba(255,165,2,0.4)' },
+        info: { bg: 'rgba(0, 212, 255, 0.25)', border: '#00d4ff', glow: 'rgba(0,212,255,0.7)', ring: 'rgba(0,212,255,0.4)' }
     };
     const c = colors[object.type] || colors.info;
 
@@ -242,12 +242,24 @@ function InteractiveObject({ object, onClick }) {
             data-static={object.static ? 'true' : 'false'}
             data-zone={depth < 2 && depth > -2 ? 'horizon' : 'other'}
         >
-            {/* Hover glow pulse */}
+            {/* Persistent pulsing glow ring - always visible */}
+            {!isActuallyDead && (
+                <div
+                    className="absolute inset-[-15px] rounded-full pointer-events-none"
+                    style={{
+                        background: `radial-gradient(circle, ${c.ring} 0%, transparent 70%)`,
+                        animation: 'pulse-glow 3s ease-in-out infinite',
+                        opacity: 0.6
+                    }}
+                />
+            )}
+
+            {/* Hover glow pulse - enhanced on hover */}
             <div
-                className="absolute inset-[-25px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                className="absolute inset-[-30px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
-                    background: `radial-gradient(circle, ${isActuallyDead ? 'rgba(255,255,255,0.1)' : c.glow} 0%, transparent 70%)`,
-                    animation: 'pulse 2s ease-in-out infinite'
+                    background: `radial-gradient(circle, ${isActuallyDead ? 'rgba(255,255,255,0.15)' : c.glow} 0%, transparent 60%)`,
+                    animation: 'pulse 1.5s ease-in-out infinite'
                 }}
             />
 
