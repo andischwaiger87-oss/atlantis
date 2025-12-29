@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useClimateStore } from '../store/useClimateStore';
-import useSimulationStore from '../store/useSimulationStore';
 import { ZONES } from '../data/zones';
 import Zone from './Zone';
 import InfoModal from './InfoModal';
@@ -42,9 +41,6 @@ function WorldCanvas() {
     const requestRef = useRef();
     const lastDepth = useRef(depth);
     const lastTouchY = useRef(null);
-
-    // Get simulation values for atmospheric effects
-    const { isSimulationActive, temperatureAnomaly, oceanPh, pollutionLevel } = useSimulationStore();
 
     // Create stars across all of space
     const stars = useMemo(() => {
@@ -194,38 +190,6 @@ function WorldCanvas() {
 
     return (
         <div className="relative w-full h-full bg-[#050a15] overflow-hidden">
-
-            {/* Atmospheric Climate Effects Overlay */}
-            {isSimulationActive && (
-                <>
-                    {/* Temperature warmth overlay - red/orange tint */}
-                    <div
-                        className="absolute inset-0 pointer-events-none z-[5] transition-opacity duration-1000"
-                        style={{
-                            background: `linear-gradient(180deg, rgba(255,${Math.max(50, 150 - temperatureAnomaly * 30)},0,${Math.min(0.15, temperatureAnomaly * 0.04)}) 0%, transparent 50%)`,
-                            opacity: temperatureAnomaly > 1 ? 1 : 0
-                        }}
-                    />
-
-                    {/* Pollution haze overlay - gray/brown particles */}
-                    <div
-                        className="absolute inset-0 pointer-events-none z-[5] transition-opacity duration-1000"
-                        style={{
-                            background: `radial-gradient(ellipse at 50% 30%, rgba(139,119,101,${Math.min(0.25, pollutionLevel * 0.003)}) 0%, transparent 70%)`,
-                            opacity: pollutionLevel > 30 ? 1 : 0
-                        }}
-                    />
-
-                    {/* Ocean acidification tint - greenish underwater */}
-                    {depth < 0 && oceanPh < 8.0 && (
-                        <div
-                            className="absolute inset-0 pointer-events-none z-[5] transition-opacity duration-1000"
-                            style={{
-                                background: `linear-gradient(0deg, rgba(100,150,100,${Math.min(0.2, (8.1 - oceanPh) * 0.3)}) 0%, transparent 60%)`,
-                            }}
-                        />
-                    )}
-                </>
 
             {/* Stars - appear early and gradually */}
             {depth > 15 && (
