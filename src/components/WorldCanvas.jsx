@@ -369,7 +369,7 @@ function WorldCanvas() {
             {showRocket && (
                 <div
                     className="fixed top-1/2 pointer-events-none z-50"
-                    style={{ left: '8%', transform: 'translate(-50%, -50%) scale(1.1)' }}
+                    style={{ left: '8.5%', transform: 'translate(-50%, -50%) scale(1.1)' }}
                 >
                     <FlyingRocket />
                 </div>
@@ -379,7 +379,7 @@ function WorldCanvas() {
             {showSubmarine && (
                 <div
                     className="fixed top-1/2 pointer-events-none z-50"
-                    style={{ left: '18%', transform: 'translate(-50%, -50%) scale(1.0)' }}
+                    style={{ left: '23%', transform: 'translate(-50%, -50%) scale(1.0)' }}
                 >
                     <DivingSubmarine />
                 </div>
