@@ -5,7 +5,8 @@ import { useClimateStore } from '../store/useClimateStore';
 const GlobalAtmosphere = () => {
     const {
         isSimulationActive,
-        getEcosystemStats
+        getEcosystemStats,
+        pollutionLevel // Ergänzt: Pollution Level für den visuellen Filter
     } = useSimulationStore();
 
     const depth = useClimateStore((state) => state.depth);
@@ -13,6 +14,9 @@ const GlobalAtmosphere = () => {
     // Ensure getEcosystemStats is a function before calling
     const stats = typeof getEcosystemStats === 'function' ? getEcosystemStats() : { oxygen: 100, foodSupply: 100 };
     const isCrisis = isSimulationActive && (stats.oxygen < 70 || stats.foodSupply < 50);
+
+    // Ergänzung: Berechnung der Filter-Sichtbarkeit (max. 40% Opacity für bessere Nutzbarkeit)
+    const pollutionOpacity = isSimulationActive ? (pollutionLevel / 100) * 0.4 : 0;
 
     // Depth scales: Space > 500, Horizon = 0, Deep < -500
     // depth 0 is sea level. 
@@ -26,6 +30,17 @@ const GlobalAtmosphere = () => {
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[50]">
+            
+            {/* NEU: Beige/Braun Filter für Verschmutzung */}
+            <div 
+                className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+                style={{ 
+                    backgroundColor: '#7d6340', // Schmutziges Braun/Beige
+                    opacity: pollutionOpacity,
+                    mixBlendMode: 'multiply' 
+                }} 
+            />
+
             {/* Atmospheric Depth Overlays */}
 
             {/* God Rays (Sunlight Zone) */}
