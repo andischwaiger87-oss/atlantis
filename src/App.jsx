@@ -7,6 +7,7 @@ import ClimateControlPanel from './components/ClimateControlPanel';
 import GlobalAtmosphere from './components/GlobalAtmosphere';
 import StartScreen from './components/StartScreen';
 import Onboarding from './components/Onboarding';
+import MobileNotice from './components/MobileNotice'; // Neu importiert
 
 function App() {
   const [showStartScreen, setShowStartScreen] = useState(true);
@@ -16,7 +17,7 @@ function App() {
   useEffect(() => {
     const hasSeenOnboarding = localStorage.getItem('atlantis_onboarding_seen');
     if (hasSeenOnboarding) {
-      // If seen, we don't show it again unless triggered or startScreen is finished
+       // Onboarding-Status könnte hier für spätere Features genutzt werden
     }
   }, []);
 
@@ -32,6 +33,9 @@ function App() {
 
   return (
     <div className="relative w-full h-full overflow-hidden bg-[var(--color-bg)]">
+      {/* Mobile-Hinweis wird immer eingeblendet, wenn die Screen-Width klein ist */}
+      <MobileNotice />
+
       {showStartScreen && <StartScreen onEnter={handleStart} />}
       {showOnboarding && <Onboarding onComplete={handleOnboardingComplete} />}
 
