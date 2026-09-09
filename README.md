@@ -1,16 +1,36 @@
-# React + Vite
+# Atlantis – Expedition Erde
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Eine deutsche, responsive React-App zur Erkundung von elf Zonen zwischen Erdorbit und Tiefsee. Das Remake verwendet die vorhandenen Projektbilder und den bestehenden Vite-/Cloudflare-Pages-Build.
 
-Currently, two official plugins are available:
+## Entwicklung und Prüfung
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `npm ci` installiert die festgeschriebenen Abhängigkeiten.
+- `npm run dev` startet die Vorschau.
+- `npm run build` erzeugt `dist/` für Cloudflare Pages.
+- `npm run lint` prüft den Quellcode.
+- `node --test tests/content.test.js` prüft Quellenzuordnung, Illustrationen, Zonenverknüpfungen und die wissenschaftlichen Szenariowerte.
 
-## React Compiler
+## Struktur
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `src/App.jsx`: Expedition, Navigation und gemeinsame Zeitperspektive.
+- `src/components/Research.jsx`: durchsuchbares Archiv, Detailansichten und Methodik.
+- `src/components/ClimateLab.jsx`: IPCC-Szenarien, Unsicherheitsdarstellung und pH-Experiment.
+- `src/data/expedition.js`: redaktionell geprüfte Artikel, Quellen, Zonen und unveränderte IPCC-Tabellenwerte.
+- `src/index.css`: responsive Gestaltung einschließlich reduzierter Bewegung.
+- `public/assets/objects/` und `src/assets/`: vorhandene Bilder; unverändert erhalten.
 
-## Expanding the ESLint configuration
+## Wissenschaftliche Einordnung
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Stand 9. September 2026. Temperaturbeobachtung 2025: WMO State of the Global Climate 2025 (veröffentlicht 2026). Szenarien: IPCC AR6 WGI (2021), Tabelle SPM.1. Diese zeigen Zeitfenster, keine frei berechneten Jahresprognosen. Beobachtungen und Projektionen sind getrennt. Die Bilder sind Illustrationen, keine Datennachweise.
+
+Die frühere frei parametrisierte Temperatur-/pH-/Bestands-Simulation wurde durch belegte Szenarien und ein unabhängiges, definitionsbasiertes pH-Experiment ersetzt. Keine automatischen Aussterbejahre, prognostizierten Tierzahlen oder erfundenen lokalen Messwerte.
+
+## Veröffentlichung
+
+Repository: `andischwaiger87-oss/atlantis`, Branch `main`. Der vorhandene Cloudflare-Pages-Abgleich veröffentlicht nach dem Push. Build: `npm run build`, Ausgabeverzeichnis: `dist`. Keine neue Hosting-Plattform, kein Backend und keine geheimen Laufzeitvariablen erforderlich.
+
+## Datenschutz und Bedienung
+
+Kein Konto, keine Analytics, kein externer Schriftabruf. Der Entdeckungsfortschritt wird ausschließlich lokal gespeichert. Tastatur: Pfeil hoch/runter oder W/S außerhalb von Eingabefeldern und Schaltflächen. Mobil: Zonenwahl, große Auf-/Abstiegstasten und feste Hauptnavigation. Native Dialoge unterstützen Fokusführung und Escape. Automatische Rundreise ist optional und pausierbar.
+
+Weitere redaktionelle Entscheidungen: `docs/CONTENT_REVIEW.md`.

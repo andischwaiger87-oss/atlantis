@@ -1,3 +1,9 @@
+# Hinweis zum Remake (9. September 2026)
+
+Dieser Katalog dokumentiert die ursprüngliche Bildbibliothek. Jahreszahlen und Zustandsnamen in Dateinamen sind keine wissenschaftlichen Prognosen. Das aktive Remake verwendet ausschließlich die geprüften Feldnotizen und Quellen in src/data/expedition.js. Frühere automatische Zustandswechsel nach festen Jahresgrenzen wurden entfernt. Alle Bilddateien bleiben erhalten.
+
+---
+
 # Projekt Atlantis: Asset Guide & Bild-Spezifikationen
 
 Diese Anleitung hilft Ihnen dabei, die Symbole und Vorschaubilder für die interaktiven Objekte im Projekt zu ersetzen.
