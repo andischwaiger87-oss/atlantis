@@ -35,3 +35,11 @@ Ersetzt wurden die alten unbelegten Prognosetexte. 33 ausgewählte Feldnotizen d
 ## Redaktionelle Erweiterungen
 
 Neue Artikel brauchen eine gültige Zone, existierende Illustration, konkrete Fachquellen, Bezugszeitraum für Zahlen, Zusammenhang, Grenzen und eine als redaktionell erkennbare Handlungseinordnung. Nach Änderungen die Inhaltsprüfung und den Produktionsbuild ausführen. Bildvarianten mit Jahreszahlen im Dateinamen begründen keine historischen oder zukünftigen Zustände.
+
+## Ergänzung vom 10. September 2026: lokaler Versuch
+
+Neu geprüft: NOAA Coral Reef Watch, Degree Heating Week v3.1 (https://coralreefwatch.noaa.gov/product/5km/index_5km_dhw.php) und NOAA, What is eutrophication? (https://oceanservice.noaa.gov/facts/eutrophication.html, aktualisiert 16.06.2024).
+
+Der Versuch nimmt eine konstante örtliche Überwärmung und zunächst keinen aufgestauten Hitzestress an. Er integriert nur Werte ab 1 °C über dem langjährigen Maximum der Monatsmittel für höchstens zwölf Wochen. Ab 4 °C-Wochen besteht Bleicherisiko, ab 8 ist verbreitete Bleiche mit Absterben hitzeempfindlicher Korallen wahrscheinlich. Bilder sind mögliche Schadenszustände. Es gibt keine erfundenen individuellen Sterbewahrscheinlichkeiten oder Arten-Aussterbejahre. Nährstoffe, Algenwachstum, Lichtmangel und Sauerstoffverbrauch bilden eine qualitative, getrennte Wirkungskette. Die Trübungsfunktion ist ausdrücklich gestalterisch, weder kalibriert noch eine Vorhersage lokaler Konzentrationen. Die bestehende globale Klimadatensammlung wurde nicht ersetzt.
+
+Verifikation: Daten- und Bewegungstests prüfen sämtliche 11 Zonen, Quellen- und Asset-Verknüpfungen, sofortige Bewegung der Rundreise und Umkehr an den Grenzen. Keine visuelle Browserprüfung in dieser Iteration durchgeführt.

@@ -34,3 +34,15 @@ Repository: `andischwaiger87-oss/atlantis`, Branch `main`. Der vorhandene Cloudf
 Kein Konto, keine Analytics, kein externer Schriftabruf. Der Entdeckungsfortschritt wird ausschließlich lokal gespeichert. Tastatur: Pfeil hoch/runter oder W/S außerhalb von Eingabefeldern und Schaltflächen. Mobil: Zonenwahl, große Auf-/Abstiegstasten und feste Hauptnavigation. Native Dialoge unterstützen Fokusführung und Escape. Automatische Rundreise ist optional und pausierbar.
 
 Weitere redaktionelle Entscheidungen: `docs/CONTENT_REVIEW.md`.
+
+## Immersive Expedition (10. September 2026)
+
+Die Expedition belegt den vollständigen Viewport. Scrollen, Ziehen, Halten der Richtungstasten und der vertikale Regler bewegen kontinuierlich zwischen -11 km und dem schematischen oberen Expeditionsrand bei 2.000 km. Der Maßstab ist pro Zone unterschiedlich. Alle 33 Feldnotizen und die ursprünglichen Objektillustrationen bleiben zugänglich. Eine optionale Rundreise beginnt sofort und kehrt an beiden Grenzen um. Wissen und globale Klimapfade sind eigene Bereiche.
+
+- src/components/ImmersiveExpedition.jsx: Bewegung, kontextuelle Objekte, Klimaregler und lokales Labor.
+- src/components/WorldRenderer.jsx: prozedurale 3D-Fahrzeuge, Beleuchtung und atmosphärischer Hintergrund mit Three.js; reduzierte Auflösung und Bildrate auf kleinen Geräten.
+- src/simulation/model.js: kontinuierliche Reise und vereinfachter Versuch mit konstanter lokaler Überwärmung.
+- src/expedition.css: offenes Interface, Smartphone- und Querformat-Anpassungen.
+- node --test tests/*.test.js: Inhaltsprüfung plus sofortiger Tourstart, Umkehr, Kontinuität und wissenschaftliche Schwellen.
+
+Lokaler Versuch: Überwärmung über dem lokalen klimatologischen Maximum der Monatsmittel × Dauer, nur ab 1 °C und maximal zwölf Wochen, nach dem Prinzip der NOAA Degree Heating Weeks. Unbelasteter Start; kein Ortsmodell. Zusätzliche Nährstoffe steuern unabhängig eine qualitative Illustration von Trübung. Die zeitliche Bildentwicklung ist keine berechnete Stoffkonzentration. Zurückziehen des Zeitreglers bedeutet einen anderen Versuchszustand, keine sofortige ökologische Erholung. Globale WMO-Beobachtungen und IPCC-Szenarien bleiben getrennt erhalten.

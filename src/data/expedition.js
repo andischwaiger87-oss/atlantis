@@ -6,6 +6,8 @@ const source = (org, title, url, year) => ({
   year
 });
 export const SOURCES = {
+  heatwatch: source('NOAA Coral Reef Watch', 'Degree Heating Week: kumulierter Hitzestress und Bleicherisiko', 'https://coralreefwatch.noaa.gov/product/5km/index_5km_dhw.php', 'Methodik · geprüft September 2026'),
+  nutrients: source('NOAA', 'What is eutrophication?', 'https://oceanservice.noaa.gov/facts/eutrophication.html', '2024'),
   wmo: source('WMO', 'State of the Global Climate 2025', 'https://wmo.int/publication-series/state-of-global-climate/state-of-global-climate-2025', '2026 · Messjahr 2025'),
   scenarios: source('IPCC', 'AR6 WGI · Summary for Policymakers, Tabelle SPM.1', 'https://www.ipcc.ch/report/ar6/wg1/chapter/summary-for-policymakers/', '2021'),
   ocean: source('IPCC', 'AR6 WGI · Kapitel 9: Ocean, Cryosphere and Sea Level Change', 'https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-9/', '2021'),
