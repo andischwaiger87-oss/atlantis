@@ -46,3 +46,9 @@ Die Expedition belegt den vollständigen Viewport. Scrollen, Ziehen, Halten der 
 - node --test tests/*.test.js: Inhaltsprüfung plus sofortiger Tourstart, Umkehr, Kontinuität und wissenschaftliche Schwellen.
 
 Lokaler Versuch: Überwärmung über dem lokalen klimatologischen Maximum der Monatsmittel × Dauer, nur ab 1 °C und maximal zwölf Wochen, nach dem Prinzip der NOAA Degree Heating Weeks. Unbelasteter Start; kein Ortsmodell. Zusätzliche Nährstoffe steuern unabhängig eine qualitative Illustration von Trübung. Die zeitliche Bildentwicklung ist keine berechnete Stoffkonzentration. Zurückziehen des Zeitreglers bedeutet einen anderen Versuchszustand, keine sofortige ökologische Erholung. Globale WMO-Beobachtungen und IPCC-Szenarien bleiben getrennt erhalten.
+
+## Einheitliche 3D-Welt
+
+Alle 33 interaktiven Objekte der Expedition werden aus Geometrie aufgebaut (LandmarkModels.js). Das Wissensarchiv behält die bestehenden Bilder. Gemeinsame Projektionskoordinaten in simulation/landmarks.js verbinden Modellposition und zugängliche Schaltfläche. Die Wasserlinien-Anker für Schiff, Windanlage und Bohrinsel folgen exakt der Horizontformel des Hintergrund-Shaders.
+
+Dezente Animationen: Rotor, Schiffsbewegung, Tierflossen, Quallenpuls, schwebende Satelliten und Partikel an hydrothermalen Quellen. Sterne funkeln langsam; Tiefseepartikel sinken und Lichtstrahlen bleiben zurückhaltend. Die Betriebssystem-Einstellung für reduzierte Bewegung stoppt dekorative Animationen. Riffmodelle reagieren über ihre Materialien auf das bestehende Wärmeexperiment; die Ozeanversauerungs-Darstellung übernimmt keine Wärmeprognose.

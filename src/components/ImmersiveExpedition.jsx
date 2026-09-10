@@ -1,19 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUp, ArrowDown, Play, Pause, SlidersHorizontal, X, RotateCcw, Plus, Map } from 'lucide-react';
-import { ARTICLES, ZONES } from '../data/expedition';
+import { ZONES } from '../data/expedition';
 import { advanceTravel, altitudeAt, centerOfZone, zoneAt, clamp, experimentState } from '../simulation/model';
 import WorldRenderer from './WorldRenderer';
 import { SourceLink } from './Research';
-const landmarks = ARTICLES.map(a => {
-  const siblings = ARTICLES.filter(b => b.zone === a.zone);
-  const i = siblings.indexOf(a);
-  const center = centerOfZone(a.zone);
-  return {
-    ...a,
-    travel: a.zone === 'horizon' ? [0, 0, 0, .35, -.35][i] : center + (i - (siblings.length - 1) / 2) * .17,
-    x: a.zone === 'horizon' ? [20, 50, 80, 25, 75][i] : [23, 73, 25, 72, 23, 76][i % 6]
-  };
-});
+import { LANDMARKS as landmarks, landmarkLayout } from '../simulation/landmarks';
 export default function ImmersiveExpedition({
   experiment,
   setExperiment,
@@ -155,12 +146,12 @@ export default function ImmersiveExpedition({
   <div className="expedition-title"><span className="eyebrow">{travel > .09 ? 'AUFSTIEG' : travel < -.09 ? 'TAUCHGANG' : 'DEINE EXPEDITION'}</span><h1>{zone.name}</h1><p>{Math.abs(travel) < .09 ? 'Eine Welt. In jede Richtung entdecken.' : zone.insight}</p></div>
   <div className="landmarks">{landmarks.filter(a => Math.abs(a.travel - travel) < .52).map(a => {
         const distance = Math.abs(a.travel - travel);
-        return <button key={a.id} className="landmark" style={{
+        return <button key={a.id} className={`landmark model-hit ${a.surface ? 'surface-hit' : ''}`} style={{
           left: `${a.x}%`,
-          top: `${42 + (travel - a.travel) * 130}%`,
+          top: `${landmarkLayout(a, travel).y}%`,
           opacity: clamp((.52 - distance) * 5, 0, 1),
           '--object-size': a.id === 'coral-reef' ? '235px' : '175px'
-        }} onClick={() => onOpen(a.id)} aria-label={`${a.title} erkunden`}><img src={`/assets/objects/${a.id === 'coral-reef' ? state.reefAsset : a.asset}.png`} alt="" draggable="false" /><span><Plus size={12} />{a.title}</span></button>;
+        }} onClick={() => onOpen(a.id)} aria-label={`${a.title} erkunden`}><i className="model-target" aria-hidden="true" /><span><Plus size={12} />{a.title}</span></button>;
       })}</div>
   <aside className="depth-control"><output>{Math.abs(altitude) >= 12000 ? (Math.abs(altitude) / 1000).toLocaleString('de-AT', {
           maximumFractionDigits: 0

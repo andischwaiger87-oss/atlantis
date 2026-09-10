@@ -24,3 +24,14 @@
 .remake .topbar nav{border:0}
 @media(max-width:420px){.remake .topbar{padding:0 16px;gap:6px}.remake .brand{font-size:12px;letter-spacing:.14em}.remake .topbar nav button{padding:10px 8px;font-size:10px}.climate-dock-heading{gap:5px;font-size:9px}.climate-dock-heading button{font-size:11px}}
 @media(max-width:750px){.travel-actions button,.steering button{min-width:44px;min-height:44px}.world-method{bottom:max(15px,env(safe-area-inset-bottom))}.gesture-hint{bottom:max(19px,env(safe-area-inset-bottom))}}
+/* Invisible semantic targets are projected with the same coordinates as the models. */
+.landmark.model-hit{width:175px;filter:none;transform:translate(-50%,-50%);height:175px}
+.model-hit .model-target{display:block;width:100%;height:100%;flex-shrink:0}
+.model-hit span{position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%)}
+.landmark.surface-hit{transform:translate(-50%,-100%)}
+.surface-hit span{top:calc(100% + 12px)}
+.model-hit:focus-visible .model-target,.model-hit:hover .model-target{border-radius:50%;box-shadow:0 0 35px #a5e6db10}
+@media(min-width:1500px){.landmark.model-hit{width:220px;height:220px}}
+@media(max-width:750px){.landmark.model-hit{width:125px;height:125px}.landmarks{inset:0}.model-hit span{max-width:135px}}
+.landmark.model-hit{width:var(--object-size);height:var(--object-size)}
+@media(max-width:750px){.landmark.model-hit{width:125px;height:125px}}

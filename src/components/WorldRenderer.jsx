@@ -1,3 +1,5 @@
+import { LANDMARKS, landmarkLayout } from '../simulation/landmarks';
+import { createLandmarkModel } from './LandmarkModels';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 function makeVehicles() {
@@ -156,7 +158,7 @@ float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 void main(){vec2 uv=vUv;float h=.5-uTravel*.94;float deep=clamp(-uTravel/4.,0.,1.);float orbit=smoothstep(1.3,4.6,uTravel);
 vec3 sky=mix(vec3(.17,.32,.39),vec3(.055,.115,.18),uv.y);sky=mix(sky,vec3(.008,.014,.038),orbit);
 float glow=exp(-abs(uv.y-h)*8.);sky+=vec3(.32,.31,.23)*glow*(1.-orbit)*.55;
-vec2 grid=uv*uSize*.21;vec2 cell=floor(grid+vec2(0.,uTravel*55.));float star=step(.996,hash(cell))*pow(max(0.,1.-length(fract(grid+vec2(0.,uTravel*55.))-.5)*2.),5.);sky+=star*orbit*.8;
+vec2 grid=uv*uSize*.21;vec2 cell=floor(grid+vec2(0.,uTravel*55.));float star=step(.996,hash(cell))*pow(max(0.,1.-length(fract(grid+vec2(0.,uTravel*55.))-.5)*2.),5.);sky+=star*orbit*(.65+.15*sin(uTime*.65+hash(cell)*6.28));float haze=exp(-pow((uv.y-.58-uv.x*.18)*5.,2.));sky+=vec3(.025,.035,.06)*haze*orbit;
 float below=1.-smoothstep(h-.008,h+.008,uv.y);vec3 ocean=mix(vec3(.035,.19,.23),vec3(.005,.025,.052),deep);ocean*=.6+.4*uv.y;
 float ray=pow(max(0.,sin(uv.x*18.+uv.y*3.+sin(uTime*.17)*.3)),14.);ocean+=vec3(.15,.35,.31)*ray*.13*(1.-deep)*uv.y;
 float waves=sin((uv.y-h)*210.+sin(uv.x*22.+uTime*.2)*2.+uTime*.5);float surface=exp(-abs(uv.y-h)*36.);ocean+=vec3(.2,.32,.33)*surface*(.18+.12*waves);
@@ -226,6 +228,27 @@ export default function WorldRenderer({
     scene.add(rim);
     const vehicles = makeVehicles();
     scene.add(vehicles.submarine, vehicles.rocket);
+    const objectScene = new THREE.Scene();
+    const objectCamera = new THREE.OrthographicCamera(-600, 600, 400, -400, .1, 3000);
+    objectCamera.position.z = 1000;
+    objectScene.add(new THREE.HemisphereLight(0xd9fff3, 0x0d2742, 2.5));
+    const objectKey = new THREE.DirectionalLight(0xffedd9, 4);
+    objectKey.position.set(-200, 400, 700);
+    objectScene.add(objectKey);
+    const objectRim = new THREE.DirectionalLight(0x70deff, 2.5);
+    objectRim.position.set(400, 50, -200);
+    objectScene.add(objectRim);
+    const objects = LANDMARKS.map(a => {
+      const model = createLandmarkModel(a.id);
+      const holder = new THREE.Group();
+      holder.add(model.group);
+      objectScene.add(holder);
+      return {
+        a,
+        model,
+        holder
+      };
+    });
     const dustGeometry = new THREE.BufferGeometry();
     const positions = new Float32Array(330 * 3);
     for (let i = 0; i < 330; i++) {
@@ -251,6 +274,11 @@ export default function WorldRenderer({
       renderer.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      objectCamera.left = -width / 2;
+      objectCamera.right = width / 2;
+      objectCamera.top = height / 2;
+      objectCamera.bottom = -height / 2;
+      objectCamera.updateProjectionMatrix();
       shader.uniforms.uSize.value.set(width, height);
       const size = width < 650 ? .72 : 1;
       vehicles.submarine.scale.setScalar(size);
@@ -284,13 +312,43 @@ export default function WorldRenderer({
       for (const p of vehicles.propellers) p.rotation.x = t * (paused ? 1 : 15);
       vehicles.flame.scale.y = .8 + Math.sin(t * 30) * .1 + Math.abs(velocityRef.current) * .3;
       vehicles.core.scale.y = .9 + Math.sin(t * 40) * .12;
-      dust.position.y = u * .5 % 4;
+      dust.position.y = (u * .5 - t * .025) % 4;
       dust.rotation.z = t * .002;
+      dustMaterial.size = u < -.5 ? .025 : .018;
+      dustMaterial.color.set(u < -1.2 ? 0x70bdbd : 0xb0ece1);
       dustMaterial.opacity = u < -.1 ? .12 + state.turbidity * .28 : .06;
       renderer.clear();
       renderer.render(backdrop, ortho);
       renderer.clearDepth();
       renderer.render(scene, camera);
+      for (const {
+        a,
+        model,
+        holder
+      } of objects) {
+        const layout = landmarkLayout(a, u);
+        holder.visible = layout.visible;
+        if (!holder.visible) continue;
+        const pixels = width < 750 ? 125 : width >= 1500 ? 220 : a.id === 'coral-reef' ? 235 : 175;
+        holder.scale.setScalar(pixels);
+        holder.position.set((layout.x / 100 - .5) * width, (.5 - layout.y / 100) * height, 0);
+        model.update(t, state);
+        const fade = THREE.MathUtils.clamp((.52 - Math.abs(a.travel - u)) * 5, 0, 1);
+        for (const material of model.materials) {
+          if (material.userData.baseOpacity === undefined) {
+            material.userData.baseOpacity = material.opacity;
+            material.userData.originalTransparent = material.transparent;
+          }
+          material.opacity = material.userData.baseOpacity * fade;
+          const transparent = material.userData.originalTransparent || fade < 1;
+          if (material.transparent !== transparent) {
+            material.transparent = transparent;
+            material.needsUpdate = true;
+          }
+        }
+      }
+      renderer.clearDepth();
+      renderer.render(objectScene, objectCamera);
     };
     frame = requestAnimationFrame(draw);
     const contextLost = e => {
@@ -303,7 +361,10 @@ export default function WorldRenderer({
       cancelAnimationFrame(frame);
       observer.disconnect();
       renderer.domElement.removeEventListener('webglcontextlost', contextLost);
-      for (const s of [scene, backdrop]) s.traverse(o => {
+      for (const {
+        model
+      } of objects) model.materials.forEach(m => m.dispose());
+      for (const s of [scene, backdrop, objectScene]) s.traverse(o => {
         o.geometry?.dispose();
         if (o.material) {
           for (const m of Array.isArray(o.material) ? o.material : [o.material]) m.dispose();
