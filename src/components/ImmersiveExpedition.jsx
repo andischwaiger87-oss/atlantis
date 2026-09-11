@@ -156,7 +156,8 @@ export default function ImmersiveExpedition({
           left: layout.x + '%',
           top: layout.y + '%',
           width: layout.pixels,
-          height: layout.pixels
+          height: layout.pixels,
+          opacity: layout.opacity ?? 1
         }} onClick={() => onOpen(a.id)} aria-label={a.title + ' erkunden'}><i className="model-target" aria-hidden="true" /><span><Plus size={12} />{a.title}</span></button>;
       })}</div><aside className="depth-control"><output>{Math.abs(altitude) >= 12000 ? (Math.abs(altitude) / 1000).toLocaleString('de-AT', {
           maximumFractionDigits: 0

@@ -51,3 +51,9 @@ Zehn Objekte besitzen eigene detaillierte Geometrie in DetailedModels.js: Pottwa
 Das Riff zeigt neben Bleiche einen möglichen Verlust lebender Gewebeteile; das Kalkskelett bleibt. Ein getrennt einschaltbarer Plastikversuch zeigt Leinen und eingeschränkte Flossenbewegung bei einer Schildkröte. Keine aus Temperatur abgeleitete Krankheit. Die zeitliche Stärke des Verhedderungsbildes ist illustrativ und nicht als kalibrierte Prognose zu verstehen. Grundlage: NOAA Fisheries, Sea Turtles / Green Turtle (Gefahren durch Fanggeräte und Meeresmüll).
 
 Mobil: Fahrzeug auf rund ein Drittel der Desktop-Skalierung reduziert, eine Entdeckung gleichzeitig (am Horizont drei), Modell und Bedienelemente räumlich getrennt. Das Klimaexperiment öffnet als Dialog; Kartenwahl, Auf-/Abstieg und Rundreise bleiben direkt erreichbar. Visuell im Browser bei 390 × 780 und 320 × 640 geprüft; Modellformen zusätzlich in lokaler Übersicht kontrolliert.
+
+## Reisegefühl und Fahrzeugbranding
+
+Die Smartphone-Ansicht verwendet wieder kontinuierliche, weltgebundene Objektpositionen auf zwei seitlichen Bahnen. Objekte ziehen beim Wischen am Fahrzeug vorbei und werden nur an den Rändern weich ausgeblendet. Keine Auswahl des jeweils nächstgelegenen Modells an einer festen Bildschirmposition. Die Modell- und Schaltflächenpositionen bleiben identisch.
+
+Der U-Boot-Rumpf besteht aus zwei disjunkten Hemisphären mit gemeinsamer Naht statt überlappenden Vollkörpern. Das vom Nutzer gelieferte Signet liegt unverändert unter public/branding/logo-signet.svg und wird als kleine projizierte Markierung auf beide Fahrzeuge aufgebracht. Der Kopfbereich ergänzt ATLANTIS um v.2. Drei zurückhaltende Partikelebenen folgen der Reise mit unterschiedlicher Geschwindigkeit; reduzierte Bewegung friert die dekorative Zeitbewegung ein.

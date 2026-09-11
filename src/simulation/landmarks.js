@@ -11,18 +11,16 @@ export const LANDMARKS = ARTICLES.map(a => {
     x: a.zone === 'horizon' ? [20, 50, 80, 25, 75][i] : [23, 73, 25, 72, 23, 76][i % 6]
   };
 });
+const MOBILE_LANES=new Map([...LANDMARKS].filter(a=>!a.surface).sort((a,b)=>a.travel-b.travel).map((a,i)=>[a.id,i%2]));
 // The surface uses exactly the same screen-space waterline as the background shader.
 export function landmarkLayout(a, travel, width = 1200) {
   const mobile = width < 750;
   if (mobile) {
-    const surface = Math.abs(travel) < .18;
-    const nearest = LANDMARKS.filter(item => !item.surface).reduce((best, item) => Math.abs(item.travel - travel) < Math.abs(best.travel - travel) ? item : best, LANDMARKS.find(item => !item.surface));
-    return {
-      x: a.surface ? a.x : 50,
-      y: a.surface ? 50 + travel * 94 : 38,
-      visible: surface ? a.surface : !a.surface && a.id === nearest.id,
-      pixels: a.surface ? Math.min(96, width * .24) : Math.min(195, width * .52)
-    };
+    const index=MOBILE_LANES.get(a.id)||0;
+    const anchor=a.id==='ocean-heat'?-.07:a.id==='ai-center'?.10:a.travel;
+    const y=a.surface?50+travel*94:44+(travel-anchor)*175;
+    const alpha=Math.max(0,Math.min(1,(y-22)/9,(67-y)/9))*(a.surface?Math.max(0,1-Math.abs(travel)/.20):Math.min(1,Math.abs(travel)/.15));
+    return {x:a.surface?a.x:index%2?74:26,y,opacity:alpha,visible:alpha>0,pixels:a.surface?Math.min(96,width*.24):Math.min(140,width*.36)};
   }
   const y = a.surface ? 50 + travel * 94 : 42 + (travel - a.travel) * 130;
   return {

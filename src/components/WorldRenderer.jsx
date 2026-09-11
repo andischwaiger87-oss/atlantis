@@ -1,8 +1,9 @@
+import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
 import { LANDMARKS, landmarkLayout } from '../simulation/landmarks';
 import { createLandmarkModel } from './LandmarkModels';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-function makeVehicles() {
+function makeVehicles(logoTexture) {
   const metal = new THREE.MeshStandardMaterial({
     color: 0xc6d5d8,
     metalness: .78,
@@ -58,10 +59,14 @@ function makeVehicles() {
     body.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), new THREE.Vector3(...b).sub(new THREE.Vector3(...a)).normalize());
     return body;
   };
+  const brand=(parent,target,position,size,orientation=new THREE.Euler())=>{
+    target.updateMatrixWorld(true);
+    const material=new THREE.MeshStandardMaterial({map:logoTexture,transparent:true,alphaTest:.04,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-4,roughness:.5,metalness:.1});
+    parent.add(new THREE.Mesh(new DecalGeometry(target,position,orientation,size),material));
+  };
   const submarine = new THREE.Group();
-  sphere(submarine, metal, 0, 0, 0, 1.65, .55, .64);
-  sphere(submarine, dark, 0, -.14, .01, 1.62, .42, .62);
-  sphere(submarine, white, -.16, .02, 0, 1.48, .48, .63);
+  const upperHull=mesh(submarine,new THREE.SphereGeometry(1,64,32,0,Math.PI*2,0,Math.PI/2),white,0,0,0,1.65,.55,.64);
+  mesh(submarine,new THREE.SphereGeometry(1,64,32,0,Math.PI*2,Math.PI/2,Math.PI/2),dark,0,0,0,1.65,.55,.64);
   sphere(submarine, dark, -.55, .3, 0, .94, .49, .51);
   sphere(submarine, glass, -.55, .35, 0, .96, .52, .53);
   for (let i = 0; i < 3; i++) {
@@ -101,10 +106,12 @@ function makeVehicles() {
   aft.rotation.z = .03;
   rod(submarine, [.6, .36, 0], [.65, .9, 0], .034, trim);
   sphere(submarine, glow, .65, .93, 0, .065, .035, .065);
+  brand(submarine,upperHull,new THREE.Vector3(.38,.23,.58),new THREE.Vector3(.35,.225,.24),new THREE.Euler(-.35,0,0));
   submarine.rotation.set(.1, -.35, -.05);
   const rocket = new THREE.Group();
   const hull = mesh(rocket, new THREE.CylinderGeometry(.4, .46, 2.3, 48), white, 0, 0, 0);
   hull.rotation.z = 0;
+  mesh(rocket,new THREE.PlaneGeometry(.23,.148),new THREE.MeshStandardMaterial({map:logoTexture,transparent:true,alphaTest:.04,depthWrite:false,roughness:.5}),0,-.02,.452);
   const nose = mesh(rocket, new THREE.ConeGeometry(.4, .85, 48), metal, 0, 1.56, 0);
   nose.rotation.y = .2;
   mesh(rocket, new THREE.CylinderGeometry(.455, .455, .12, 48), dark, 0, -.83, 0);
@@ -163,7 +170,9 @@ float below=1.-smoothstep(h-.008,h+.008,uv.y);vec3 ocean=mix(vec3(.035,.19,.23),
 float ray=pow(max(0.,sin(uv.x*18.+uv.y*3.+sin(uTime*.17)*.3)),14.);ocean+=vec3(.15,.35,.31)*ray*.13*(1.-deep)*uv.y;
 float waves=sin((uv.y-h)*210.+sin(uv.x*22.+uTime*.2)*2.+uTime*.5);float surface=exp(-abs(uv.y-h)*36.);ocean+=vec3(.2,.32,.33)*surface*(.18+.12*waves);
 float local=(1.-smoothstep(-.15,0.,uTravel))*(1.-smoothstep(1.2,2.7,-uTravel));ocean=mix(ocean,vec3(.13,.19,.105)*(.7+.3*uv.y),uTurbidity*.76*local);
-vec3 color=mix(sky,ocean,below);float vignette=1.-length((uv-.5)*vec2(.65,.8))*.55;color*=vignette;gl_FragColor=vec4(color,1.);}`;
+vec3 color=mix(sky,ocean,below);
+for(int layer=0;layer<3;layer++){float l=float(layer);vec2 field=uv*vec2(uSize.x/uSize.y,1.)*(18.+l*14.);field.y+=uTravel*(7.+l*4.)+uTime*(.025+l*.012);field.x+=sin(uTime*.06+l)*.07;vec2 cell=floor(field);vec2 offset=vec2(hash(cell+l),hash(cell+31.+l))*.7+.15;float d=length(fract(field)-offset);float point=(1.-smoothstep(.008,.065,d))*step(.90,hash(cell+71.+l));color+=mix(vec3(.36,.52,.68),vec3(.37,.65,.62),below)*point*(.08+l*.025);}
+float vignette=1.-length((uv-.5)*vec2(.65,.8))*.55;color*=vignette;gl_FragColor=vec4(color,1.);}`;
 export default function WorldRenderer({
   travelRef,
   velocityRef,
@@ -226,7 +235,8 @@ export default function WorldRenderer({
     const rim = new THREE.DirectionalLight(0x70deff, 4);
     rim.position.set(4, 1, -3);
     scene.add(rim);
-    const vehicles = makeVehicles();
+    const logoTexture=new THREE.TextureLoader().load('/branding/logo-signet.svg');logoTexture.colorSpace=THREE.SRGBColorSpace;
+    const vehicles = makeVehicles(logoTexture);
     scene.add(vehicles.submarine, vehicles.rocket);
     const objectScene = new THREE.Scene();
     const objectCamera = new THREE.OrthographicCamera(-600, 600, 400, -400, .1, 3000);
@@ -333,7 +343,7 @@ export default function WorldRenderer({
         holder.scale.setScalar(pixels);
         holder.position.set((layout.x / 100 - .5) * width, (.5 - layout.y / 100) * height, 0);
         model.update(t, state);
-        const fade = width < 750 ? 1 : THREE.MathUtils.clamp((.52 - Math.abs(a.travel - u)) * 5, 0, 1);
+        const fade = width < 750 ? layout.opacity : THREE.MathUtils.clamp((.52 - Math.abs(a.travel - u)) * 5, 0, 1);
         for (const material of model.materials) {
           if (material.userData.baseOpacity === undefined) {
             material.userData.baseOpacity = material.opacity;
@@ -370,9 +380,12 @@ export default function WorldRenderer({
           for (const m of Array.isArray(o.material) ? o.material : [o.material]) m.dispose();
         }
       });
+      logoTexture.dispose();
       renderer.dispose();
       renderer.domElement.remove();
     };
   }, [travelRef, velocityRef, experimentRef, paused]);
   return <div ref={mount} className="world-renderer" aria-hidden={!failed}>{failed && <p className="render-fallback">Die 3D-Ansicht ist auf diesem Gerät nicht verfügbar. Die Erkundung und alle Inhalte bleiben bedienbar.</p>}</div>;
 }
+
+

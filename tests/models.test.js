@@ -58,12 +58,12 @@ test('reef materials respond continuously to the heat experiment', () => {
   m.group.traverse(o => o.geometry?.dispose());
   m.materials.forEach(x => x.dispose());
 });
-test('mobile discovery keeps at most three surface objects and reaches every entry', () => {
+test('mobile travel remains bounded and every entry is reachable', () => {
   const seen = new Set();
   for (let i = -5000; i <= 5000; i++) {
     const visible = LANDMARKS.filter(a => landmarkLayout(a, i / 1000, 390).visible);
-    assert.ok(visible.length <= 3);
-    if (visible.length > 1) assert.ok(visible.every(a => a.surface));
+    assert.ok(visible.length <= 5);
+    assert.ok(visible.filter(a=>!a.surface).length<=3);
     visible.forEach(a => seen.add(a.id));
   }
   assert.equal(seen.size, LANDMARKS.length);
@@ -90,3 +90,5 @@ test('plastic exposure changes turtle posture independently from heat', () => {
   turtle.group.traverse(o => o.geometry?.dispose());
   turtle.materials.forEach(m => m.dispose());
 });
+
+test('mobile objects move continuously past the camera rather than swapping in place',()=>{const a=LANDMARKS.find(a=>a.id==='sperm-whale-dive');const before=landmarkLayout(a,a.travel,390),after=landmarkLayout(a,a.travel+.02,390);assert.ok(before.visible&&after.visible);assert.ok(Math.abs(after.y-before.y-3.5)<1e-8);assert.equal(before.x,after.x);});

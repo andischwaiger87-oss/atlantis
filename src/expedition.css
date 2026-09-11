@@ -54,3 +54,7 @@
 }
 @media(max-height:520px) and (max-width:749px){.expedition-title{top:65px}.depth-control{top:65px}.mobile-climate-entry{bottom:10px}.travel-actions,.steering,.depth-control button{bottom:68px}}
 @media(max-width:749px){.remake .topbar nav button{min-height:44px}.remake .brand{min-height:44px;display:flex;align-items:center}}
+.remake .brand .brand-version{display:inline;font-size:9px;letter-spacing:.02em;font-weight:400;margin:2px 0 0 5px;color:#9cb6b9}
+.remake .brand{gap:0}
+@media(max-width:749px){.remake .brand .brand-version{font-size:8px;margin-left:4px}.model-hit:not(.surface-hit) span{font-size:10px;max-width:145px}.remake .topbar{gap:3px}.remake .topbar nav button{padding-inline:6px}}
+.landmark.model-hit,.landmark.model-hit:hover{background:transparent}
