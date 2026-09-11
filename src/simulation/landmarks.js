@@ -12,10 +12,23 @@ export const LANDMARKS = ARTICLES.map(a => {
   };
 });
 // The surface uses exactly the same screen-space waterline as the background shader.
-export function landmarkLayout(a, travel) {
+export function landmarkLayout(a, travel, width = 1200) {
+  const mobile = width < 750;
+  if (mobile) {
+    const surface = Math.abs(travel) < .18;
+    const nearest = LANDMARKS.filter(item => !item.surface).reduce((best, item) => Math.abs(item.travel - travel) < Math.abs(best.travel - travel) ? item : best, LANDMARKS.find(item => !item.surface));
+    return {
+      x: a.surface ? a.x : 50,
+      y: a.surface ? 50 + travel * 94 : 38,
+      visible: surface ? a.surface : !a.surface && a.id === nearest.id,
+      pixels: a.surface ? Math.min(96, width * .24) : Math.min(195, width * .52)
+    };
+  }
+  const y = a.surface ? 50 + travel * 94 : 42 + (travel - a.travel) * 130;
   return {
     x: a.x,
-    y: a.surface ? 50 + travel * 94 : 42 + (travel - a.travel) * 130,
-    visible: Math.abs(a.travel - travel) < .52
+    y,
+    visible: Math.abs(a.travel - travel) < .52 && y > 22 && y < 70,
+    pixels: width >= 1500 ? 220 : a.id === 'coral-reef' ? 235 : 175
   };
 }

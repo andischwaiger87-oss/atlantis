@@ -35,3 +35,22 @@
 @media(max-width:750px){.landmark.model-hit{width:125px;height:125px}.landmarks{inset:0}.model-hit span{max-width:135px}}
 .landmark.model-hit{width:var(--object-size);height:var(--object-size)}
 @media(max-width:750px){.landmark.model-hit{width:125px;height:125px}}
+/* Phone: one discovery at a time, with controls kept outside the scene. */
+.mobile-climate-entry{display:none}
+.experiment-sheet label.debris-setting{display:flex;align-items:center;gap:10px}.experiment-sheet .debris-setting input{width:20px;margin:0;min-height:24px}
+@media(max-width:749px){
+ .immersive #main,.immersive-world{height:100dvh;min-height:0}
+ .remake .topbar{height:56px;padding:0 16px;background:#06151ce8!important}
+ .remake .brand{font-size:12px;letter-spacing:.12em}.remake .topbar nav{padding:0;background:none;backdrop-filter:none}.remake .topbar nav button{font-size:10px;padding:10px 7px}
+ .expedition-title{top:80px;left:20px;max-width:70%;z-index:3}.expedition-title .eyebrow,.expedition-title p{display:none}.expedition-title h1{font-size:26px;margin:0;letter-spacing:-.04em}
+ .depth-control{right:18px;top:78px;height:auto;gap:0}.depth-control output{font-size:17px;min-width:55px}.depth-control output small{font-size:8px}.depth-control input{display:none}.depth-control button{position:fixed;left:calc(50% - 22px);bottom:92px;width:44px;height:44px;background:#123039;border:1px solid #bdded329;border-radius:50%}
+ .landmark.model-hit{max-width:none!important;filter:none}.model-hit span{font-size:11px;max-width:220px;white-space:normal;min-height:32px;background:#061921c9;padding:6px 10px;line-height:1.4}.surface-hit span{font-size:9px;max-width:110px;padding:4px 5px;top:calc(100% + 7px)}
+ .departure,.gesture-hint,.world-method,.climate-dock{display:none}
+ .travel-actions{left:20px;bottom:92px;gap:0}.travel-actions button:first-child{width:44px;padding:0;border-radius:50%}.travel-actions button:first-child span,.travel-actions button:nth-child(2){display:none}
+ .steering{right:20px;bottom:92px;gap:10px}.steering button{width:44px;height:44px;background:#123039}
+ .mobile-climate-entry{display:flex;position:absolute;bottom:max(22px,env(safe-area-inset-bottom));left:20px;width:calc(100% - 40px);height:48px;align-items:center;gap:10px;border-top:1px solid #b2ded635;border-radius:0;padding:8px 0;background:#071921d9;color:#dcf1e9;font-size:13px;z-index:6}.mobile-climate-entry span{margin-left:auto;font-size:10px;color:#a6c9c5}
+ .route-menu{position:absolute;top:135px;bottom:155px;right:20px;left:20px;max-height:none;overflow:auto;background:#09212af5}.route-menu button{padding:11px 15px}.zone-explanation{max-width:none}
+ .experiment-sheet{max-height:calc(100dvh - 24px);padding:20px}.experiment-sheet h2{font-size:25px}.experiment-sheet label{margin:18px 0}
+}
+@media(max-height:520px) and (max-width:749px){.expedition-title{top:65px}.depth-control{top:65px}.mobile-climate-entry{bottom:10px}.travel-actions,.steering,.depth-control button{bottom:68px}}
+@media(max-width:749px){.remake .topbar nav button{min-height:44px}.remake .brand{min-height:44px;display:flex;align-items:center}}

@@ -1,8 +1,10 @@
+import { DETAIL_IDS, detailedModel } from './DetailedModels.js';
 import * as T from 'three';
 
 // All expedition objects are geometry. Materials share the vehicles' restrained palette.
 export const MODEL_IDS = ['offshore-wind', 'cargo-tanker', 'oil-platform', 'ai-center', 'ocean-heat', 'climate-sentinel', 'space-junk-cluster', 'solar-observatory', 'iss-research', 'aurora-borealis', 'noctilucent-clouds', 'meteors-burn', 'ozone-layer', 'weather-balloon', 'co2-buildup', 'mega-storm', 'forest-fire-smoke', 'aviation-impact', 'sea-turtle', 'coral-reef', 'plankton-map', 'plastic-island', 'ocean-acid', 'bioluminescence-jelly', 'vertical-migration', 'ghost-nets', 'marine-snow', 'hydrothermal-vent', 'sperm-whale-dive', 'nodule-mining', 'research-lander', 'mariana-snailfish', 'subduction-fault'];
 export function createLandmarkModel(id) {
+  if (DETAIL_IDS.includes(id)) return detailedModel(id);
   const root = new T.Group(),
     animated = [];
   const materials = [];

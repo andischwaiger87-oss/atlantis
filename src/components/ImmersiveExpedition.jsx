@@ -15,6 +15,12 @@ export default function ImmersiveExpedition({
   onGlobal
 }) {
   const [travel, setTravel] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const resize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
   const travelRef = useRef(0);
   const velocityRef = useRef(0);
   const experimentRef = useRef(experimentState(experiment));
@@ -144,16 +150,15 @@ export default function ImmersiveExpedition({
   <WorldRenderer travelRef={travelRef} velocityRef={velocityRef} experimentRef={experimentRef} />
   <div className="world-shade" />
   <div className="expedition-title"><span className="eyebrow">{travel > .09 ? 'AUFSTIEG' : travel < -.09 ? 'TAUCHGANG' : 'DEINE EXPEDITION'}</span><h1>{zone.name}</h1><p>{Math.abs(travel) < .09 ? 'Eine Welt. In jede Richtung entdecken.' : zone.insight}</p></div>
-  <div className="landmarks">{landmarks.filter(a => Math.abs(a.travel - travel) < .52).map(a => {
-        const distance = Math.abs(a.travel - travel);
-        return <button key={a.id} className={`landmark model-hit ${a.surface ? 'surface-hit' : ''}`} style={{
-          left: `${a.x}%`,
-          top: `${landmarkLayout(a, travel).y}%`,
-          opacity: clamp((.52 - distance) * 5, 0, 1),
-          '--object-size': a.id === 'coral-reef' ? '235px' : '175px'
-        }} onClick={() => onOpen(a.id)} aria-label={`${a.title} erkunden`}><i className="model-target" aria-hidden="true" /><span><Plus size={12} />{a.title}</span></button>;
-      })}</div>
-  <aside className="depth-control"><output>{Math.abs(altitude) >= 12000 ? (Math.abs(altitude) / 1000).toLocaleString('de-AT', {
+  <div className="landmarks">{landmarks.filter(a => landmarkLayout(a, travel, viewportWidth).visible).map(a => {
+        const layout = landmarkLayout(a, travel, viewportWidth);
+        return <button key={a.id} className={'landmark model-hit ' + (a.surface ? 'surface-hit' : '')} style={{
+          left: layout.x + '%',
+          top: layout.y + '%',
+          width: layout.pixels,
+          height: layout.pixels
+        }} onClick={() => onOpen(a.id)} aria-label={a.title + ' erkunden'}><i className="model-target" aria-hidden="true" /><span><Plus size={12} />{a.title}</span></button>;
+      })}</div><aside className="depth-control"><output>{Math.abs(altitude) >= 12000 ? (Math.abs(altitude) / 1000).toLocaleString('de-AT', {
           maximumFractionDigits: 0
         }) : Math.abs(altitude).toLocaleString('de-AT', {
           maximumFractionDigits: 0
@@ -173,7 +178,7 @@ export default function ImmersiveExpedition({
         controls.current.auto = next;
         controls.current.target = null;
         controls.current.sign = travel >= 4.9 ? -1 : travel <= -4.9 ? 1 : -1;
-      }} aria-pressed={auto}>{auto ? <Pause size={16} /> : <Play size={16} />}<span>{auto ? 'Reise pausieren' : 'Rundreise'}</span></button><button onClick={() => moveTo(0)} aria-label="Zum Horizont"><RotateCcw size={17} /></button></div>
+      }} aria-label={auto ? "Rundreise pausieren" : "Rundreise starten"} aria-pressed={auto}>{auto ? <Pause size={16} /> : <Play size={16} />}<span>{auto ? 'Reise pausieren' : 'Rundreise'}</span></button><button onClick={() => moveTo(0)} aria-label="Zum Horizont"><RotateCcw size={17} /></button></div>
   <div className="steering">{[1, -1].map(dir => <button key={dir} aria-label={dir === 1 ? 'Aufsteigen – gedrückt halten' : 'Abtauchen – gedrückt halten'} onPointerDown={e => {
         manual();
         controls.current.held = dir;
@@ -193,7 +198,7 @@ export default function ImmersiveExpedition({
       }} onBlur={() => {
         controls.current.held = 0;
       }}>{dir === 1 ? <ArrowUp /> : <ArrowDown />}</button>)}</div>
-  <div className="climate-dock"><div className="climate-dock-heading"><button onClick={() => setSettings(true)}><SlidersHorizontal size={15} /><span>Klima erleben · Riff</span></button><span>+{experiment.heat.toLocaleString('de-AT')} °C lokal · Woche {Math.floor(experiment.weeks)}</span></div><div className="climate-timeline"><button aria-label={playing && experiment.weeks < 12 ? 'Versuch pausieren' : 'Versuch abspielen'} onClick={() => {
+  <button className="mobile-climate-entry" onClick={() => setSettings(true)}><SlidersHorizontal size={17} /> Klima erleben <span>Woche {Math.floor(experiment.weeks)} →</span></button><div className="climate-dock"><div className="climate-dock-heading"><button onClick={() => setSettings(true)}><SlidersHorizontal size={15} /><span>Klima erleben · Riff</span></button><span>+{experiment.heat.toLocaleString('de-AT')} °C lokal · Woche {Math.floor(experiment.weeks)}</span></div><div className="climate-timeline"><button aria-label={playing && experiment.weeks < 12 ? 'Versuch pausieren' : 'Versuch abspielen'} onClick={() => {
           if (experiment.weeks >= 12) setExperiment(e => ({
             ...e,
             weeks: 0
@@ -210,18 +215,24 @@ export default function ImmersiveExpedition({
         onOpen('coral-reef');
       }}>{state.title}<span> →</span></button></div>
   <button className="world-method" onClick={onMethod}>Illustrative Welt · Modellversuch</button><span className="gesture-hint">Ziehen · Scrollen · ↑ ↓</span>
-  {settings && <dialog ref={sheet} className="experiment-sheet" onCancel={() => setSettings(false)}><div className="sheet-top"><span>KLIMALABOR / LOKALER VERSUCH</span><button aria-label="Schließen" onClick={() => setSettings(false)}><X /></button></div><h2>Was hält ein Riff aus?</h2><p>Verändere die Belastung. Lass Wochen vergehen. Beobachte das Riff und öffne seine Feldnotiz.</p><label>Zusätzliche Wärme <strong>+{experiment.heat.toLocaleString('de-AT')} °C</strong><input type="range" min="0" max="3" step=".1" value={experiment.heat} onChange={e => setExperiment(p => ({
+  {settings && <dialog ref={sheet} className="experiment-sheet" onCancel={() => setSettings(false)}><div className="sheet-top"><span>KLIMALABOR / LOKALER VERSUCH</span><button aria-label="Schließen" onClick={() => setSettings(false)}><X /></button></div><h2>Was verändert das Leben im Meer?</h2><p>Verändere Wärme, Nährstoffe oder Plastikbelastung. Beobachte die Folgen in der Welt und öffne die Feldnotizen.</p><label>Zusätzliche Wärme <strong>+{experiment.heat.toLocaleString('de-AT')} °C</strong><input type="range" min="0" max="3" step=".1" value={experiment.heat} onChange={e => setExperiment(p => ({
           ...p,
           heat: Number(e.target.value)
         }))} /><small>Über dem örtlichen langjährigen Maximum der Monatsmittel. Keine globale Erwärmungszahl.</small></label><label>Nährstoffeintrag<select value={experiment.nutrients} onChange={e => setExperiment(p => ({
           ...p,
           nutrients: Number(e.target.value)
-        }))}><option value="0">Kein zusätzlicher Eintrag</option><option value="1">Erhöht</option><option value="2">Hoch</option></select></label><div className="causal-chain">{experiment.nutrients ? 'Nährstoffe → mehr Algen → weniger Licht → Sauerstoffverbrauch beim Abbau' : 'Wärme × Dauer → Hitzestress → Bleiche → mögliche Riffschäden'}</div><p>{state.dhw.toLocaleString('de-AT', {
+        }))}><option value="0">Kein zusätzlicher Eintrag</option><option value="1">Erhöht</option><option value="2">Hoch</option></select></label><label className="debris-setting"><input type="checkbox" checked={!!experiment.debris} onChange={e => setExperiment(p => ({
+          ...p,
+          debris: e.target.checked
+        }))} /> Treibende Leinen / Fanggeräte</label><label className="sheet-duration">Dauer · Woche {Math.floor(experiment.weeks)}<input aria-label="Versuchsdauer in Wochen" type="range" min="0" max="12" step=".1" value={experiment.weeks} onChange={e => setExperiment(p => ({
+          ...p,
+          weeks: Number(e.target.value)
+        }))} /></label><div className="causal-chain">{experiment.debris ? 'Treibende Leinen → Verhedderung → eingeschränkte Flossenbewegung' : experiment.nutrients ? 'Nährstoffe → mehr Algen → weniger Licht → Sauerstoffverbrauch beim Abbau' : 'Wärme × Dauer → Hitzestress → Bleiche → mögliche Riffschäden'}</div><p>{state.dhw.toLocaleString('de-AT', {
           maximumFractionDigits: 1
         })} °C-Wochen · {state.title}</p><button className="primary-button" onClick={() => {
-        moveTo(-.5);
+        moveTo(landmarks.find(a => a.id === (experiment.debris ? 'sea-turtle' : 'coral-reef')).travel);
         setSettings(false);
-      }}>Am Riff beobachten <ArrowDown size={17} /></button><details><summary>Wie wird das berechnet?</summary><p>Vereinfachter Versuch mit konstanter Überwärmung und unbelastetem Start. Ab +1 °C wird die Überwärmung mit der Dauer (maximal 12 Wochen) multipliziert. NOAA beschreibt ab 4 °C-Wochen Bleicherisiko und ab 8 verbreitete Bleiche mit wahrscheinlichem Absterben empfindlicher Korallen. Individuelle Bestände werden nicht berechnet.</p><SourceLink id="heatwatch" /><p>Die Trübung veranschaulicht Nährstoffbelastung. Ihre Stärke und zeitliche Entwicklung sind gestalterisch gewählt, keine Vorhersage einer Algenkonzentration.</p><SourceLink id="nutrients" /></details><button className="global-link" onClick={() => {
+      }}>In der Welt beobachten <ArrowDown size={17} /></button><details><summary>Wie wird das berechnet?</summary><p>Vereinfachter Versuch mit konstanter Überwärmung und unbelastetem Start. Ab +1 °C wird die Überwärmung mit der Dauer (maximal 12 Wochen) multipliziert. NOAA beschreibt ab 4 °C-Wochen Bleicherisiko und ab 8 verbreitete Bleiche mit wahrscheinlichem Absterben empfindlicher Korallen. Individuelle Bestände werden nicht berechnet.</p><SourceLink id="heatwatch" /><p>Die Trübung veranschaulicht Nährstoffbelastung. Ihre Stärke und zeitliche Entwicklung sind gestalterisch gewählt, keine Vorhersage einer Algenkonzentration.</p><SourceLink id="nutrients" /><p>Die Leinen und die eingeschränkte Flossenbewegung zeigen eine mögliche Verhedderung. Ihre Zunahme im Versuch ist illustrativ, keine zeitliche Schadensprognose. Die Schildkröte erhält keine aus Temperatur abgeleitete Krankheitsdiagnose.</p><SourceLink id="turtle" /></details><button className="global-link" onClick={() => {
         setSettings(false);
         onGlobal();
       }}>Globale Klimapfade & Messdaten →</button></dialog>}

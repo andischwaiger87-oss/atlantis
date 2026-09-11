@@ -280,7 +280,7 @@ export default function WorldRenderer({
       objectCamera.bottom = -height / 2;
       objectCamera.updateProjectionMatrix();
       shader.uniforms.uSize.value.set(width, height);
-      const size = width < 650 ? .72 : 1;
+      const size = width < 750 ? Math.min(.34, width / 1200) : 1;
       vehicles.submarine.scale.setScalar(size);
       vehicles.rocket.scale.setScalar(size * .76);
     };
@@ -306,7 +306,7 @@ export default function WorldRenderer({
       vehicles.submarine.visible = u <= .03;
       vehicles.rocket.visible = u > .03;
       const active = vehicles.submarine.visible ? vehicles.submarine : vehicles.rocket;
-      active.position.y = -.6 + (reduce ? 0 : Math.sin(t * .8) * .045);
+      active.position.y = (width < 750 ? -1.05 : -.6) + (reduce ? 0 : Math.sin(t * .8) * .045);
       active.rotation.z = (u <= .03 ? -.03 : -.07) + velocityRef.current * (u <= .03 ? .13 : .08);
       active.rotation.y = -.35 + (reduce ? 0 : Math.sin(t * .25) * .045);
       for (const p of vehicles.propellers) p.rotation.x = t * (paused ? 1 : 15);
@@ -326,14 +326,14 @@ export default function WorldRenderer({
         model,
         holder
       } of objects) {
-        const layout = landmarkLayout(a, u);
+        const layout = landmarkLayout(a, u, width);
         holder.visible = layout.visible;
         if (!holder.visible) continue;
-        const pixels = width < 750 ? 125 : width >= 1500 ? 220 : a.id === 'coral-reef' ? 235 : 175;
+        const pixels = layout.pixels;
         holder.scale.setScalar(pixels);
         holder.position.set((layout.x / 100 - .5) * width, (.5 - layout.y / 100) * height, 0);
         model.update(t, state);
-        const fade = THREE.MathUtils.clamp((.52 - Math.abs(a.travel - u)) * 5, 0, 1);
+        const fade = width < 750 ? 1 : THREE.MathUtils.clamp((.52 - Math.abs(a.travel - u)) * 5, 0, 1);
         for (const material of model.materials) {
           if (material.userData.baseOpacity === undefined) {
             material.userData.baseOpacity = material.opacity;

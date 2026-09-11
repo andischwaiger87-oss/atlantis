@@ -23,13 +23,15 @@ export function heatStress(heat, weeks) {
 export function experimentState({
   heat = 1.5,
   weeks = 0,
-  nutrients = 0
+  nutrients = 0,
+  debris = false
 }) {
   const dhw = heatStress(heat, weeks);
   const stage = dhw >= 8 ? 'mortality' : dhw >= 4 ? 'bleaching' : dhw > 0 ? 'stress' : 'baseline';
   const reefAsset = stage === 'mortality' ? 'coral-reef_2050' : stage === 'bleaching' ? 'coral-reef' : 'coral-reef_1950';
   return {
     dhw,
+    entanglement: debris ? clamp(weeks / 6, 0, 1) : 0,
     stage,
     reefAsset,
     turbidity: clamp(nutrients / 2 * weeks / 12, 0, 1),
@@ -39,6 +41,11 @@ export function experimentState({
 }
 export function responseForArticle(id, experiment) {
   const s = experimentState(experiment);
+  if (id === 'sea-turtle' && experiment.debris && experiment.weeks > 0) return {
+    title: 'In treibenden Leinen verheddert',
+    text: 'Die Leinen behindern die Flossenbewegung. Verhedderung in Fanggeräten kann Meeresschildkröten verletzen und ihre Fortbewegung beeinträchtigen. Die Haltung zeigt eine mögliche Beeinträchtigung, keine Krankheitsdiagnose und keine berechnete zeitliche Schadensprognose. Dieser Plastikversuch ist unabhängig von der Überwärmung.',
+    source: 'turtle'
+  };
   if (id === 'coral-reef') return {
     title: s.title,
     text: s.description,
