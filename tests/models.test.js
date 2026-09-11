@@ -92,3 +92,16 @@ test('plastic exposure changes turtle posture independently from heat', () => {
 });
 
 test('mobile objects move continuously past the camera rather than swapping in place',()=>{const a=LANDMARKS.find(a=>a.id==='sperm-whale-dive');const before=landmarkLayout(a,a.travel,390),after=landmarkLayout(a,a.travel+.02,390);assert.ok(before.visible&&after.visible);assert.ok(Math.abs(after.y-before.y-3.5)<1e-8);assert.equal(before.x,after.x);});
+
+test('heat storage and acidification retain separate model and label lanes on phones',()=>{
+ const heat=LANDMARKS.find(a=>a.id==='ocean-heat');
+ const acid=LANDMARKS.find(a=>a.id==='ocean-acid');
+ for(const width of [320,360,390,430])for(let i=-30;i<=5;i++){
+  const a=landmarkLayout(heat,i/100,width),b=landmarkLayout(acid,i/100,width);
+  if(a.visible&&b.visible){
+   const centerGap=Math.abs(a.x-b.x)*width/100;
+   const occupiedHalfWidths=(Math.max(a.pixels,145)+Math.max(b.pixels,145))/2;
+   assert.ok(centerGap-occupiedHalfWidths>=8,'model and label envelopes must not overlap');
+  }
+ }
+});
