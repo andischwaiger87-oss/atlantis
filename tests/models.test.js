@@ -105,3 +105,26 @@ test('heat storage and acidification retain separate model and label lanes on ph
   }
  }
 });
+
+test('desktop horizon discoveries stay clear of adjacent models and their labels', () => {
+  const pairs = [['ocean-heat', 'plastic-island'], ['ocean-heat', 'ocean-acid'],
+    ['ai-center', 'co2-buildup'], ['ai-center', 'mega-storm']];
+  for (const [width, height] of [[1024, 768], [1366, 768], [1920, 1080], [2560, 1440]]) {
+    for (const ids of pairs) {
+      const entries = ids.map(id => LANDMARKS.find(a => a.id === id));
+      let encounters = 0;
+      for (let step = -100; step <= 100; step++) {
+        const [a, b] = entries.map(entry => landmarkLayout(entry, step / 100, width));
+        if (!a.visible || !b.visible) continue;
+        encounters++;
+        const horizontalGap = Math.abs(a.x - b.x) * width / 100;
+        const verticalGap = Math.abs(a.y - b.y) * height / 100;
+        const halfWidths = (Math.max(a.pixels, 230) + Math.max(b.pixels, 230)) / 2;
+        const modelAndLabelHeight = (a.pixels + b.pixels) / 2 + 44;
+        assert.ok(horizontalGap >= halfWidths + 12 || verticalGap >= modelAndLabelHeight + 12,
+          `${ids.join(' / ')} at ${width}×${height}, travel ${step / 100}`);
+      }
+      assert.ok(encounters > 0, 'the overlap check must exercise a shared encounter');
+    }
+  }
+});
